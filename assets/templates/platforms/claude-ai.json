@@ -1,0 +1,33 @@
+{
+  "platform": "claude-ai",
+  "displayName": "Claude.ai (web app)",
+  "installType": "zip-upload",
+  "folderStructure": {
+    "projectRoot": null,
+    "globalRoot": null,
+    "skillPath": "rankmath-seo-wp.zip",
+    "filename": "SKILL.md"
+  },
+  "sections": {
+    "skill": true,
+    "references": true,
+    "tools": false,
+    "data": true,
+    "examples": true
+  },
+  "frontmatter": {
+    "name": "rankmath-seo-wp",
+    "description": "Write Rank Math SEO-compliant WordPress articles in Traditional Chinese (or any language). Outputs Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, focus keyword density 1.0-1.5%, 12 H2 structure, and SEO Title containing a digit.",
+    "license": "MIT",
+    "author": "moksa (https://moksaweb.com)",
+    "version": "1.0.1"
+  },
+  "loaderBehaviour": "Upload via Settings -> Capabilities -> Skills. Claude.ai parses SKILL.md frontmatter and surfaces the skill in your library. Tools that need a local Python or Node runtime (export-blocks, verify-article) won't run in the sandbox; use them locally before pasting article content.",
+  "uploadSteps": [
+    "1. Run: rankmath-install claude-ai --to ./build (creates rankmath-seo-wp.zip)",
+    "2. Open Claude.ai -> Settings -> Capabilities -> Skills -> Upload",
+    "3. Pick the generated zip; the skill appears in your library",
+    "4. New chats auto-invoke when you ask for a WP article"
+  ],
+  "verified": true
+}

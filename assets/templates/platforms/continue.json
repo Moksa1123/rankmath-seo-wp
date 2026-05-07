@@ -1,0 +1,26 @@
+{
+  "platform": "continue",
+  "displayName": "Continue (continue.dev)",
+  "installType": "rule",
+  "folderStructure": {
+    "projectRoot": ".continue",
+    "globalRoot": "~/.continue",
+    "skillPath": "rules",
+    "filename": "rankmath-seo-wp.md"
+  },
+  "sections": {
+    "skill": true,
+    "references": false,
+    "tools": false,
+    "data": false,
+    "examples": false
+  },
+  "frontmatter": {
+    "name": "rankmath-seo-wp",
+    "description": "Rank Math SEO compliant WordPress article writer. Produces Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, FK density 1.0-1.5%, 12 H2 structure.",
+    "alwaysApply": false
+  },
+  "loaderBehaviour": "Continue reads .continue/rules/*.md as Rules. Set alwaysApply: true to attach to every chat. References must be embedded inline; the installer concatenates key reference files into the rule body.",
+  "embedReferences": ["article-template.md", "howto-block.md", "faq-block.md", "moksa-style.md"],
+  "verified": true
+}

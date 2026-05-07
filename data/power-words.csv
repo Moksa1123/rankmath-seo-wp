@@ -1,0 +1,20 @@
+language,category,word,note
+zh-TW,authority,完整教學,canonical Moksa SEO Title prefix
+zh-TW,authority,終極指南,strong but use sparingly
+zh-TW,authority,完整指南,formal alternative to 教學
+zh-TW,urgency,5 分鐘,implies quick value; pairs with digit
+zh-TW,urgency,搶先,implies first-mover knowledge
+zh-TW,scale,大功能,quantifier for feature counts
+zh-TW,scale,大重點,quantifier for takeaway lists
+zh-TW,scale,個方案,for plan/tier counts (e.g. 5 個方案)
+zh-TW,scale,步驟,canonical for HowTo (4 步驟)
+zh-TW,credibility,實戰,implies real-world experience
+zh-TW,credibility,必看,strong CTA; use carefully
+zh-TW,credibility,精修,implies refined / curated
+en,authority,Complete Guide,equivalent of 完整教學
+en,authority,Ultimate Guide,strong but overused
+en,urgency,5-Minute,quick-value framing
+en,scale,Top X,classic listicle frame
+en,scale,X Best,for ranking lists
+en,credibility,Battle-Tested,strong real-world signal
+en,credibility,Production-Ready,for technical audiences

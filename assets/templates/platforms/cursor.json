@@ -1,0 +1,26 @@
+{
+  "platform": "cursor",
+  "displayName": "Cursor",
+  "installType": "rule",
+  "folderStructure": {
+    "projectRoot": ".cursor",
+    "globalRoot": "~/.cursor",
+    "skillPath": "rules",
+    "filename": "rankmath-seo-wp.mdc"
+  },
+  "sections": {
+    "skill": true,
+    "references": false,
+    "tools": false,
+    "data": false,
+    "examples": false
+  },
+  "frontmatter": {
+    "description": "Rank Math SEO compliant WordPress article writer. Triggers on requests to write WP articles, blog posts, or content for sites using the Rank Math SEO plugin. Produces Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, FK density 1.0-1.5%, 12 H2 structure.",
+    "globs": ["**/*.html", "**/*.md", "**/wp-content/**"],
+    "alwaysApply": false
+  },
+  "loaderBehaviour": "Cursor reads .cursor/rules/*.mdc as Project Rules. Set alwaysApply: true to auto-attach to every chat, or leave false to attach when filename globs match. Cursor does NOT load referenced files automatically — embed key content inline; keep the rule under ~6KB.",
+  "embedReferences": ["article-template.md", "howto-block.md", "faq-block.md", "moksa-style.md"],
+  "verified": true
+}

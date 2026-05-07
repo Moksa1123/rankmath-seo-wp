@@ -1,0 +1,9 @@
+platform,project_path,global_path,frontmatter_required,notes
+claude-code,.claude/skills/rankmath-seo-wp/SKILL.md,~/.claude/skills/rankmath-seo-wp/SKILL.md,name+description,Auto-loads on session start
+claude-ai,(zip upload),n/a,name+description,Settings > Capabilities > Skills > Upload
+cursor,.cursor/rules/rankmath-seo-wp.mdc,~/.cursor/rules/rankmath-seo-wp.mdc,description+globs,Cursor reads .mdc as Project Rules
+codex-cli,.codex/skills/rankmath-seo-wp/SKILL.md,~/.codex/skills/rankmath-seo-wp/SKILL.md,name+description,Best-effort; verify against your Codex CLI version
+gemini-cli,.gemini/extensions/rankmath-seo-wp/GEMINI.md,~/.gemini/extensions/rankmath-seo-wp/GEMINI.md,name+description,Best-effort; loaded via Gemini CLI hierarchical context
+windsurf,.windsurf/rules/rankmath-seo-wp.md,n/a,trigger+description,Project scope only; embeds references inline
+copilot,.github/copilot-instructions.md,n/a,n/a,Single project-wide instructions file (append-mode)
+continue,.continue/rules/rankmath-seo-wp.md,~/.continue/rules/rankmath-seo-wp.md,name+description+alwaysApply,Treats .md as a rule file

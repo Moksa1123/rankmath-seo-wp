@@ -1,0 +1,9 @@
+slot,topic,fk_in_title,sample_zh,sample_en
+1,competitor_comparison,yes,[FK] 和 ChatGPT 比起來差在哪?,How does [FK] compare to ChatGPT or Gemini?
+2,free_tier,yes,[FK] Free 帳號真的可以用嗎?,Can I use [FK] for free?
+3,pricing_cost,no,Token 消耗會不會很貴?,How much does it cost in tokens?
+4,compliance_privacy,yes,[FK] 能處理機密資料嗎?,Can [FK] handle confidential data safely?
+5,technical_capability,no,它能做 X 任務嗎?,Can it perform task X?
+6,integration_platform,no,和 Y 平台整合怎麼設?,How does it integrate with platform Y?
+7,error_handling,no,出錯了怎麼辦?,What should I do when it errors out?
+8,language_support,yes,[FK] 中文支援怎麼樣?,How well does [FK] support Chinese?

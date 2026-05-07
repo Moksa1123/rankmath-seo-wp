@@ -1,0 +1,24 @@
+{
+  "platform": "copilot",
+  "displayName": "GitHub Copilot",
+  "installType": "instructions-append",
+  "folderStructure": {
+    "projectRoot": ".github",
+    "globalRoot": null,
+    "skillPath": "",
+    "filename": "copilot-instructions.md"
+  },
+  "sections": {
+    "skill": true,
+    "references": false,
+    "tools": false,
+    "data": false,
+    "examples": false
+  },
+  "frontmatter": null,
+  "loaderBehaviour": "GitHub Copilot reads .github/copilot-instructions.md as a single project-wide instructions file (no frontmatter). The installer appends a self-contained '## Rank Math SEO WP Skill' section preserving anything already in the file. References are summarised inline since Copilot does not load referenced files.",
+  "appendMarker": "<!-- BEGIN: rankmath-seo-wp -->",
+  "appendMarkerEnd": "<!-- END: rankmath-seo-wp -->",
+  "embedReferences": ["article-template.md", "howto-block.md", "faq-block.md"],
+  "verified": true
+}

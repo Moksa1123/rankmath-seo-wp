@@ -1,0 +1,8 @@
+density_low,density_high,verdict,rank_math_signal,action
+0.00,0.39,critical_low,Focus keyword density is too low,Add FK to opening + 5 H2 headings + 4 FAQ titles
+0.40,0.69,low,Focus keyword density is too low,Restore FK in 5 H2 + section-opening sentences
+0.70,0.99,below_target,Marginal — below sweet spot,Add 2-3 FK occurrences in body or FAQ titles
+1.00,1.50,sweet_spot,Optimal density for Rank Math,Maintain — do not add more
+1.51,1.79,above_target,Slightly high — still passes,Replace 1-2 FK in H2 with pronouns (它 / 這個工具)
+1.80,2.49,high,Approaching keyword stuffing,Replace FK with pronouns in 3-4 H2/FAQ
+2.50,99.00,critical_high,Focus keyword density is too high,Replace FK with pronouns in 7 H2s and 4 FAQ titles

@@ -1,0 +1,28 @@
+{
+  "platform": "gemini-cli",
+  "displayName": "Gemini CLI",
+  "installType": "full",
+  "folderStructure": {
+    "projectRoot": ".gemini",
+    "globalRoot": "~/.gemini",
+    "skillPath": "extensions/rankmath-seo-wp",
+    "filename": "GEMINI.md"
+  },
+  "sections": {
+    "skill": true,
+    "references": true,
+    "tools": true,
+    "data": true,
+    "examples": true
+  },
+  "frontmatter": {
+    "name": "rankmath-seo-wp",
+    "description": "Write Rank Math SEO-compliant WordPress articles in Traditional Chinese (or any language). Outputs Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, focus keyword density 1.0-1.5%, 12 H2 structure, and SEO Title containing a digit.",
+    "license": "MIT",
+    "author": "moksa (https://moksaweb.com)",
+    "version": "1.0.1"
+  },
+  "loaderBehaviour": "Gemini CLI loads GEMINI.md via its hierarchical context system. The installer renames SKILL.md -> GEMINI.md to match the convention. References, tools, and data are copied alongside.",
+  "verified": false,
+  "verificationNote": "Gemini CLI's extension/skill loading is evolving. If your version doesn't auto-discover GEMINI.md inside extensions/, copy the content into the project-level GEMINI.md instead."
+}

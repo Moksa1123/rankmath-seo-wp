@@ -1,0 +1,72 @@
+{
+  "name": "rankmath-seo-wp",
+  "version": "1.0.1",
+  "description": "Agent skill that writes Rank Math SEO 80+ scoring WordPress articles in Traditional Chinese (or any language). Outputs Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, focus keyword density 1.0-1.5%, and a 12 H2 structure. Includes WP-CLI deployers and a clipboard-based block-paste exporter.",
+  "bin": {
+    "rankmath-export": "tools/export-blocks.mjs",
+    "rankmath-verify": "tools/verify-article.mjs",
+    "rankmath-install": "tools/install-skill.mjs"
+  },
+  "scripts": {
+    "export": "node tools/export-blocks.mjs",
+    "verify": "node tools/verify-article.mjs",
+    "install:skill": "node tools/install-skill.mjs",
+    "list:platforms": "node tools/install-skill.mjs --list",
+    "verify:py": "python tools/verify-article.py",
+    "export:py": "python tools/export-blocks.py",
+    "install:py": "python tools/install-skill.py",
+    "fix:howto": "node tools/fix-howto-block.mjs",
+    "fix:faq": "node tools/regenerate-faq.mjs",
+    "fix:howto:py": "python tools/fix-howto-block.py",
+    "fix:faq:py": "python tools/regenerate-faq.py",
+    "test:export": "node tools/export-blocks.mjs examples/sample-article.html --print > /dev/null && echo OK"
+  },
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "README.zh-TW.md",
+    "README.ja.md",
+    "README.ko.md",
+    "LICENSE",
+    "CLAUDE.md",
+    "CONTRIBUTING.md",
+    "assets",
+    "data",
+    "examples",
+    "references",
+    "tools"
+  ],
+  "keywords": [
+    "rank-math",
+    "rank-math-seo",
+    "wordpress",
+    "wp",
+    "seo",
+    "gutenberg",
+    "gutenberg-blocks",
+    "howto-block",
+    "faq-block",
+    "wp-cli",
+    "claude",
+    "claude-code",
+    "cursor",
+    "codex",
+    "ai-skill",
+    "agent-skills",
+    "moksa",
+    "moksaweb"
+  ],
+  "author": "moksa (https://moksaweb.com)",
+  "license": "MIT",
+  "homepage": "https://github.com/Moksa1123/rankmath-seo-wp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moksa1123/rankmath-seo-wp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Moksa1123/rankmath-seo-wp/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

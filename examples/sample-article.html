@@ -1,0 +1,166 @@
+<!-- wp:paragraph -->
+<p>Claude Skills 是 Anthropic 在 2025 年底推出的開放式能力擴展架構、把專業領域知識打包成 Claude 可動態載入的模組。Anthropic 官方 GitHub Repo 提供 17 個 Skills——從 Office 文件（pptx xlsx docx pdf）到 Frontend Design、MCP Builder、Slack GIF Creator、Webapp Testing、Skill Creator 等橫跨 Creative、Development、Enterprise 三大領域。除了官方 Skills、社群創作的 Custom Skills 也爆炸成長。2025 年 12 月 Anthropic 把 Skills 規格開放成 Industry Standard、OpenAI Cursor Gemini CLI 也採用同樣格式、Skills 跨 AI 平台 Portable。這篇 Claude Skills 完整教學會拆解三層架構、SKILL.md 格式、Progressive Disclosure 機制、實戰場景、限制和最佳實踐。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p><strong>Moksa 觀點：</strong>我顧問業每個客戶有獨特 Style——財報用某種 Layout、Pitch 用某種敘事公式、合約用某種條款結構。以前每次和 Claude 對話要重新解釋一遍。寫了 5 個 Custom Skills（一個客戶一個）丟進 Claude.ai 之後、Claude 自動偵測使用情境呼叫對的 Skill、產出立即符合該客戶風格。最甜的是 Skills 是 Open Standard、我同樣的 Skill 在 ChatGPT Codex 也能用、不會被 Vendor Lock In。對知識工作者這個架構是「個人專業知識的 AI 化」、把過去寫在 Notion 的 Best Practice 變成 AI 可執行的能力。</p></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">1. 什麼是 Claude Skills？三層架構概覽</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Claude Skills 是組織化資料夾——含 SKILL.md 指令檔、輔助 Script、Reference 文件——讓 Claude 動態載入專業能力。傳統 LLM 對所有問題用同一套 General Knowledge 回答、Skills 讓 Claude 變成「專業 Agent」、面對 PowerPoint 任務用 PowerPoint Skill、面對你公司合約用你的 Custom Legal Skill。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>它分三層架構。第一層 <strong>Pre-built Skills</strong>——Anthropic 維護的官方 17 個 Skills、所有用戶自動可用。第二層 <strong>Custom Skills</strong>——你或你公司寫的領域專業 Skills、上傳到 Claude.ai 或部署到 Claude Code skills 資料夾。第三層 <strong>Workspace Skills</strong>——Team Enterprise Admin 集中部署 Skills 給整個組織。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">2. Claude Skills 和 ChatGPT GPTs 怎麼選？</h2>
+<!-- /wp:heading -->
+
+<!-- wp:table -->
+<figure class="wp-block-table"><table><thead><tr><th>面向</th><th>Claude Skills</th><th>ChatGPT GPTs</th></tr></thead><tbody><tr><td>規格</td><td>Open Standard SKILL.md</td><td>OpenAI 獨家格式</td></tr><tr><td>跨平台</td><td>Portable 多 AI 支援</td><td>OpenAI 生態獨家</td></tr><tr><td>Marketplace</td><td>無中央 Store</td><td>GPT Store 公開上架</td></tr><tr><td>Best For</td><td>個人/組織專業知識封裝</td><td>單一目的 Bot 公開分享</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>選擇 Claude Skills 的關鍵理由是 Open Standard、不被 Vendor Lock In。寫一次跨多平台用。ChatGPT GPTs 的優勢是 GPT Store Discoverability。實務上專業助理用 Custom GPT、互動工具用 Skills、組合互補。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">3. 如何啟用這個工具？</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>啟用流程因環境不同——Pre-built Skills 不需要啟用、Custom Skills 上傳到 Claude.ai 或放進 Claude Code skills 資料夾。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code># Claude.ai upload Custom Skill
+1. Settings → Capabilities → Skills → Upload
+2. Choose folder or .zip with SKILL.md inside
+3. Skill appears in your library
+
+# Claude Code filesystem Skills
+~/.claude/skills/                 # Personal
+└── my-legal-review/
+    ├── SKILL.md
+    └── references/
+
+# Project-level
+.claude/skills/                   # Per-project
+</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">4. Claude Skills 4 步驟使用內建 Skills</h2>
+<!-- /wp:heading -->
+
+<!-- wp:rank-math/howto-block {"steps":[{"id":"step-1","visible":true,"title":"Verify Code Execution enabled","content":"Settings > Capabilities 確認 Code execution and file creation 已開。Pre-built Skills（pptx xlsx docx pdf）需要 Code Execution 才能跑。"},{"id":"step-2","visible":true,"title":"Ask Claude with task description","content":"開新對話、明確描述需求例如「做一個再生能源 5 頁 PowerPoint」「分析這個 CSV 並產 Excel Dashboard」。Claude 自動匹配對的 Skill。"},{"id":"step-3","visible":true,"title":"Wait for skill loading","content":"Claude 偵測 Skill 後載入完整 Instructions、跑 Code Execution 產檔案。看到 Loading skill 訊息表示 Progressive Disclosure 第二層觸發。"},{"id":"step-4","visible":true,"title":"Download generated file","content":"Claude 完成後在對話下方產下載連結（pptx xlsx docx pdf）。點 Download 取檔。檔案儲存在 Anthropic 服務器 30 天 Cache。"}],"sizeSlug":"large"} -->
+<div class="wp-block-rank-math-howto-block"><div class="rank-math-howto-step"><h3 class="rank-math-howto-title">Verify Code Execution enabled</h3><div class="rank-math-howto-content">Settings &gt; Capabilities 確認 Code execution and file creation 已開。Pre-built Skills（pptx xlsx docx pdf）需要 Code Execution 才能跑。</div></div><div class="rank-math-howto-step"><h3 class="rank-math-howto-title">Ask Claude with task description</h3><div class="rank-math-howto-content">開新對話、明確描述需求例如「做一個再生能源 5 頁 PowerPoint」「分析這個 CSV 並產 Excel Dashboard」。Claude 自動匹配對的 Skill。</div></div><div class="rank-math-howto-step"><h3 class="rank-math-howto-title">Wait for skill loading</h3><div class="rank-math-howto-content">Claude 偵測 Skill 後載入完整 Instructions、跑 Code Execution 產檔案。看到 Loading skill 訊息表示 Progressive Disclosure 第二層觸發。</div></div><div class="rank-math-howto-step"><h3 class="rank-math-howto-title">Download generated file</h3><div class="rank-math-howto-content">Claude 完成後在對話下方產下載連結（pptx xlsx docx pdf）。點 Download 取檔。檔案儲存在 Anthropic 服務器 30 天 Cache。</div></div></div>
+<!-- /wp:rank-math/howto-block -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">5. 它能做哪些任務？</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>它涵蓋的任務類型廣泛。Document Generation、Code Review、Brand Voice Consistency、Compliance Check 都有專屬 Skill 對應。每個 Skill 用 SKILL.md 描述何時觸發、Instructions 怎麼處理、Output 格式。Progressive Disclosure 機制讓 50+ Skills 同時存在不會 Token 爆炸。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">6. Anthropic 17 個官方 Skills 介紹</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Anthropic 在 github.com/anthropics/skills 維護 17 個 Skills 跨三大領域。Document 類 4 個（pptx xlsx docx pdf）。Creative & Design 5 個（algorithmic-art、brand-guidelines、canvas-design、frontend-design、theme-factory）。Development 5 個（claude-api、mcp-builder、web-artifacts-builder、webapp-testing、skill-creator）。Enterprise 3 個（doc-coauthoring、internal-comms、slack-gif-creator）。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">7. Progressive Disclosure 怎麼運作？</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Progressive Disclosure 是 Skills 的核心設計、解決 Token 爆炸問題。三層載入——Metadata Only（啟動時只載入 name + description）、Skill Activation（匹配後載入完整 Instructions）、Reference Files（需要時動態載入子文件）。讓 Skill 數量幾乎沒有實際上限。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">8. 業界熱門 Custom Skills 推薦</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>UI/UX Pro Max（71K Stars）、claude-seo（19 Sub Skill）、WordPress Skills、Marketing & Brand Build Skills（59 個）等社群熱門 Skill 涵蓋設計、SEO、行銷、合規等領域。VoltAgent/awesome-agent-skills 收錄 1000+ 跨平台 Skills、ComposioHQ/awesome-claude-skills 是另一個熱門 Curated List。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">9. 哪裡可以找到更多官方資源？</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>以下 3 支 Anthropic 官方影片搭配本文看能深化你對它實戰應用的理解。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=zfWfczd6keE","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=zfWfczd6keE
+</div><figcaption class="wp-element-caption">The Future of AI at Work — Specialized agents</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=a8PmR-fNQ_0","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=a8PmR-fNQ_0
+</div><figcaption class="wp-element-caption">Building agent skills — Anthropic 官方</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=BX2PxxM15Zc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=BX2PxxM15Zc
+</div><figcaption class="wp-element-caption">Progressive Disclosure architecture</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">10. 使用 Claude Skills 有哪些限制？</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>它雖然強大實際使用仍有限制。第一是 <strong>Beta 階段不穩定</strong>——Skills API 仍在 Public Beta、版本可能更新、Backward Compatibility 不保證。Production 用要做好 Version Pinning。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第二是 <strong>Activation 不一定精準</strong>——Claude 自動匹配 Skill 偶爾會錯。description 寫法直接影響觸發精度、實務上需要幾次迭代測試。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第三是 <strong>Skill 維護成本</strong>——一旦 Skills 數量超過 20 個維護開始困難。每個 Skill 的 description 是否還準確、Instruction 是否還對應現況需要定期 Audit。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第四是 <strong>Open Standard 不等於完全 Portable</strong>——同 Skill 在 ChatGPT 跑 Anthropic 寫的版本行為可能不一致。Cross Platform 要 Test Each Platform。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第五是 <strong>Sensitive Data Skills</strong>——把公司內部 Best Practice 包成 Skill 上傳等於儲存在 Anthropic 服務器。Compliance 嚴格場景考慮 Workspace Skills 隔離或私有部署。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第六是 <strong>Always Test Skills Before Production</strong>——任何新 Skill 上線前要跑 5-10 個典型任務驗證 Output 品質。Skill 在 Edge Case 行為偶爾不可預測、Production 用之前要 Stress Test。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">11. 參考依據</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://moksaweb.com/category/claude-code/">Moksa Claude Code 完整教學系列</a></li><li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Agent Skills Overview 官方文件</a></li><li><a href="https://github.com/anthropics/skills">Anthropic 官方 Skills GitHub Repo</a></li><li><a href="https://github.com/VoltAgent/awesome-agent-skills">awesome-agent-skills 1000+ 社群 Skills</a></li><li><a href="https://platform.claude.com/cookbook/skills-notebooks-01-skills-introduction">Skills Cookbook</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">12. 常見問題 FAQ</h2>
+<!-- /wp:heading -->
+
+<!-- wp:rank-math/faq-block {"questions":[{"id":"faq-1","title":"Claude Skills 和 ChatGPT GPTs 有什麼差別？","content":"Claude Skills 是 Open Standard 規格、SKILL.md 格式公開、能跨 ChatGPT Codex 等其他 AI 平台用。ChatGPT GPTs 是 OpenAI 生態獨家、要在 GPT Store 發布。實務上看你需要 Open vs Marketplace 哪個重要。","visible":true},{"id":"faq-2","title":"Claude Skills Free 帳號可以用嗎？","content":"Pre-built Skills Free 也能用。Custom Skills 上傳功能 Pro 月費 20 美金以上才有。Claude Code 連 Free 都能用 Filesystem Skills（放在 ~/.claude/skills/）。","visible":true},{"id":"faq-3","title":"SKILL.md description 要寫多長？","content":"控制在 30-100 字。包含三個元素——Skill 做什麼、何時用、輸出什麼。Anthropic 官方 17 個 Skills 的 description 是好範本可參考。","visible":true},{"id":"faq-4","title":"Claude Skills 會記住歷史互動嗎？","content":"Skills 本身是無狀態（Stateless）——每次對話 Claude 重新載入 Skill Instructions。如果想要記住歷史互動、要搭配 Memory 或 Projects。","visible":true},{"id":"faq-5","title":"OpenAI 也採用 Skills 規格是真的嗎？","content":"是。2025 年 12 月 Anthropic 把 Skills 規格開源成 Industry Standard。OpenAI Cursor Windsurf Gemini CLI 都加入支援。","visible":true},{"id":"faq-6","title":"Skill 觸發不準怎麼辦？","content":"主要靠改善 description——具體列觸發場景、加常見任務 Keyword、Test 5-10 個典型 Prompt 看是否觸發。可參考 Anthropic 官方 17 Skills 的 description 寫法。","visible":true},{"id":"faq-7","title":"Workspace Skills 怎麼集中部署？","content":"Team Enterprise 方案的 Admin 在 Organization Settings > Skills 上傳。Auto Update 機制讓 Skill 更新後所有員工立即用新版本。Free Pro Max 個人帳號沒這個功能。","visible":true},{"id":"faq-8","title":"Claude Skills 中文支援怎麼樣？","content":"很好。SKILL.md 內可以全中文寫 Instructions、description 中英都能解析。中文使用者寫客製 Skill 完全可行、Output Format 中英都支援。","visible":true}]} -->
+<div class="wp-block-rank-math-faq-block"><div class="rank-math-faq-item"><h3 class="rank-math-question">Claude Skills 和 ChatGPT GPTs 有什麼差別？</h3><div class="rank-math-answer">Claude Skills 是 Open Standard 規格、SKILL.md 格式公開、能跨 ChatGPT Codex 等其他 AI 平台用。ChatGPT GPTs 是 OpenAI 生態獨家、要在 GPT Store 發布。實務上看你需要 Open vs Marketplace 哪個重要。</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">Claude Skills Free 帳號可以用嗎？</h3><div class="rank-math-answer">Pre-built Skills Free 也能用。Custom Skills 上傳功能 Pro 月費 20 美金以上才有。Claude Code 連 Free 都能用 Filesystem Skills（放在 ~/.claude/skills/）。</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">SKILL.md description 要寫多長？</h3><div class="rank-math-answer">控制在 30-100 字。包含三個元素——Skill 做什麼、何時用、輸出什麼。Anthropic 官方 17 個 Skills 的 description 是好範本可參考。</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">Claude Skills 會記住歷史互動嗎？</h3><div class="rank-math-answer">Skills 本身是無狀態（Stateless）——每次對話 Claude 重新載入 Skill Instructions。如果想要記住歷史互動、要搭配 Memory 或 Projects。</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">OpenAI 也採用 Skills 規格是真的嗎？</h3><div class="rank-math-answer">是。2025 年 12 月 Anthropic 把 Skills 規格開源成 Industry Standard。OpenAI Cursor Windsurf Gemini CLI 都加入支援。</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">Skill 觸發不準怎麼辦？</h3><div class="rank-math-answer">主要靠改善 description——具體列觸發場景、加常見任務 Keyword、Test 5-10 個典型 Prompt 看是否觸發。可參考 Anthropic 官方 17 Skills 的 description 寫法。</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">Workspace Skills 怎麼集中部署？</h3><div class="rank-math-answer">Team Enterprise 方案的 Admin 在 Organization Settings &gt; Skills 上傳。Auto Update 機制讓 Skill 更新後所有員工立即用新版本。Free Pro Max 個人帳號沒這個功能。</div></div><div class="rank-math-faq-item"><h3 class="rank-math-question">Claude Skills 中文支援怎麼樣？</h3><div class="rank-math-answer">很好。SKILL.md 內可以全中文寫 Instructions、description 中英都能解析。中文使用者寫客製 Skill 完全可行、Output Format 中英都支援。</div></div></div>
+<!-- /wp:rank-math/faq-block -->

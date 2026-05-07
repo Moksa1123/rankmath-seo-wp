@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.tox/
+.coverage
+htmlcov/
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS
+desktop.ini
+*.lnk
+
+# Local config (don't commit secrets)
+.env
+.env.local
+.npmrc
+*.pem
+*.key
+~/.ssh/
+
+# npm publish artefacts
+*.tgz
+
+# Generated WP article output (not part of skill)
+art_*.html
+gen_*.py
+fix_*.py
+boost_*.py
+verify_*.py
+fix_links.py
+fix_marketplace.py
+fix_blocks.py
+
+# Test artifacts
+*.log
+test_output/
+tmp/
+
+# WP-CLI temp files
+wp_post_*.html
+
+# Image outputs (only commit reference template)
+*.webp
+!examples/*.webp
