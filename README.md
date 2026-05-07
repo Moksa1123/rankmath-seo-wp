@@ -1,105 +1,104 @@
-<h1 align="center">Rank Math SEO WP — Agent Skill</h1>
+<div align="center">
 
-<p align="center">
-  <strong>Write Rank Math 80+ scoring WordPress articles via AI — paste-ready Gutenberg blocks, no SSH needed</strong>
+# Rank Math SEO WP
+
+### A WordPress article writer skill that produces Rank Math 80+ scoring posts. Paste-ready Gutenberg blocks. No SSH needed.
+
+<p>
+  <a href="https://www.npmjs.com/package/rankmath-seo-wp"><img src="https://img.shields.io/npm/v/rankmath-seo-wp?style=flat-square&color=cb3837&logo=npm&logoColor=white&label=npm" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/rankmath-seo-wp"><img src="https://img.shields.io/npm/dm/rankmath-seo-wp?style=flat-square&color=cb3837&logo=npm&logoColor=white" alt="npm downloads"></a>
+  <a href="https://github.com/Moksa1123/rankmath-seo-wp"><img src="https://img.shields.io/github/stars/Moksa1123/rankmath-seo-wp?style=flat-square&logo=github&logoColor=white&color=181717" alt="GitHub stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT"></a>
 </p>
 
-<p align="center">
+<p>
   <img src="https://img.shields.io/badge/format-Agent%20Skill-blue?style=flat-square" alt="Agent Skill">
   <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.9+">
   <img src="https://img.shields.io/badge/node-%3E%3D18-339933?style=flat-square&logo=node.js&logoColor=white" alt="Node 18+">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT"></a>
-  <a href="https://moksaweb.com"><img src="https://img.shields.io/badge/author-moksa-orange?style=flat-square" alt="moksa"></a>
+  <img src="https://img.shields.io/badge/AI%20platforms-8-blueviolet?style=flat-square" alt="8 AI platforms">
 </p>
 
-<p align="center">
-  <strong>Languages:</strong>
+<p>
+  <a href="#quick-start"><strong>Get started</strong></a> ·
+  <a href="https://github.com/Moksa1123/rankmath-seo-wp"><strong>GitHub</strong></a> ·
+  <a href="https://www.npmjs.com/package/rankmath-seo-wp"><strong>npm</strong></a> ·
+  <a href="https://moksaweb.com"><strong>moksaweb.com</strong></a>
+</p>
+
+<p>
   <strong>English</strong> ·
   <a href="README.zh-TW.md">繁體中文</a> ·
   <a href="README.ja.md">日本語</a> ·
   <a href="README.ko.md">한국어</a>
 </p>
 
+</div>
+
 ---
 
-Battle-tested on [moksaweb.com](https://moksaweb.com) across 30+ published Claude AI tutorials.
-Ships with a one-shot installer for **8 AI platforms** — Claude Code, Claude.ai,
-Cursor, OpenAI Codex CLI, Gemini CLI, Windsurf, GitHub Copilot, and Continue —
-plus any AI tool that follows the
-[Anthropic Agent Skills standard](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview).
+<table>
+<tr>
+<td width="33%" valign="top">
 
-## Highlights
+#### Block paste, no SSH
 
-- **Paste-ready Gutenberg export** — clipboard the entire article, paste into the WP block editor, every block (HowTo / FAQ / embed / table) renders. No WP-CLI required.
-- **Twin Python + Node tooling** — every CLI ships as both `.py` and `.mjs`. Pick whichever toolchain you already have.
-- **Structured CSV reference data** — density bands, H2 templates, FAQ topics, power words. Read by both tools and humans.
-- **Verifier** — checks FK density (1.0–1.5 % sweet spot), 12 H2 balance, HowTo / FAQ JSON↔HTML alignment, forbidden patterns.
-- **Multi-platform installer** — supports Claude / Claude.ai / Cursor / Codex / Gemini CLI / Windsurf / Copilot / Continue (see `data/platforms.csv`).
+`rankmath-export article.html` copies the entire article to your clipboard. Paste into the WP block editor — every HowTo / FAQ / embed block reconstructs perfectly.
 
-## What this skill does
+</td>
+<td width="33%" valign="top">
 
-The skill triggers automatically when the assistant detects requests like:
+#### 8-platform installer
 
-- 「幫我寫一篇 WordPress 文章關於 X」
-- "Write a WP article about X with Rank Math SEO"
-- "Create blog post for moksaweb.com on Y"
-- "Fix this article for Rank Math compliance"
+`rankmath-install <platform>` drops the skill into the right path with the right frontmatter for Claude Code, Claude.ai, Cursor, Codex CLI, Gemini CLI, Windsurf, GitHub Copilot, and Continue.
 
-The AI then produces an article with:
+</td>
+<td width="33%" valign="top">
 
-- **12 H2 structure** (opening + Moksa quote + 12 sections; FAQ block under H2 #12)
-- **Focus-keyword density 1.0–1.5 %** (computed, not blindly stuffed)
-- **Rank Math HowTo block** in canonical Gutenberg format
-- **Rank Math FAQ block** with JSON ↔ HTML alignment
-- **SEO Title containing a digit** (Rank Math hard requirement)
-- **Natural Chinese writing style** — no English-jargon dump
-- **2,000+ word count** with 3 YouTube embeds + 5 external authoritative links
+#### Pre-publish verifier
 
-## Quick start — one-liner install
+`rankmath-verify article.html "FK"` validates focus-keyword density (1.0–1.5%), 12 H2 structure, HowTo / FAQ block integrity, and 30+ Rank Math anti-patterns.
 
-Clone, then run the installer for your AI platform. The installer copies the
-skill content to the correct path with the correct filename and frontmatter
-for each tool.
+</td>
+</tr>
+<tr>
+<td valign="top">
+
+#### Twin Python and Node CLIs
+
+Every CLI ships as a `.py` and `.mjs` twin pair, parity-tested. Pick whichever toolchain you already have — both produce identical output.
+
+</td>
+<td valign="top">
+
+#### Structured CSV reference data
+
+Density bands, H2 templates, FAQ topics, SEO power words, and platform install paths in machine-readable CSV. Tools and humans both read it.
+
+</td>
+<td valign="top">
+
+#### Multilingual documentation
+
+Full README in English, 繁體中文, 日本語, and 한국어, with synced structure and Chinese-language SEO defaults.
+
+</td>
+</tr>
+</table>
+
+---
+
+## Quick start
 
 ```bash
-git clone https://github.com/Moksa1123/rankmath-seo-wp
-cd rankmath-seo-wp
+# Use right now via npx (no install needed)
+npx rankmath-install claude-code              # full skill -> .claude/skills/rankmath-seo-wp/
+npx rankmath-export article.html              # copy paste-ready HTML to clipboard
+npx rankmath-verify article.html "Claude Skills"
 
-# See all 8 supported platforms
-python tools/install-skill.py --list
-# or: node tools/install-skill.mjs --list
-# or: npx rankmath-install --list
-
-# Install into your current project
-python tools/install-skill.py claude-code   # full install -> .claude/skills/rankmath-seo-wp/
-python tools/install-skill.py cursor        # rule        -> .cursor/rules/rankmath-seo-wp.mdc
-python tools/install-skill.py copilot       # append      -> .github/copilot-instructions.md
-python tools/install-skill.py claude-ai --to ./build  # zip -> build/rankmath-seo-wp.zip
-
-# Install globally (where supported by the platform)
-python tools/install-skill.py claude-code --global   # ~/.claude/skills/rankmath-seo-wp/
-
-# Inspect without writing
-python tools/install-skill.py --info cursor
-python tools/install-skill.py --dry-run claude-code
+# Or install globally
+npm install -g rankmath-seo-wp
+rankmath-install --list                       # show all 8 supported AI platforms
 ```
-
-### Supported platforms
-
-| Platform           | Key            | Install type         | Default path                                           |
-|--------------------|----------------|----------------------|--------------------------------------------------------|
-| Claude Code        | `claude-code`  | full                 | `.claude/skills/rankmath-seo-wp/SKILL.md`              |
-| Claude.ai (web)    | `claude-ai`    | zip-upload           | `./rankmath-seo-wp.zip` → upload via Settings → Skills |
-| Cursor             | `cursor`       | rule                 | `.cursor/rules/rankmath-seo-wp.mdc`                    |
-| OpenAI Codex CLI   | `codex-cli`    | full                 | `.codex/skills/rankmath-seo-wp/SKILL.md`               |
-| Gemini CLI         | `gemini-cli`   | full                 | `.gemini/extensions/rankmath-seo-wp/GEMINI.md`         |
-| Windsurf           | `windsurf`     | rule                 | `.windsurf/rules/rankmath-seo-wp.md`                   |
-| GitHub Copilot     | `copilot`      | instructions-append  | `.github/copilot-instructions.md`                      |
-| Continue           | `continue`     | rule                 | `.continue/rules/rankmath-seo-wp.md`                   |
-
-Codex CLI and Gemini CLI are best-effort — confirm against your tool's docs.
-
-### Try it
 
 After install, restart your AI tool and try:
 
@@ -107,50 +106,91 @@ After install, restart your AI tool and try:
 > 幫我寫一篇 Claude Code Hooks 的教學文章
 ```
 
-### Use as reference docs (no install)
+The skill triggers on requests to write WordPress articles. Output is Gutenberg-block-paste-ready and scores 80+ on Rank Math.
 
-Even without an installer, the `references/` and `data/` folders are
-comprehensive documentation. Browse manually.
+> [!TIP]
+> Want to inspect before installing? Run `rankmath-install --info cursor` to see exact paths, frontmatter, and loader behaviour.
 
-## Two delivery paths
+---
 
-This skill supports two delivery paths depending on whether you have shell
-access to your WordPress server.
+## Supported AI platforms
 
-### Path A · Block paste (no SSH)
+| # | Platform | Key | Strategy | Default path |
+|---|----------|-----|----------|--------------|
+| 1 | **Claude Code** | `claude-code` | full | `.claude/skills/rankmath-seo-wp/SKILL.md` |
+| 2 | **Claude.ai (web)** | `claude-ai` | zip-upload | `./rankmath-seo-wp.zip` → Settings → Skills |
+| 3 | **Cursor** | `cursor` | rule | `.cursor/rules/rankmath-seo-wp.mdc` |
+| 4 | **OpenAI Codex CLI** | `codex-cli` | full | `.codex/skills/rankmath-seo-wp/SKILL.md` |
+| 5 | **Gemini CLI** | `gemini-cli` | full | `.gemini/extensions/rankmath-seo-wp/GEMINI.md` |
+| 6 | **Windsurf** | `windsurf` | rule | `.windsurf/rules/rankmath-seo-wp.md` |
+| 7 | **GitHub Copilot** | `copilot` | append | `.github/copilot-instructions.md` |
+| 8 | **Continue** | `continue` | rule | `.continue/rules/rankmath-seo-wp.md` |
 
-```bash
-# 1. Verify
-python tools/verify-article.py article.html "Your Focus Keyword"
-# or: node tools/verify-article.mjs article.html "Your Focus Keyword"
+> [!NOTE]
+> `claude-code`, `claude-ai`, `cursor`, `windsurf`, `copilot`, and `continue` are verified. `codex-cli` and `gemini-cli` are best-effort — confirm against your tool's current docs.
 
-# 2. Export — copies paste-ready HTML to clipboard
-python tools/export-blocks.py article.html
-# or: npx rankmath-export article.html
+---
 
-# 3. In WP admin: Posts → Add New → click in editor → Ctrl+V / Cmd+V
-```
+## CLI cheatsheet
 
-Gutenberg parses the `<!-- wp:... -->` block comments on paste and rebuilds
-every block — HowTo, FAQ, YouTube embeds, tables, code blocks. Then set Rank
-Math meta in the sidebar (focus keyword, SEO title with a digit, description,
-slug) and upload your featured image.
-
-Extract just one block:
-
-```bash
-python tools/export-blocks.py article.html --only howto   # HowTo only
-python tools/export-blocks.py article.html --only faq     # FAQ only
-```
-
-Or write to file instead of clipboard:
+<details>
+<summary><strong>Block-paste export</strong> — <code>rankmath-export</code></summary>
 
 ```bash
-python tools/export-blocks.py article.html --to-file ready.html
-python tools/export-blocks.py article.html --print > ready.html
+rankmath-export article.html                  # copy whole article to clipboard
+rankmath-export article.html --only howto     # copy just the HowTo block
+rankmath-export article.html --only faq       # copy just the FAQ block
+rankmath-export article.html --to-file out.html
+rankmath-export article.html --print > out.html
+rankmath-export article.html --no-validate    # skip block validation
 ```
 
-### Path B · WP-CLI batch (server access)
+In WordPress: **Posts → Add New → click in editor → Ctrl+V / Cmd+V**.
+Gutenberg parses the block comments and rebuilds every block.
+
+</details>
+
+<details>
+<summary><strong>Article verifier</strong> — <code>rankmath-verify</code></summary>
+
+```bash
+rankmath-verify article.html "Your Focus Keyword"
+```
+
+Sample output:
+
+```
+=== article.html ===
+Word count:      1495 visible words           OK above 1400 minimum
+FK count:        22 visible occurrences
+FK density:      1.47%                        OK in target range 1.0-1.5%
+Heading balance: 12 open / 12 close           OK 12/12 (target structure)
+HowTo block:     OK
+FAQ block:       OK (8 questions aligned)
+Forbidden:       OK none found
+
+=== Result: 8 passed, 0 failed ===
+```
+
+</details>
+
+<details>
+<summary><strong>Multi-platform installer</strong> — <code>rankmath-install</code></summary>
+
+```bash
+rankmath-install --list                       # list 8 platforms
+rankmath-install --info cursor                # inspect target path & loader
+rankmath-install claude-code                  # install to ./.claude/skills/...
+rankmath-install claude-code --global         # install to ~/.claude/skills/...
+rankmath-install claude-ai --to ./build       # build zip in ./build/
+rankmath-install --dry-run claude-code        # plan without writing
+rankmath-install                              # interactive picker
+```
+
+</details>
+
+<details>
+<summary><strong>WP-CLI batch fixers</strong> — Python or Node (server access required)</summary>
 
 ```bash
 export WP_SSH_KEY=~/.ssh/id_rsa
@@ -159,130 +199,179 @@ export WP_PATH=/path/to/wordpress
 
 # Fix legacy HowTo blocks across multiple posts
 python tools/fix-howto-block.py 8489 8478 8466
+node   tools/fix-howto-block.mjs 8489 8478 8466
 
-# Fix broken FAQ alignment across multiple posts
+# Fix broken FAQ JSON↔HTML alignment
 python tools/regenerate-faq.py 8489 8478 8579
+node   tools/regenerate-faq.mjs 8489 8478 8579
 ```
 
-## Verify any article
+</details>
 
-```bash
-python tools/verify-article.py article.html "Your Focus Keyword"
-# or
-node tools/verify-article.mjs article.html "Your Focus Keyword"
-```
+---
 
-Sample output:
+## Article anatomy
+
+The skill produces an article matching this skeleton — every published moksaweb.com article follows it:
 
 ```
-=== article.html ===
-Word count:      1495 visible words
-                 OK above 1400 minimum
-FK count:        22 visible occurrences
-FK density:      1.47%
-                 OK in target range 1.0-1.5%
-Heading balance: 12 open / 12 close
-                 OK 12/12 (target structure)
-HowTo block:     OK
-FAQ block:       OK (8 questions aligned)
-Forbidden:       OK none found
-
-=== Result: 8 passed, 0 failed ===
+[Opening paragraph]            ~150 words, FK 2-3 times
+[Moksa observation quote]      natural Chinese, FK 1 time, no jargon dump
+H2 #1   什麼是 [FK]?
+H2 #2   [FK] 和 [Competitor] 怎麼選?       ← comparison table
+H2 #3   如何啟用這個工具?                   ← code block
+H2 #4   [FK] 4 步驟啟用設定                 ← HowTo block
+H2 #5   它能做哪些 X 工作?
+H2 #6   [Persona] 怎麼用 [FK]?
+H2 #7   [Killer feature] 怎麼運作?
+H2 #8   進階主題或場景
+H2 #9   哪裡可以找到更多官方資源?           ← 3 YouTube embeds
+H2 #10  使用 [FK] 有哪些限制?               ← 6 paragraphs
+H2 #11  參考依據                             ← 5 external links
+H2 #12  常見問題 FAQ                         ← FAQ block
 ```
 
-## Folder structure
+Result: 1,400–2,000+ words, FK density 1.0–1.5%, Rank Math 80+ score, paste-ready Gutenberg blocks.
+
+---
+
+## Repo layout
+
+<details>
+<summary>Click to expand</summary>
 
 ```
 rankmath-seo-wp/
 ├── SKILL.md                          # Skill contract (auto-loaded)
-├── README.md                         # English entry (this file)
-├── README.{zh-TW,ja,ko}.md           # Translations
-├── CLAUDE.md                         # Conventions for AI assistants editing the skill
+├── README.md / .zh-TW / .ja / .ko    # Multilingual docs
+├── CLAUDE.md                         # Conventions for AI editing the skill
 ├── CONTRIBUTING.md                   # Human contributor guide
 ├── LICENSE                           # MIT
-├── package.json                      # npm metadata + bin entries
-├── data/                             # Structured CSV reference data
-│   ├── focus-keyword-density.csv     # Density bands → verdict + remediation
-│   ├── h2-templates.csv              # 12 H2 structure with FK placement
-│   ├── faq-topics.csv                # 8 FAQ topic patterns (zh-TW + en)
-│   ├── power-words.csv               # SEO-Title power words
-│   └── platforms.csv                 # Install paths per AI platform
-├── references/                       # Long-form guides (loaded on-demand)
-│   ├── article-template.md           # 12 H2 structure + FK distribution
-│   ├── howto-block.md                # rank-math/howto-block canonical format
-│   ├── faq-block.md                  # FAQ JSON ↔ HTML alignment rules
+├── package.json                      # npm metadata + 3 bin entries
+│
+├── assets/templates/platforms/       # 8 platform install configs
+│   ├── claude-code.json              # full
+│   ├── claude-ai.json                # zip-upload
+│   ├── cursor.json                   # rule (.mdc + globs)
+│   ├── codex-cli.json                # full
+│   ├── gemini-cli.json               # full (GEMINI.md)
+│   ├── windsurf.json                 # rule (model_decision)
+│   ├── copilot.json                  # instructions-append (idempotent)
+│   └── continue.json                 # rule (alwaysApply)
+│
+├── data/                             # Structured CSV reference
+│   ├── focus-keyword-density.csv
+│   ├── h2-templates.csv
+│   ├── faq-topics.csv
+│   ├── power-words.csv
+│   └── platforms.csv
+│
+├── references/                       # Long-form prose guides
+│   ├── article-template.md
+│   ├── howto-block.md
+│   ├── faq-block.md
 │   ├── seo-checklist.md              # Rank Math 100-point breakdown
-│   ├── moksa-style.md                # Personal-quote style + replacement table
-│   ├── image-specs.md                # Featured-image specs + PIL template
-│   └── wp-cli-pitfalls.md            # 9 WP-CLI deployment gotchas
-├── tools/                            # Twin CLI tools (Python + Node)
+│   ├── moksa-style.md                # Personal-quote style guide
+│   ├── image-specs.md                # Featured-image PIL template
+│   └── wp-cli-pitfalls.md            # 9 deployment gotchas
+│
+├── tools/                            # Twin Python + Node CLIs
 │   ├── verify-article.py    / .mjs   # FK density + structure verifier
 │   ├── export-blocks.py     / .mjs   # Block-paste-ready exporter
 │   ├── install-skill.py     / .mjs   # Multi-platform installer
-│   ├── regenerate-faq.py    / .mjs   # FAQ JSON↔HTML aligner (also batches via WP-CLI)
-│   └── fix-howto-block.py   / .mjs   # Legacy HowTo format upgrader (also batches via WP-CLI)
+│   ├── regenerate-faq.py    / .mjs   # FAQ JSON↔HTML aligner (also batches)
+│   └── fix-howto-block.py   / .mjs   # Legacy HowTo format upgrader
+│
 └── examples/
-    └── sample-article.html           # Reference article (passes all checks)
+    └── sample-article.html
 ```
 
-## What problems does this solve?
+</details>
+
+---
+
+## What this skill solves
 
 After publishing 30+ articles, the same paper-cuts kept showing up:
 
-| Problem                                | This skill fixes by…                                                |
-|----------------------------------------|---------------------------------------------------------------------|
-| Rank Math SEO score under 60           | Following the 100-point checklist in `seo-checklist.md`             |
-| FK density 3 %+ ("keyword stuffing")   | Distribution map in `article-template.md` (5 H2 + 4 FAQ + body)     |
-| FK density 0.5 % ("too low")           | Verifier in `verify-article.{py,mjs}`                               |
-| HowTo "區塊包含未預期的內容" error      | Canonical 8594 format in `howto-block.md`                           |
-| FAQ block validation error             | JSON ↔ HTML alignment via `regenerate-faq.py`                       |
-| `<script>` JSON-LD shows as raw text   | Skill explicitly warns against inline scripts                       |
-| H2 contains "HowTo Schema" suffix      | Skill and verifier both flag this anti-pattern                      |
-| Windows Python writes `\r\n`           | All tools force `newline='\n'`                                      |
-| `--post_content="$(cat)"` shell error  | Skill teaches `wp post update file.html` syntax                     |
-| SEO Title missing-number warning       | `[FK] 完整教學：N 大功能` template enforced                          |
-| No SSH access to WP server             | `export-blocks` clipboards paste-ready HTML for the block editor    |
+| Problem | Fix shipped in this skill |
+|---------|---------------------------|
+| Rank Math SEO score under 60 | 100-point checklist in `references/seo-checklist.md` |
+| FK density 3%+ ("keyword stuffing") | Distribution map: 5 H2 + 4 FAQ + selective body |
+| FK density 0.5% ("too low") | Verifier in `verify-article.{py,mjs}` |
+| HowTo "區塊包含未預期的內容" error | Canonical 8594 format in `references/howto-block.md` |
+| FAQ block validation error | JSON ↔ HTML aligner `regenerate-faq.{py,mjs}` |
+| `<script>` JSON-LD shows as raw text | Skill explicitly warns against inline scripts |
+| `HowTo Schema` text in H2 heading | Both skill and verifier flag this anti-pattern |
+| Windows Python writes `\r\n` | All tools force `newline='\n'` |
+| `--post_content="$(cat)"` shell error | Skill teaches `wp post update file.html` syntax |
+| SEO Title missing-number warning | `[FK] 完整教學：N 大功能` template enforced |
+| **No SSH access to WP server** | **`rankmath-export` clipboards paste-ready HTML** |
+
+---
 
 ## Adapting to other niches
 
-The skill targets Chinese tech tutorials, but the rules generalise:
+This skill targets Chinese tech tutorials, but the rules generalise:
 
-- Replace `Moksa 觀點` opening with your brand's signature device
+- Replace `Moksa 觀點` with your brand's signature opening device
 - Adjust `references/article-template.md` H2 structure for your domain
-- 1.0–1.5 % FK density works for most languages
-- Update WP host/path placeholders in `references/wp-cli-pitfalls.md`
+- 1.0–1.5% FK density works for most languages
+- Update WP host placeholders in `references/wp-cli-pitfalls.md`
 - Update image base-template path in `references/image-specs.md`
 
-## Open Standard
+---
 
-Follows the [Anthropic Agent Skills spec](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview):
-`SKILL.md` with YAML frontmatter (`name`, `description`) + flat reference files.
-Format-compatible across AI platforms.
+## Open standard
+
+Built on the [Anthropic Agent Skills spec](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview):
+`SKILL.md` with YAML frontmatter (`name`, `description`) plus flat reference files.
+Cross-platform-compatible by design.
+
+---
 
 ## Author
 
-Built and maintained by **moksa** — author of [moksaweb.com](https://moksaweb.com),
-where this skill is battle-tested on every published Claude AI tutorial.
+<table>
+<tr>
+<td>
 
-- Website: [moksaweb.com](https://moksaweb.com)
-- Author: [moksa](https://moksaweb.com)
+**[moksa](https://moksaweb.com)** — author of [moksaweb.com](https://moksaweb.com), where this skill is used on every published Claude AI tutorial.
 
-If this skill saved you a few hours of Rank Math debugging, a star ⭐ on the repo
-or a link back to [moksaweb.com](https://moksaweb.com) is appreciated.
+This skill distils 30+ articles' worth of Rank Math debugging into a reusable, multi-platform, multi-language toolkit.
 
-## License
+</td>
+<td align="center" width="200">
+
+<a href="https://moksaweb.com">
+  <img src="https://img.shields.io/badge/website-moksaweb.com-2563EB?style=for-the-badge" alt="Website">
+</a>
+<br>
+<a href="https://github.com/Moksa1123">
+  <img src="https://img.shields.io/badge/GitHub-Moksa1123-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+</a>
+
+</td>
+</tr>
+</table>
+
+If this skill saved you a few hours of Rank Math debugging, a star on the repo or a link back to [moksaweb.com](https://moksaweb.com) is appreciated.
+
+---
+
+## License and contributing
 
 MIT — see [LICENSE](LICENSE). Copyright © 2026 moksa (moksaweb.com).
 
-## Contributing
+PRs welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Especially:
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). PRs welcome for:
-
-- Translations (additional README locales beyond EN / zh-TW / ja / ko)
+- Translations (additional README locales beyond EN, zh-TW, ja, ko)
 - Additional fix tools (broken image, broken external link, etc.)
 - Niche-specific article templates (e-commerce, news, finance)
 - Validation rules for other SEO plugins (Yoast, AIOSEO, SEOPress)
 
 ---
 
-Crafted with [Claude Code](https://claude.com/claude-code) by [moksa](https://moksaweb.com).
+<div align="center">
+  <sub>Built by <a href="https://moksaweb.com">moksa</a> · <a href="https://github.com/Moksa1123/rankmath-seo-wp">GitHub</a> · <a href="https://www.npmjs.com/package/rankmath-seo-wp">npm</a></sub>
+</div>

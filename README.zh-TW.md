@@ -1,147 +1,196 @@
-<h1 align="center">Rank Math SEO WP — Agent Skill</h1>
+<div align="center">
 
-<p align="center">
-  <strong>讓 AI 寫出 Rank Math 80 分以上的 WordPress 文章——一鍵複製貼上就能進區塊編輯器，不用 SSH</strong>
+# Rank Math SEO WP
+
+### 自動產出 Rank Math 80 分以上 WordPress 文章的 AI Skill。剪貼簿一貼就能進區塊編輯器，不用 SSH。
+
+<p>
+  <a href="https://www.npmjs.com/package/rankmath-seo-wp"><img src="https://img.shields.io/npm/v/rankmath-seo-wp?style=flat-square&color=cb3837&logo=npm&logoColor=white&label=npm" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/rankmath-seo-wp"><img src="https://img.shields.io/npm/dm/rankmath-seo-wp?style=flat-square&color=cb3837&logo=npm&logoColor=white" alt="npm downloads"></a>
+  <a href="https://github.com/Moksa1123/rankmath-seo-wp"><img src="https://img.shields.io/github/stars/Moksa1123/rankmath-seo-wp?style=flat-square&logo=github&logoColor=white&color=181717" alt="GitHub stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT"></a>
 </p>
 
-<p align="center">
+<p>
   <img src="https://img.shields.io/badge/format-Agent%20Skill-blue?style=flat-square" alt="Agent Skill">
   <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.9+">
   <img src="https://img.shields.io/badge/node-%3E%3D18-339933?style=flat-square&logo=node.js&logoColor=white" alt="Node 18+">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT"></a>
-  <a href="https://moksaweb.com"><img src="https://img.shields.io/badge/author-moksa-orange?style=flat-square" alt="moksa"></a>
+  <img src="https://img.shields.io/badge/AI%20%E5%B9%B3%E5%8F%B0-8-blueviolet?style=flat-square" alt="8 AI 平台">
 </p>
 
-<p align="center">
-  <strong>語言：</strong>
+<p>
+  <a href="#快速開始"><strong>立即開始</strong></a> ·
+  <a href="https://github.com/Moksa1123/rankmath-seo-wp"><strong>GitHub</strong></a> ·
+  <a href="https://www.npmjs.com/package/rankmath-seo-wp"><strong>npm</strong></a> ·
+  <a href="https://moksaweb.com"><strong>moksaweb.com</strong></a>
+</p>
+
+<p>
   <a href="README.md">English</a> ·
   <strong>繁體中文</strong> ·
   <a href="README.ja.md">日本語</a> ·
   <a href="README.ko.md">한국어</a>
 </p>
 
+</div>
+
 ---
 
-[moksaweb.com](https://moksaweb.com) 在 30+ 篇 Claude AI 教學文章中實戰打磨而成。
-內建一行指令安裝器，支援 **8 個 AI 平台**——Claude Code、Claude.ai、Cursor、OpenAI Codex CLI、Gemini CLI、Windsurf、GitHub Copilot、Continue——
-以及任何遵循 [Anthropic Agent Skills 標準](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) 的 AI 工具。
+<table>
+<tr>
+<td width="33%" valign="top">
 
-## 亮點
+#### 區塊複製貼上、不用 SSH
 
-- **區塊複製貼上匯出**——整篇文章複製到剪貼簿，貼進 WP 區塊編輯器即可，HowTo / FAQ / YouTube / 表格全部正確渲染。**不需要 SSH 或 WP-CLI**。
-- **Python + Node 雙語工具**——每個 CLI 都有 `.py` 和 `.mjs` 兩個版本，挑你已經有的就好。
-- **結構化 CSV 參考資料**——關鍵字密度區間、H2 範本、FAQ 主題、SEO power words，工具與人類都能讀。
-- **驗證器**——自動檢查 FK 密度（1.0–1.5% 甜蜜點）、12 H2 結構、HowTo / FAQ JSON↔HTML 對齊、禁用模式。
-- **多平台安裝對照表**——支援 Claude / Claude.ai / Cursor / Codex / Gemini CLI / Windsurf / Copilot / Continue（見 `data/platforms.csv`）。
+`rankmath-export article.html` 把整篇文章塞進剪貼簿。貼進 WP 區塊編輯器——HowTo / FAQ / 嵌入區塊全部完美還原。
 
-## 這個 Skill 做什麼
+</td>
+<td width="33%" valign="top">
 
-當 AI 偵測到以下指令時，就會自動觸發：
+#### 8 平台一鍵安裝器
 
-- 「幫我寫一篇 WordPress 文章關於 X」
-- "Write a WP article about X with Rank Math SEO"
-- 「幫 moksaweb.com 寫一篇 Y 的部落格」
-- 「修一下這篇文章讓它符合 Rank Math」
+`rankmath-install <platform>` 自動把 Skill 放到正確路徑、正確 frontmatter——支援 Claude Code、Claude.ai、Cursor、Codex CLI、Gemini CLI、Windsurf、GitHub Copilot、Continue。
 
-接著 AI 會產出符合下列規範的文章：
+</td>
+<td width="33%" valign="top">
 
-- **12 個 H2 結構**（開場 + Moksa 觀點 + 12 個段落，FAQ 放在 H2 #12）
-- **焦點關鍵字密度 1.0–1.5%**（自動計算、不亂塞）
-- **Rank Math HowTo block** 採用標準 Gutenberg 格式
-- **Rank Math FAQ block** JSON ↔ HTML 完全對齊
-- **SEO Title 必含阿拉伯數字**（Rank Math 硬性要求）
-- **自然中文文體**——不堆英文行話
-- **2,000 字以上** 配 3 個 YouTube 影片 + 5 個外部權威連結
+#### 上稿前驗證器
 
-## 快速開始 — 一行指令安裝
+`rankmath-verify article.html "FK"` 自動檢查焦點關鍵字密度（1.0–1.5%）、12 H2 結構、HowTo / FAQ 區塊完整性、30+ 個 Rank Math 反模式。
 
-clone 下來、執行你 AI 平台對應的 installer。Installer 會把 Skill 內容放到該平台規定的路徑、檔名、frontmatter 形態。
+</td>
+</tr>
+<tr>
+<td valign="top">
+
+#### Python + Node 雙生工具
+
+每個 CLI 都有 `.py` 和 `.mjs` 兩個版本，行為經過 parity 測試完全一致。挑你已經有的工具鏈用就好。
+
+</td>
+<td valign="top">
+
+#### 結構化 CSV 資料
+
+關鍵字密度區間、H2 範本、FAQ 主題、SEO power words、平台安裝路徑——全部用機器可讀的 CSV 寫好，工具與人類都能讀。
+
+</td>
+<td valign="top">
+
+#### 多語文件
+
+完整 README 含 English、繁體中文、日本語、한국어，章節結構同步、中文 SEO 預設值經過實戰打磨。
+
+</td>
+</tr>
+</table>
+
+---
+
+## 快速開始
 
 ```bash
-git clone https://github.com/Moksa1123/rankmath-seo-wp
-cd rankmath-seo-wp
+# 用 npx 立即試用（不用裝）
+npx rankmath-install claude-code              # full skill -> .claude/skills/rankmath-seo-wp/
+npx rankmath-export article.html              # 貼上即用 HTML 進剪貼簿
+npx rankmath-verify article.html "Claude Skills"
 
-# 列出全部 8 個支援的平台
-python tools/install-skill.py --list
-# 或: node tools/install-skill.mjs --list
-# 或: npx rankmath-install --list
-
-# 安裝到目前專案
-python tools/install-skill.py claude-code   # full install -> .claude/skills/rankmath-seo-wp/
-python tools/install-skill.py cursor        # rule         -> .cursor/rules/rankmath-seo-wp.mdc
-python tools/install-skill.py copilot       # 附加         -> .github/copilot-instructions.md
-python tools/install-skill.py claude-ai --to ./build  # zip -> build/rankmath-seo-wp.zip
-
-# 安裝到 user-global（平台支援時）
-python tools/install-skill.py claude-code --global   # ~/.claude/skills/rankmath-seo-wp/
-
-# 不寫檔，只看計畫
-python tools/install-skill.py --info cursor
-python tools/install-skill.py --dry-run claude-code
+# 或全域安裝
+npm install -g rankmath-seo-wp
+rankmath-install --list                       # 列出 8 個支援的 AI 平台
 ```
 
-### 支援的平台
-
-| 平台               | Key            | 安裝類型             | 預設路徑                                               |
-|--------------------|----------------|----------------------|--------------------------------------------------------|
-| Claude Code        | `claude-code`  | full                 | `.claude/skills/rankmath-seo-wp/SKILL.md`              |
-| Claude.ai (web)    | `claude-ai`    | zip-upload           | `./rankmath-seo-wp.zip` → 設定 → Skills → 上傳         |
-| Cursor             | `cursor`       | rule                 | `.cursor/rules/rankmath-seo-wp.mdc`                    |
-| OpenAI Codex CLI   | `codex-cli`    | full                 | `.codex/skills/rankmath-seo-wp/SKILL.md`               |
-| Gemini CLI         | `gemini-cli`   | full                 | `.gemini/extensions/rankmath-seo-wp/GEMINI.md`         |
-| Windsurf           | `windsurf`     | rule                 | `.windsurf/rules/rankmath-seo-wp.md`                   |
-| GitHub Copilot     | `copilot`      | instructions-append  | `.github/copilot-instructions.md`                      |
-| Continue           | `continue`     | rule                 | `.continue/rules/rankmath-seo-wp.md`                   |
-
-Codex CLI 與 Gemini CLI 為 best-effort，請以你目前版本的官方文件為準。
-
-### 安裝後試試
-
-重啟 AI 工具，輸入：
+安裝完重啟 AI 工具，試試：
 
 ```
 > 幫我寫一篇 Claude Code Hooks 的教學文章
 ```
 
-### 不安裝、當參考文件用
+Skill 會自動觸發，產出 Rank Math 80 分以上、貼上即用的 Gutenberg 區塊文章。
 
-即使不執行 installer，`references/` 與 `data/` 的內容也很完整，可直接翻閱。
+> [!TIP]
+> 想先看再裝？跑 `rankmath-install --info cursor` 可以看到該平台的精確路徑、frontmatter、loader 行為。
 
-## 兩種交付路徑
+---
 
-依照你有沒有 WordPress 主機 SSH 存取權，選一條路。
+## 支援的 AI 平台
 
-### 路徑 A · 區塊複製貼上（不需 SSH）
+| # | 平台 | Key | 策略 | 預設路徑 |
+|---|------|-----|------|----------|
+| 1 | **Claude Code** | `claude-code` | full | `.claude/skills/rankmath-seo-wp/SKILL.md` |
+| 2 | **Claude.ai (web)** | `claude-ai` | zip-upload | `./rankmath-seo-wp.zip` → 設定 → Skills |
+| 3 | **Cursor** | `cursor` | rule | `.cursor/rules/rankmath-seo-wp.mdc` |
+| 4 | **OpenAI Codex CLI** | `codex-cli` | full | `.codex/skills/rankmath-seo-wp/SKILL.md` |
+| 5 | **Gemini CLI** | `gemini-cli` | full | `.gemini/extensions/rankmath-seo-wp/GEMINI.md` |
+| 6 | **Windsurf** | `windsurf` | rule | `.windsurf/rules/rankmath-seo-wp.md` |
+| 7 | **GitHub Copilot** | `copilot` | append | `.github/copilot-instructions.md` |
+| 8 | **Continue** | `continue` | rule | `.continue/rules/rankmath-seo-wp.md` |
 
-```bash
-# 1. 驗證
-python tools/verify-article.py article.html "你的焦點關鍵字"
-# 或: node tools/verify-article.mjs article.html "你的焦點關鍵字"
+> [!NOTE]
+> `claude-code`、`claude-ai`、`cursor`、`windsurf`、`copilot`、`continue` 已驗證。`codex-cli` 與 `gemini-cli` 為 best-effort，請以你目前版本的官方文件為準。
 
-# 2. 匯出——將「貼上即用」的 HTML 複製到剪貼簿
-python tools/export-blocks.py article.html
-# 或: npx rankmath-export article.html
+---
 
-# 3. WP 後台：文章 → 新增 → 編輯器內按 Ctrl+V / Cmd+V
-```
+## CLI 速查表
 
-Gutenberg 解析貼上的 `<!-- wp:... -->` 區塊註解，把每個區塊重建出來——HowTo、FAQ、YouTube、表格、程式碼區塊全部正確還原。接著在側邊欄設定 Rank Math meta（焦點關鍵字、含數字的 SEO Title、描述、slug）並上傳特色圖片即可。
-
-只匯出單一區塊：
-
-```bash
-python tools/export-blocks.py article.html --only howto   # 只匯出 HowTo
-python tools/export-blocks.py article.html --only faq     # 只匯出 FAQ
-```
-
-或寫到檔案：
+<details>
+<summary><strong>區塊貼上匯出</strong> — <code>rankmath-export</code></summary>
 
 ```bash
-python tools/export-blocks.py article.html --to-file ready.html
-python tools/export-blocks.py article.html --print > ready.html
+rankmath-export article.html                  # 整篇進剪貼簿
+rankmath-export article.html --only howto     # 只匯出 HowTo block
+rankmath-export article.html --only faq       # 只匯出 FAQ block
+rankmath-export article.html --to-file out.html
+rankmath-export article.html --print > out.html
+rankmath-export article.html --no-validate    # 跳過區塊驗證
 ```
 
-### 路徑 B · WP-CLI 批次（需主機存取）
+WP 後台：**文章 → 新增 → 編輯器內按 Ctrl+V / Cmd+V**。
+Gutenberg 解析區塊註解、把每一個區塊還原。
+
+</details>
+
+<details>
+<summary><strong>文章驗證器</strong> — <code>rankmath-verify</code></summary>
+
+```bash
+rankmath-verify article.html "你的焦點關鍵字"
+```
+
+範例輸出：
+
+```
+=== article.html ===
+Word count:      1495 visible words           OK above 1400 minimum
+FK count:        22 visible occurrences
+FK density:      1.47%                        OK in target range 1.0-1.5%
+Heading balance: 12 open / 12 close           OK 12/12 (target structure)
+HowTo block:     OK
+FAQ block:       OK (8 questions aligned)
+Forbidden:       OK none found
+
+=== Result: 8 passed, 0 failed ===
+```
+
+</details>
+
+<details>
+<summary><strong>多平台安裝器</strong> — <code>rankmath-install</code></summary>
+
+```bash
+rankmath-install --list                       # 列出 8 個平台
+rankmath-install --info cursor                # 看細節
+rankmath-install claude-code                  # 安裝到 ./.claude/skills/...
+rankmath-install claude-code --global         # 安裝到 ~/.claude/skills/...
+rankmath-install claude-ai --to ./build       # 在 ./build/ 產 zip
+rankmath-install --dry-run claude-code        # 不寫檔，只看計畫
+rankmath-install                              # 互動模式
+```
+
+</details>
+
+<details>
+<summary><strong>WP-CLI 批次修復</strong> — Python 或 Node（需主機存取）</summary>
 
 ```bash
 export WP_SSH_KEY=~/.ssh/id_rsa
@@ -150,129 +199,179 @@ export WP_PATH=/path/to/wordpress
 
 # 一次修多篇舊版 HowTo block
 python tools/fix-howto-block.py 8489 8478 8466
+node   tools/fix-howto-block.mjs 8489 8478 8466
 
-# 一次修多篇 FAQ 對齊問題
+# 一次修多篇 FAQ JSON↔HTML 對齊
 python tools/regenerate-faq.py 8489 8478 8579
+node   tools/regenerate-faq.mjs 8489 8478 8579
 ```
 
-## 驗證任一篇文章
+</details>
 
-```bash
-python tools/verify-article.py article.html "你的焦點關鍵字"
-# 或
-node tools/verify-article.mjs article.html "你的焦點關鍵字"
-```
+---
 
-範例輸出：
+## 文章骨架
+
+Skill 會產出符合下列骨架的文章——moksaweb.com 上每一篇都遵循這個結構：
 
 ```
-=== article.html ===
-Word count:      1495 visible words
-                 OK above 1400 minimum
-FK count:        22 visible occurrences
-FK density:      1.47%
-                 OK in target range 1.0-1.5%
-Heading balance: 12 open / 12 close
-                 OK 12/12 (target structure)
-HowTo block:     OK
-FAQ block:       OK (8 questions aligned)
-Forbidden:       OK none found
-
-=== Result: 8 passed, 0 failed ===
+[開場段落]                    ~150 字、FK 出現 2–3 次
+[Moksa 觀點]                   自然中文、FK 1 次、不堆英文行話
+H2 #1   什麼是 [FK]?
+H2 #2   [FK] 和 [Competitor] 怎麼選?       ← 比較表格
+H2 #3   如何啟用這個工具?                   ← 程式碼區塊
+H2 #4   [FK] 4 步驟啟用設定                 ← HowTo block
+H2 #5   它能做哪些 X 工作?
+H2 #6   [Persona] 怎麼用 [FK]?
+H2 #7   [Killer feature] 怎麼運作?
+H2 #8   進階主題或場景
+H2 #9   哪裡可以找到更多官方資源?           ← 3 個 YouTube 影片
+H2 #10  使用 [FK] 有哪些限制?               ← 6 段
+H2 #11  參考依據                             ← 5 個外部連結
+H2 #12  常見問題 FAQ                         ← FAQ block
 ```
+
+結果：1,400–2,000+ 字、FK 密度 1.0–1.5%、Rank Math 80 分以上、區塊貼上即用。
+
+---
 
 ## 資料夾結構
 
+<details>
+<summary>點開展開</summary>
+
 ```
 rankmath-seo-wp/
-├── SKILL.md                          # 主要進入點（自動載入）
-├── README.md                         # 英文 README
-├── README.{zh-TW,ja,ko}.md           # 多語翻譯
+├── SKILL.md                          # Skill 主檔（自動載入）
+├── README.md / .zh-TW / .ja / .ko    # 多語文件
 ├── CLAUDE.md                         # AI 編輯本 Skill 時的開發守則
 ├── CONTRIBUTING.md                   # 人類貢獻者指南
 ├── LICENSE                           # MIT
-├── package.json                      # npm 中繼資料 + bin 設定
+├── package.json                      # npm 中繼資料 + 3 個 bin
+│
+├── assets/templates/platforms/       # 8 個平台安裝設定
+│   ├── claude-code.json              # full
+│   ├── claude-ai.json                # zip-upload
+│   ├── cursor.json                   # rule (.mdc + globs)
+│   ├── codex-cli.json                # full
+│   ├── gemini-cli.json               # full (GEMINI.md)
+│   ├── windsurf.json                 # rule (model_decision)
+│   ├── copilot.json                  # instructions-append (idempotent)
+│   └── continue.json                 # rule (alwaysApply)
+│
 ├── data/                             # 結構化 CSV 參考資料
-│   ├── focus-keyword-density.csv     # 密度區間 → 結論 + 修正建議
-│   ├── h2-templates.csv              # 12 H2 結構與 FK 配置
-│   ├── faq-topics.csv                # 8 個 FAQ 主題範本（中英）
-│   ├── power-words.csv               # SEO Title 強力詞
-│   └── platforms.csv                 # 各 AI 平台安裝路徑
-├── references/                       # 詳細指南（按需載入）
-│   ├── article-template.md           # 12 H2 結構 + FK 分佈
-│   ├── howto-block.md                # rank-math/howto-block 標準格式
-│   ├── faq-block.md                  # FAQ JSON ↔ HTML 對齊規則
+│   ├── focus-keyword-density.csv
+│   ├── h2-templates.csv
+│   ├── faq-topics.csv
+│   ├── power-words.csv
+│   └── platforms.csv
+│
+├── references/                       # 長文指南
+│   ├── article-template.md
+│   ├── howto-block.md
+│   ├── faq-block.md
 │   ├── seo-checklist.md              # Rank Math 100 分拆解
-│   ├── moksa-style.md                # Moksa 觀點寫作風格 + 替換詞表
-│   ├── image-specs.md                # 特色圖規格 + PIL 範本
+│   ├── moksa-style.md                # Moksa 觀點寫作風格
+│   ├── image-specs.md                # 特色圖 PIL 範本
 │   └── wp-cli-pitfalls.md            # 9 個 WP-CLI 部署地雷
-├── tools/                            # 雙語 CLI 工具（Python + Node）
+│
+├── tools/                            # 雙語 CLI 工具
 │   ├── verify-article.py    / .mjs   # FK 密度與結構驗證
 │   ├── export-blocks.py     / .mjs   # 區塊貼上匯出
 │   ├── install-skill.py     / .mjs   # 多平台安裝器
-│   ├── regenerate-faq.py    / .mjs   # FAQ JSON↔HTML 對齊（含 WP-CLI 批次）
-│   └── fix-howto-block.py   / .mjs   # 舊版 HowTo 格式升級（含 WP-CLI 批次）
+│   ├── regenerate-faq.py    / .mjs   # FAQ JSON↔HTML 對齊（含批次）
+│   └── fix-howto-block.py   / .mjs   # 舊版 HowTo 升級（含批次）
+│
 └── examples/
-    └── sample-article.html           # 通過全部檢查的示範文章
+    └── sample-article.html
 ```
+
+</details>
+
+---
 
 ## 解決哪些痛點
 
-發 30+ 篇後，這幾個問題反覆出現：
+發 30+ 篇後反覆出現的問題：
 
-| 痛點                                  | 本 Skill 的對策                                            |
-|---------------------------------------|-----------------------------------------------------------|
-| Rank Math 分數 < 60                   | 照 `seo-checklist.md` 的 100 分檢核清單                    |
-| FK 密度 3% 以上（堆關鍵字）            | `article-template.md` 的分佈表（5 H2 + 4 FAQ + 段落首句）  |
-| FK 密度 0.5%（太低）                   | `verify-article.{py,mjs}` 自動驗證                         |
-| HowTo「區塊包含未預期的內容」錯誤      | 套用 `howto-block.md` 的 8594 標準格式                     |
-| FAQ block 驗證錯誤                     | 用 `regenerate-faq.py` 對齊 JSON ↔ HTML                    |
-| `<script>` JSON-LD 顯示成原始文字     | Skill 明確警告不要用 inline script                        |
-| H2 出現「HowTo Schema」字樣            | Skill 與驗證器同時偵測                                     |
-| Windows Python 寫出 `\r\n`             | 工具一律強制 `newline='\n'`                                |
-| `--post_content="$(cat)"` 噴錯         | 教你用 `wp post update file.html` 語法                    |
-| SEO Title 沒有數字的警告               | 強制套用 `[FK] 完整教學：N 大功能` 範本                   |
-| 沒 SSH 也想上稿                        | `export-blocks` 把貼上即用的 HTML 丟進剪貼簿              |
+| 痛點 | 本 Skill 的對策 |
+|------|----------------|
+| Rank Math 分數 < 60 | `references/seo-checklist.md` 100 分檢核清單 |
+| FK 密度 3% 以上（堆關鍵字） | 分佈表：5 H2 + 4 FAQ + 段落首句 |
+| FK 密度 0.5%（太低） | `verify-article.{py,mjs}` 自動驗證 |
+| HowTo「區塊包含未預期的內容」錯誤 | `references/howto-block.md` 的 8594 標準格式 |
+| FAQ block 驗證錯誤 | `regenerate-faq.{py,mjs}` 對齊 JSON ↔ HTML |
+| `<script>` JSON-LD 顯示成原始文字 | Skill 明確禁用 inline script |
+| H2 出現「HowTo Schema」字樣 | Skill 與驗證器同時偵測 |
+| Windows Python 寫出 `\r\n` | 工具一律強制 `newline='\n'` |
+| `--post_content="$(cat)"` 噴錯 | 教你用 `wp post update file.html` 語法 |
+| SEO Title 沒有數字的警告 | 強制 `[FK] 完整教學：N 大功能` 範本 |
+| **沒 SSH 也想上稿** | **`rankmath-export` 把貼上即用 HTML 丟進剪貼簿** |
+
+---
 
 ## 套用到其他主題
 
 本 Skill 為中文科技教學量身設計，但規則可通用：
 
-- 把 `Moksa 觀點` 換成你的招牌開場
+- 把 `Moksa 觀點` 換成你品牌的招牌開場
 - 依領域改寫 `references/article-template.md` 的 H2 結構
 - 1.0–1.5% 的 FK 密度適用大多數語言
 - 在 `references/wp-cli-pitfalls.md` 改成你的 WP host / path
 - 在 `references/image-specs.md` 改成你的特色圖底圖路徑
 
+---
+
 ## 開放標準
 
 遵循 [Anthropic Agent Skills 規範](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)：
-`SKILL.md` + YAML frontmatter（`name`、`description`）+ 扁平 reference 檔案。跨 AI 平台格式相容。
+`SKILL.md` + YAML frontmatter（`name`、`description`）+ 扁平 reference 檔案。
+跨 AI 平台格式相容。
+
+---
 
 ## 作者
 
-由 **moksa** 撰寫並維護——[moksaweb.com](https://moksaweb.com) 站長，
-這份 Skill 在每一篇 Claude AI 教學文章上實戰打磨而成。
+<table>
+<tr>
+<td>
 
-- 網站：[moksaweb.com](https://moksaweb.com)
-- 作者：[moksa](https://moksaweb.com)
+**[moksa](https://moksaweb.com)** —— [moksaweb.com](https://moksaweb.com) 站長，這份 Skill 在每一篇 Claude AI 教學文章上實戰使用。
 
-若這份 Skill 替你省了幾小時調 Rank Math 的時間，歡迎到 GitHub 給個 ⭐
-或在你的文章加上連回 [moksaweb.com](https://moksaweb.com) 的回饋連結。
+把 30+ 篇 Rank Math 除錯經驗濃縮成可重用的多平台、多語言工具包。
 
-## 授權
+</td>
+<td align="center" width="200">
 
-MIT 授權——見 [LICENSE](LICENSE)。Copyright © 2026 moksa (moksaweb.com)。
+<a href="https://moksaweb.com">
+  <img src="https://img.shields.io/badge/website-moksaweb.com-2563EB?style=for-the-badge" alt="Website">
+</a>
+<br>
+<a href="https://github.com/Moksa1123">
+  <img src="https://img.shields.io/badge/GitHub-Moksa1123-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+</a>
 
-## 貢獻
+</td>
+</tr>
+</table>
 
-詳見 [CONTRIBUTING.md](CONTRIBUTING.md)。歡迎以下 PR：
+如果這份 Skill 替你省了幾小時調 Rank Math 的時間，歡迎到 GitHub 給個 star 或在你的文章加上連回 [moksaweb.com](https://moksaweb.com) 的回饋連結。
 
-- 翻譯（除了 EN / zh-TW / ja / ko 以外的語系）
+---
+
+## 授權與貢獻
+
+MIT 授權—— 見 [LICENSE](LICENSE)。Copyright © 2026 moksa (moksaweb.com)。
+
+歡迎 PR——詳見 [CONTRIBUTING.md](CONTRIBUTING.md)。特別是：
+
+- 翻譯（除了 EN、zh-TW、ja、ko 以外的語系）
 - 新的修正工具（圖片損毀、外部連結失效等）
 - 其他垂直領域的文章範本（電商、新聞、財經）
 - 其他 SEO 外掛的驗證規則（Yoast、AIOSEO、SEOPress）
 
 ---
 
-由 [moksa](https://moksaweb.com) 透過 [Claude Code](https://claude.com/claude-code) 打造。
+<div align="center">
+  <sub>由 <a href="https://moksaweb.com">moksa</a> 打造 · <a href="https://github.com/Moksa1123/rankmath-seo-wp">GitHub</a> · <a href="https://www.npmjs.com/package/rankmath-seo-wp">npm</a></sub>
+</div>
