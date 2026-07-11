@@ -91,9 +91,9 @@ English, 繁體中文, 日本語, 한국어 완전 README, 섹션 구조 동기�
 
 ```bash
 # npx 로 즉시 사용 (설치 불필요)
-npx rankmath-install claude-code              # full skill -> .claude/skills/rankmath-seo-wp/
-npx rankmath-export article.html              # 붙이면 바로 HTML 클립보드로
-npx rankmath-verify article.html "Claude Skills"
+npx -p rankmath-seo-wp rankmath-install claude-code              # full skill -> .claude/skills/rankmath-seo-wp/
+npx -p rankmath-seo-wp rankmath-export article.html              # 붙이면 바로 HTML 클립보드로
+npx -p rankmath-seo-wp rankmath-verify article.html "Claude Skills"
 
 # 또는 글로벌 설치
 npm install -g rankmath-seo-wp

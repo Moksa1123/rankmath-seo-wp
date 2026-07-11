@@ -20,7 +20,7 @@
     "description": "Write Rank Math SEO-compliant WordPress articles in Traditional Chinese (or any language) that pass the Rank Math 100-point scoring system. Outputs Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, focus keyword density 1.0-1.5%, 12 H2 structure, and SEO Title containing a digit.",
     "license": "MIT",
     "author": "moksa (https://moksaweb.com)",
-    "version": "1.1.0"
+    "version": "1.1.1"
   },
   "loaderBehaviour": "Auto-loads on session start when SKILL.md frontmatter parses successfully.",
   "verified": true

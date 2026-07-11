@@ -91,9 +91,9 @@
 
 ```bash
 # 用 npx 立即試用（不用裝）
-npx rankmath-install claude-code              # full skill -> .claude/skills/rankmath-seo-wp/
-npx rankmath-export article.html              # 貼上即用 HTML 進剪貼簿
-npx rankmath-verify article.html "Claude Skills"
+npx -p rankmath-seo-wp rankmath-install claude-code              # full skill -> .claude/skills/rankmath-seo-wp/
+npx -p rankmath-seo-wp rankmath-export article.html              # 貼上即用 HTML 進剪貼簿
+npx -p rankmath-seo-wp rankmath-verify article.html "Claude Skills"
 
 # 或全域安裝
 npm install -g rankmath-seo-wp

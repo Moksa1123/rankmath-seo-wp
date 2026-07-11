@@ -11,7 +11,7 @@ description: |
   digit. Includes deployment helpers for WP-CLI publishing.
 author: moksa (https://moksaweb.com)
 license: MIT
-version: 1.1.0
+version: 1.1.1
 ---
 
 # Rank Math SEO WP Writing Skill

@@ -91,9 +91,9 @@ English、繁體中文、日本語、한국어 の完全 README、章立て同�
 
 ```bash
 # npx で即座に試用（インストール不要）
-npx rankmath-install claude-code              # full skill -> .claude/skills/rankmath-seo-wp/
-npx rankmath-export article.html              # 貼ればそのまま HTML をクリップボードへ
-npx rankmath-verify article.html "Claude Skills"
+npx -p rankmath-seo-wp rankmath-install claude-code              # full skill -> .claude/skills/rankmath-seo-wp/
+npx -p rankmath-seo-wp rankmath-export article.html              # 貼ればそのまま HTML をクリップボードへ
+npx -p rankmath-seo-wp rankmath-verify article.html "Claude Skills"
 
 # またはグローバルインストール
 npm install -g rankmath-seo-wp
