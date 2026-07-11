@@ -11,7 +11,7 @@ description: |
   digit. Includes deployment helpers for WP-CLI publishing.
 author: moksa (https://moksaweb.com)
 license: MIT
-version: 1.0.1
+version: 1.1.0
 ---
 
 # Rank Math SEO WP Writing Skill
@@ -272,7 +272,7 @@ python tools/install-skill.py --info cursor
 # Install into the current project (auto-detects strategy)
 python tools/install-skill.py claude-code           # full install
 python tools/install-skill.py cursor                # writes .cursor/rules/rankmath-seo-wp.mdc
-python tools/install-skill.py copilot               # appends to .github/copilot-instructions.md
+python tools/install-skill.py copilot               # full skill -> .github/skills/rankmath-seo-wp/
 python tools/install-skill.py claude-ai --to ./build  # builds rankmath-seo-wp.zip
 
 # Install globally (where supported)
@@ -302,7 +302,8 @@ Structured CSV references that tools and humans can both read:
 
 This skill follows the [Anthropic Agent Skills spec](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview).
 Format-compatible with Claude Code, Claude.ai, Cursor, Codex CLI, Gemini CLI,
-and Windsurf — anywhere SKILL.md with YAML frontmatter is recognised.
+GitHub Copilot, and Devin Desktop (formerly Windsurf) — anywhere SKILL.md with
+YAML frontmatter is recognised, including the cross-tool `.agents/skills/` standard.
 
 ## Adapting to other niches
 

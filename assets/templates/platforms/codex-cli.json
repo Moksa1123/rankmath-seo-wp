@@ -20,9 +20,9 @@
     "description": "Write Rank Math SEO-compliant WordPress articles in Traditional Chinese (or any language). Outputs Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, focus keyword density 1.0-1.5%, 12 H2 structure, and SEO Title containing a digit.",
     "license": "MIT",
     "author": "moksa (https://moksaweb.com)",
-    "version": "1.0.1"
+    "version": "1.1.0"
   },
-  "loaderBehaviour": "Codex CLI honours the Anthropic Agent Skills format. Place SKILL.md under .codex/skills/<name>/ and Codex auto-loads on session start.",
-  "verified": false,
-  "verificationNote": "Confirm against your Codex CLI version's documentation. If skill auto-loading is unsupported, fall back to copying SKILL.md to AGENTS.md or GEMINI.md as project context."
+  "loaderBehaviour": "Codex CLI honours the Anthropic Agent Skills format. Place SKILL.md under .codex/skills/<name>/ and Codex auto-loads on session start. Codex also honours the cross-tool .agents/skills/ directory standard.",
+  "verified": true,
+  "verificationNote": "Verified against Codex CLI as of July 2026. Optional: install to the cross-tool standard path instead with --to .agents (writes .agents/skills/rankmath-seo-wp/SKILL.md), shared by every tool that supports the .agents directory convention."
 }

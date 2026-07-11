@@ -49,7 +49,7 @@
 
 #### 8-platform installer
 
-`rankmath-install <platform>` drops the skill into the right path with the right frontmatter for Claude Code, Claude.ai, Cursor, Codex CLI, Gemini CLI, Windsurf, GitHub Copilot, and Continue.
+`rankmath-install <platform>` drops the skill into the right path with the right frontmatter for Claude Code, Claude.ai, Cursor, Codex CLI, Gemini CLI, Devin Desktop (Windsurf), GitHub Copilot, and Continue.
 
 </td>
 <td width="33%" valign="top">
@@ -120,14 +120,14 @@ The skill triggers on requests to write WordPress articles. Output is Gutenberg-
 | 1 | **Claude Code** | `claude-code` | full | `.claude/skills/rankmath-seo-wp/SKILL.md` |
 | 2 | **Claude.ai (web)** | `claude-ai` | zip-upload | `./rankmath-seo-wp.zip` → Settings → Skills |
 | 3 | **Cursor** | `cursor` | rule | `.cursor/rules/rankmath-seo-wp.mdc` |
-| 4 | **OpenAI Codex CLI** | `codex-cli` | full | `.codex/skills/rankmath-seo-wp/SKILL.md` |
-| 5 | **Gemini CLI** | `gemini-cli` | full | `.gemini/extensions/rankmath-seo-wp/GEMINI.md` |
-| 6 | **Windsurf** | `windsurf` | rule | `.windsurf/rules/rankmath-seo-wp.md` |
-| 7 | **GitHub Copilot** | `copilot` | append | `.github/copilot-instructions.md` |
+| 4 | **OpenAI Codex CLI** | `codex-cli` | full | `.codex/skills/rankmath-seo-wp/SKILL.md` (or `--to .agents` for the cross-tool `.agents/skills/` standard) |
+| 5 | **Gemini CLI** | `gemini-cli` | full | `.gemini/skills/rankmath-seo-wp/SKILL.md` |
+| 6 | **Devin Desktop** (formerly Windsurf) | `windsurf` | rule | `.devin/rules/rankmath-seo-wp.md` |
+| 7 | **GitHub Copilot** | `copilot` | full | `.github/skills/rankmath-seo-wp/SKILL.md` |
 | 8 | **Continue** | `continue` | rule | `.continue/rules/rankmath-seo-wp.md` |
 
 > [!NOTE]
-> `claude-code`, `claude-ai`, `cursor`, `windsurf`, `copilot`, and `continue` are verified. `codex-cli` and `gemini-cli` are best-effort — confirm against your tool's current docs.
+> All 8 platforms verified as of July 2026. Older tool versions fall back to legacy paths: Gemini CLI `.gemini/extensions/<name>/GEMINI.md`, Windsurf `.windsurf/rules/`, Copilot append-to-`.github/copilot-instructions.md` — see `rankmath-install --info <platform>` for details.
 
 ---
 
@@ -253,10 +253,10 @@ rankmath-seo-wp/
 │   ├── claude-code.json              # full
 │   ├── claude-ai.json                # zip-upload
 │   ├── cursor.json                   # rule (.mdc + globs)
-│   ├── codex-cli.json                # full
-│   ├── gemini-cli.json               # full (GEMINI.md)
-│   ├── windsurf.json                 # rule (model_decision)
-│   ├── copilot.json                  # instructions-append (idempotent)
+│   ├── codex-cli.json                # full (.agents/skills/ optional)
+│   ├── gemini-cli.json               # full (SKILL.md standard)
+│   ├── windsurf.json                 # rule (.devin/rules, model_decision)
+│   ├── copilot.json                  # full (.github/skills/)
 │   └── continue.json                 # rule (alwaysApply)
 │
 ├── data/                             # Structured CSV reference

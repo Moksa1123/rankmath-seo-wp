@@ -5,8 +5,8 @@
   "folderStructure": {
     "projectRoot": ".gemini",
     "globalRoot": "~/.gemini",
-    "skillPath": "extensions/rankmath-seo-wp",
-    "filename": "GEMINI.md"
+    "skillPath": "skills/rankmath-seo-wp",
+    "filename": "SKILL.md"
   },
   "sections": {
     "skill": true,
@@ -20,9 +20,9 @@
     "description": "Write Rank Math SEO-compliant WordPress articles in Traditional Chinese (or any language). Outputs Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, focus keyword density 1.0-1.5%, 12 H2 structure, and SEO Title containing a digit.",
     "license": "MIT",
     "author": "moksa (https://moksaweb.com)",
-    "version": "1.0.1"
+    "version": "1.1.0"
   },
-  "loaderBehaviour": "Gemini CLI loads GEMINI.md via its hierarchical context system. The installer renames SKILL.md -> GEMINI.md to match the convention. References, tools, and data are copied alongside.",
-  "verified": false,
-  "verificationNote": "Gemini CLI's extension/skill loading is evolving. If your version doesn't auto-discover GEMINI.md inside extensions/, copy the content into the project-level GEMINI.md instead."
+  "loaderBehaviour": "Gemini CLI supports the Agent Skills standard (same SKILL.md format as Claude Code). Place SKILL.md under .gemini/skills/<name>/ (project) or ~/.gemini/skills/<name>/ (global) and it auto-discovers on session start. References, tools, and data are copied alongside.",
+  "verified": true,
+  "verificationNote": "Verified against Gemini CLI as of July 2026. Older versions that predate SKILL.md support use the legacy extension path .gemini/extensions/rankmath-seo-wp/GEMINI.md — if skills are not picked up, install with --to .gemini/extensions/rankmath-seo-wp and rename SKILL.md to GEMINI.md."
 }

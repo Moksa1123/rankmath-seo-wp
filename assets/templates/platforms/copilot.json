@@ -1,24 +1,28 @@
 {
   "platform": "copilot",
   "displayName": "GitHub Copilot",
-  "installType": "instructions-append",
+  "installType": "full",
   "folderStructure": {
     "projectRoot": ".github",
     "globalRoot": null,
-    "skillPath": "",
-    "filename": "copilot-instructions.md"
+    "skillPath": "skills/rankmath-seo-wp",
+    "filename": "SKILL.md"
   },
   "sections": {
     "skill": true,
-    "references": false,
-    "tools": false,
-    "data": false,
-    "examples": false
+    "references": true,
+    "tools": true,
+    "data": true,
+    "examples": true
   },
-  "frontmatter": null,
-  "loaderBehaviour": "GitHub Copilot reads .github/copilot-instructions.md as a single project-wide instructions file (no frontmatter). The installer appends a self-contained '## Rank Math SEO WP Skill' section preserving anything already in the file. References are summarised inline since Copilot does not load referenced files.",
-  "appendMarker": "<!-- BEGIN: rankmath-seo-wp -->",
-  "appendMarkerEnd": "<!-- END: rankmath-seo-wp -->",
-  "embedReferences": ["article-template.md", "howto-block.md", "faq-block.md"],
-  "verified": true
+  "frontmatter": {
+    "name": "rankmath-seo-wp",
+    "description": "Write Rank Math SEO-compliant WordPress articles in Traditional Chinese (or any language). Outputs Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, focus keyword density 1.0-1.5%, 12 H2 structure, and SEO Title containing a digit.",
+    "license": "MIT",
+    "author": "moksa (https://moksaweb.com)",
+    "version": "1.1.0"
+  },
+  "loaderBehaviour": "GitHub Copilot supports Agent Skills (introduced December 2025): SKILL.md under .github/skills/<name>/ is auto-discovered by the Copilot coding agent and Copilot in VS Code. Project scope only. References, tools, and data are copied alongside.",
+  "verified": true,
+  "verificationNote": "Verified against Copilot Agent Skills as of July 2026. On older Copilot versions that predate .github/skills/, fall back to the legacy method: append the SKILL.md body as a '## Rank Math SEO WP Skill' section inside .github/copilot-instructions.md."
 }

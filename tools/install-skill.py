@@ -17,7 +17,8 @@ Usage:
 Install types:
     full                — copies SKILL.md + references/ + tools/ + data/ + examples/
     rule                — writes a single .md/.mdc rule file with embedded refs
-    instructions-append — appends a fenced section to copilot-instructions.md
+    instructions-append — appends a fenced section to an instructions file
+                          (legacy Copilot fallback; Copilot now uses full)
     zip-upload          — bundles the skill as a zip for manual upload (Claude.ai)
 
 Exit codes: 0 = installed, 1 = failed, 2 = invocation error

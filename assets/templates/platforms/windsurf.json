@@ -1,9 +1,9 @@
 {
   "platform": "windsurf",
-  "displayName": "Windsurf",
+  "displayName": "Devin Desktop (formerly Windsurf)",
   "installType": "rule",
   "folderStructure": {
-    "projectRoot": ".windsurf",
+    "projectRoot": ".devin",
     "globalRoot": null,
     "skillPath": "rules",
     "filename": "rankmath-seo-wp.md"
@@ -19,7 +19,8 @@
     "trigger": "model_decision",
     "description": "Triggered when the user asks to write WordPress articles compatible with Rank Math SEO. Produces Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, FK density 1.0-1.5%, 12 H2 structure."
   },
-  "loaderBehaviour": "Windsurf reads .windsurf/rules/*.md as Cascade Rules. Project scope only — there is no user-global rules folder. References must be embedded inline; the installer concatenates the most-needed reference files into the rule body.",
+  "loaderBehaviour": "Windsurf was renamed Devin Desktop by Cognition in June 2026. It reads .devin/rules/*.md as Cascade Rules; the legacy .windsurf/rules/ folder is still honoured as a fallback. Project scope only — there is no user-global rules folder. References must be embedded inline; the installer concatenates the most-needed reference files into the rule body.",
   "embedReferences": ["article-template.md", "howto-block.md", "faq-block.md", "moksa-style.md"],
-  "verified": true
+  "verified": true,
+  "verificationNote": "Verified against Devin Desktop as of July 2026. The platform key stays `windsurf` for CLI compatibility. On a pre-rename Windsurf build, install to the legacy path instead: run with --to .windsurf (writes .windsurf/rules/rankmath-seo-wp.md)."
 }

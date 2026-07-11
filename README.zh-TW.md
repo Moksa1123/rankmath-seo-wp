@@ -49,7 +49,7 @@
 
 #### 8 平台一鍵安裝器
 
-`rankmath-install <platform>` 自動把 Skill 放到正確路徑、正確 frontmatter——支援 Claude Code、Claude.ai、Cursor、Codex CLI、Gemini CLI、Windsurf、GitHub Copilot、Continue。
+`rankmath-install <platform>` 自動把 Skill 放到正確路徑、正確 frontmatter——支援 Claude Code、Claude.ai、Cursor、Codex CLI、Gemini CLI、Devin Desktop（原 Windsurf）、GitHub Copilot、Continue。
 
 </td>
 <td width="33%" valign="top">
@@ -120,14 +120,14 @@ Skill 會自動觸發，產出 Rank Math 80 分以上、貼上即用的 Gutenber
 | 1 | **Claude Code** | `claude-code` | full | `.claude/skills/rankmath-seo-wp/SKILL.md` |
 | 2 | **Claude.ai (web)** | `claude-ai` | zip-upload | `./rankmath-seo-wp.zip` → 設定 → Skills |
 | 3 | **Cursor** | `cursor` | rule | `.cursor/rules/rankmath-seo-wp.mdc` |
-| 4 | **OpenAI Codex CLI** | `codex-cli` | full | `.codex/skills/rankmath-seo-wp/SKILL.md` |
-| 5 | **Gemini CLI** | `gemini-cli` | full | `.gemini/extensions/rankmath-seo-wp/GEMINI.md` |
-| 6 | **Windsurf** | `windsurf` | rule | `.windsurf/rules/rankmath-seo-wp.md` |
-| 7 | **GitHub Copilot** | `copilot` | append | `.github/copilot-instructions.md` |
+| 4 | **OpenAI Codex CLI** | `codex-cli` | full | `.codex/skills/rankmath-seo-wp/SKILL.md`（或 `--to .agents` 裝到跨工具標準 `.agents/skills/`） |
+| 5 | **Gemini CLI** | `gemini-cli` | full | `.gemini/skills/rankmath-seo-wp/SKILL.md` |
+| 6 | **Devin Desktop**（原 Windsurf） | `windsurf` | rule | `.devin/rules/rankmath-seo-wp.md` |
+| 7 | **GitHub Copilot** | `copilot` | full | `.github/skills/rankmath-seo-wp/SKILL.md` |
 | 8 | **Continue** | `continue` | rule | `.continue/rules/rankmath-seo-wp.md` |
 
 > [!NOTE]
-> `claude-code`、`claude-ai`、`cursor`、`windsurf`、`copilot`、`continue` 已驗證。`codex-cli` 與 `gemini-cli` 為 best-effort，請以你目前版本的官方文件為準。
+> 8 個平台於 2026 年 7 月全數驗證。舊版工具請走 legacy 路徑：Gemini CLI 用 `.gemini/extensions/<name>/GEMINI.md`、Windsurf 用 `.windsurf/rules/`、Copilot 附加到 `.github/copilot-instructions.md`——細節見 `rankmath-install --info <platform>`。
 
 ---
 
@@ -253,10 +253,10 @@ rankmath-seo-wp/
 │   ├── claude-code.json              # full
 │   ├── claude-ai.json                # zip-upload
 │   ├── cursor.json                   # rule (.mdc + globs)
-│   ├── codex-cli.json                # full
-│   ├── gemini-cli.json               # full (GEMINI.md)
-│   ├── windsurf.json                 # rule (model_decision)
-│   ├── copilot.json                  # instructions-append (idempotent)
+│   ├── codex-cli.json                # full (.agents/skills/ optional)
+│   ├── gemini-cli.json               # full (SKILL.md standard)
+│   ├── windsurf.json                 # rule (.devin/rules, model_decision)
+│   ├── copilot.json                  # full (.github/skills/)
 │   └── continue.json                 # rule (alwaysApply)
 │
 ├── data/                             # 結構化 CSV 參考資料
