@@ -1,0 +1,18 @@
+{"meta": {"date": "2026-11-15", "model": "claude-opus-5-5", "how": "subagent reads SKILL.md, uses scripts/search.py and data/"}, "answers": {
+"density-full-band-top": "Up to 2.5%: analyzer.js keywordDensity gives full (best) points from 1% up to 2.5%; above 2.5% it fails with 0. The KB's 1-1.5% is only a recommendation.",
+"density-good-points": "keywordDensity is worth max 6 points; 0.8% falls in the 'good' band (0.76-<1%) and gets 3 points.",
+"length-1500-points": "1,700 words falls in the >=1500 tier, so 4 points out of a maximum of 8 (8 needs >=2500 words).",
+"title-points-zh": "38 points (it is 36 only when the site locale is English); zh_TW sites get 38.",
+"media-featured-plus-3-youtube": "3 out of 6: the featured image counts as 1 image (1 point) and 2+ videos give 2 points (3 YouTube embeds = 2), total 3/6.",
+"media-three-images": "4 points (out of 6): 3 images incl. the featured image score 4.",
+"power-words-zh-skipped": "No. Rank Math's titleHasPowerWords needs a power-word list for the site locale, and the plugin ships lists only for de, en, es, fi, fr, hu, id, it, ja, nl, sv - no Chinese list - so the test does not apply and drops out of both score sums.",
+"wordcount-cjk": "1 word: wp.wordcount 'words' counts whitespace-separated tokens, so an unbroken run of Chinese with no spaces counts as one word.",
+"howto-duration-valid": "No. hasDuration, days, hours, minutes are real block.json attributes and save() ignores them, so they do not break validation; they only deviate from the moksaweb.com site form (post 8594), which is a site-style issue, not an editor error.",
+"howto-save-classes": "(a) step wrapper: div class=\"rank-math-howto-step\"; (b) step title: class=\"rank-math-howto-title\" (in the titleWrapper tag, default h3); (c) step content: div class=\"rank-math-howto-content\". The outer wrapper is wp-block-rank-math-howto-block.",
+"howto-multiple": "No - only one HowTo block per post. It is decided by block.json supports.multiple: false.",
+"in10-threshold": "Above 400 words: with 400 words or fewer the whole text is checked; above that only the first 10% of words.",
+"faq-default-sizeslug": "(a) FAQ block: sizeSlug default \"thumbnail\"; (b) HowTo block: sizeSlug default \"full\".",
+"verifier-word-gate": "It passes from 600 visible (wp.wordcount) words, taken from Rank Math's lengthContent test, whose lowest scoring tier (>=600 words -> 2 points) is the pass threshold.",
+"site-howto-sizeslug": "sizeSlug \"large\" (plugin default is \"full\"), taken from moksaweb.com reference post 8594 (site style, not a Rank Math requirement).",
+"internal-vs-external-points": "linksHasInternal is worth 5 points; linksHasExternals is worth 4 points."
+}}

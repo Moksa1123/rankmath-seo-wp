@@ -1,0 +1,25 @@
+{
+ "meta": {
+  "date": "2026-11-15",
+  "model": "claude-opus-5-5",
+  "how": "subagent, no tools, closed book"
+ },
+ "answers": {
+  "density-full-band-top": "The keywordDensity test keeps its full points up to 2.5% density. Above 2.5%, and below 0.5%, it gets nothing.",
+  "density-good-points": "The maximum is 6 points. A density of 0.8% sits in the band below 1%, so it gets a partial score of about 3 points.",
+  "length-1500-points": "lengthContent is worth 8 points at most. 1,700 words falls in the 1,500–2,000 band, which gets 4 out of 8.",
+  "title-points-zh": "38 points. The usual 36 goes up by 2 because the English-only sentiment and power-word tests (1 point each) are dropped and their points move to this test.",
+  "media-featured-plus-3-youtube": "3 out of 6 points: 1 for the single image (the featured image) and the 2-point video maximum for the YouTube embeds.",
+  "media-three-images": "My best guess is 3 points out of 6. The image score goes up with the image count, and there are no video points here.",
+  "power-words-zh-skipped": "No, it does not run. The power-word test, like the sentiment test, only runs when the site locale is English, so it is skipped on zh_TW and its point goes to keywordInTitle.",
+  "wordcount-cjk": "It counts 1 word. The 'words' mode splits on spaces, and this Chinese sentence has none.",
+  "howto-duration-valid": "No. Empty duration values with hasDuration:false are ordinary attribute values. The editor only shows the invalid-content warning when the saved HTML doesn't match what save() would produce.",
+  "howto-save-classes": "(a) rank-math-step, (b) rank-math-step-title, (c) rank-math-step-content.",
+  "howto-multiple": "No. The HowTo block's block.json sets supports.multiple to false, so only one is allowed per post.",
+  "in10-threshold": "Above 400 words, the test checks only the first 10% of the text instead of the whole thing.",
+  "faq-default-sizeslug": "(a) The FAQ block defaults to \"thumbnail\". (b) The HowTo block defaults to \"full\".",
+  "verifier-word-gate": "This is a guess: the check passes at 2,500 visible words, taken from the 2,500-word recommended level of Rank Math's lengthContent rule.",
+  "site-howto-sizeslug": "This is a guess: sizeSlug \"full\", taken from an existing published moksaweb.com tutorial post that contains a working HowTo block. I can't name the exact post without looking at the skill files.",
+  "internal-vs-external-points": "linksHasInternal is worth 5 points and linksHasExternals is worth 4."
+ }
+}

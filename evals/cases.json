@@ -4,114 +4,420 @@
     {
       "id": "density-full-band-top",
       "question": "In the Rank Math plugin's own analyzer code (not the KB advice), up to what keyword density percentage does the keywordDensity test still award its full points?",
-      "must": [["(?<![\\d.])2\\.5(?!\\d)"]],
+      "must": [
+        [
+          "(?<![\\d.])2\\.5(?!\\d)"
+        ]
+      ],
       "source": "analyzer.js keywordDensity calculateScore (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 1 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "density-good-points",
       "question": "Rank Math's keywordDensity test: what is its maximum score in points, and how many points does a density of 0.8% get?",
-      "must": [["(?<!\\d)6(?!\\d)"], ["(?<!\\d)3(?!\\d) ?(points?|分|/ ?6)", "(?<!\\d)3 out of 6", "good.{0,30}(?<!\\d)3(?!\\d)", "(?<!\\d)3(?!\\d)[^\\d]{0,20}good"]],
+      "must": [
+        [
+          "(?<!\\d)6(?!\\d)"
+        ],
+        [
+          "(?<!\\d)3(?!\\d) ?(points?|分|/ ?6)",
+          "(?<!\\d)3 out of 6",
+          "good.{0,30}(?<!\\d)3(?!\\d)",
+          "(?<!\\d)3(?!\\d)[^\\d]{0,20}good"
+        ]
+      ],
       "source": "analyzer.js keywordDensity getBoundaries {fail:0,fair:2,good:3,best:6} (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 1 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "length-1500-points",
       "question": "Rank Math content-length test (lengthContent): how many points does an article of 1,700 words get, out of how many maximum?",
-      "must": [["(?<!\\d)4 ?(/|out of|of|分|points?)", "(?<!\\d)4(?!\\d)[^\\d]{0,15}(?<!\\d)8(?!\\d)"], ["(?<!\\d)8(?!\\d)"]],
+      "must": [
+        [
+          "(?<!\\d)4 ?(/|out of|of|分|points?)",
+          "(?<!\\d)4(?!\\d)[^\\d]{0,15}(?<!\\d)8(?!\\d)"
+        ],
+        [
+          "(?<!\\d)8(?!\\d)"
+        ]
+      ],
       "source": "analyzer.js lengthContent getBoundaries (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 1 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "title-points-zh",
       "question": "How many points is Rank Math's 'Focus Keyword in SEO Title' test (keywordInTitle) worth on a site whose language is Traditional Chinese (zh_TW)?",
-      "must": [["(?<!\\d)38(?!\\d)"]],
+      "must": [
+        [
+          "(?<!\\d)38(?!\\d)"
+        ]
+      ],
       "source": "analyzer.js keywordInTitle getScore: en 36, other 38 (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 1 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "media-featured-plus-3-youtube",
       "question": "A post has a featured image, no other images, and 3 YouTube iframe embeds. How many points does Rank Math's media test (contentHasAssets) give, out of its maximum?",
-      "must": [["(?<!\\d)3 ?(/|out of|of|分|points?)", "(?<!\\d)3(?!\\d)[^\\d]{0,15}(?<!\\d)6(?!\\d)"]],
+      "must": [
+        [
+          "(?<!\\d)3 ?(/|out of|of|分|points?)",
+          "(?<!\\d)3(?!\\d)[^\\d]{0,15}(?<!\\d)6(?!\\d)"
+        ]
+      ],
       "source": "analyzer.js contentHasAssets: images {1:1}, videos 2+ -> 2, cap 6 (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 1 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "media-three-images",
       "question": "Rank Math contentHasAssets: a post with exactly 3 images (including the featured image) and no videos gets how many points?",
-      "must": [["(?<!\\d)4 ?(/|out of|of|分|points?)", "(?<!\\d)4(?!\\d)[^\\d]{0,15}(?<!\\d)6(?!\\d)"]],
+      "must": [
+        [
+          "(?<!\\d)4 ?(/|out of|of|分|points?)",
+          "(?<!\\d)4(?!\\d)[^\\d]{0,15}(?<!\\d)6(?!\\d)"
+        ]
+      ],
       "source": "analyzer.js contentHasAssets calculateImagesScore {0:0,1:1,2:2,3:4} else 6 (1.0.282)",
       "trust": "官方原始碼"
     },
     {
       "id": "power-words-zh-skipped",
       "question": "On a WordPress site set to Traditional Chinese, does Rank Math's 'power word in title' test run? Why or why not?",
-      "must": [["(does not|doesn't|不會|不跑|沒有|skipp|not (run|appl|applicable)|n/a)"], ["(no (zh|chinese)|沒有中文|中文.{0,10}(清單|列表|list)|(zh|chinese).{0,20}(list|file).{0,20}(missing|not|no)|only.{0,40}(de|en|es|fi|fr|ja))"]],
+      "must": [
+        [
+          "(does not|doesn't|不會|不跑|沒有|skipp|not (run|appl|applicable)|n/a)"
+        ],
+        [
+          "no (zh|chinese|traditional chinese|zh_tw|zh-tw)[^.]{0,30}(power[- ]?words? )?(list|file)",
+          "沒有中文",
+          "(zh|chinese)[^.]{0,30}(list|file)[^.]{0,20}(missing|does not exist|doesn't exist|not (included|shipped))",
+          "(11|eleven) (locale|language)",
+          "only[^.]{0,20}de[, ]+en[, ]+es"
+        ]
+      ],
       "source": "class-screen.php power_words(): assets/vendor/powerwords/<locale>.php; 11 locales, no zh (1.0.282)",
       "trust": "官方原始碼"
     },
     {
       "id": "wordcount-cjk",
       "question": "Rank Math counts words with WordPress's wordcount 'words' mode. How many words does it count for the paragraph <p>這是一段沒有空白的中文句子</p>?",
-      "must": [["(?<![\\d.])1(?![\\d.]) ?(word|個|字)", "one word", "一個", "count(s|ed)? (it )?as (a single|one|1)", "^\\s*1\\s*$"]],
+      "must": [
+        [
+          "(?<![\\d.])1(?![\\d.]) ?(word|個|字)",
+          "one word",
+          "一個",
+          "count(s|ed)? (it )?as (a single|one|1)",
+          "^\\s*1\\s*$"
+        ]
+      ],
       "source": "@wordpress/wordcount 5.1.0 wordsRegExp /\\S\\s+/; port in tools/verify-article.py",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 1 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "howto-duration-valid",
       "question": "In a saved rank-math/howto-block, the block comment JSON contains \"hasDuration\":false,\"days\":\"\",\"hours\":\"\",\"minutes\":\"\". Does that by itself make the block show 'This block contains unexpected or invalid content' in the editor?",
-      "must": [["^\\W*no\\b", "\\bno[,.]", "不會", "does not", "doesn't", "will not", "won't"], ["(save|attribute|block\\.json|ignored|不影響|屬性)"]],
+      "must": [
+        [
+          "^\\W*no\\b",
+          "\\bno[,.]",
+          "不會",
+          "does not",
+          "doesn't",
+          "will not",
+          "won't"
+        ],
+        [
+          "(save|attribute|block\\.json|ignored|不影響|屬性)"
+        ]
+      ],
       "source": "blocks/howto/block.json attributes + index.js save() ignores them (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 1 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "howto-save-classes",
       "question": "What exact CSS class names does the rank-math/howto-block editor save() put on (a) each step wrapper div, (b) the step title element, (c) the step content div?",
-      "must": [["rank-math-howto-step\\b(?!-)"], ["rank-math-howto-title"], ["rank-math-howto-content"]],
+      "must": [
+        [
+          "rank-math-howto-step\\b(?!-)"
+        ],
+        [
+          "rank-math-howto-title"
+        ],
+        [
+          "rank-math-howto-content"
+        ]
+      ],
       "source": "blocks/howto/assets/js/index.js save() (1.0.282)",
       "trust": "官方原始碼"
     },
     {
       "id": "howto-multiple",
       "question": "Can one WordPress post contain two separate Rank Math HowTo blocks? What in the block definition decides this?",
-      "must": [["^\\W*no\\b", "\\bno[,.]", "不能", "cannot", "can't", "only one", "只能一個"], ["multiple"]],
+      "must": [
+        [
+          "^\\W*no\\b",
+          "\\bno[,.]",
+          "不能",
+          "cannot",
+          "can't",
+          "only one",
+          "只能一個"
+        ],
+        [
+          "multiple"
+        ]
+      ],
       "source": "blocks/howto/block.json supports.multiple false (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 1 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "in10-threshold",
       "question": "Rank Math's 'Focus Keyword at the beginning of content' test (keywordIn10Percent): above how many words does the plugin code start checking only the first 10% instead of the whole text?",
-      "must": [["(?<!\\d)400(?!\\d)"]],
+      "must": [
+        [
+          "(?<!\\d)400(?!\\d)"
+        ]
+      ],
       "source": "analyzer.js keywordIn10Percent: 400<words.length (1.0.282); KB says 300",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 1 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "faq-default-sizeslug",
       "question": "In Rank Math's block.json files, what is the default value of the sizeSlug attribute for (a) the FAQ block and (b) the HowTo block?",
-      "must": [["thumbnail"], ["full"]],
+      "must": [
+        [
+          "thumbnail"
+        ],
+        [
+          "full"
+        ]
+      ],
       "source": "blocks/faq/block.json sizeSlug thumbnail; blocks/howto/block.json sizeSlug full (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 1 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "verifier-word-gate",
       "question": "In the rankmath-seo-wp skill, at what visible word count does tools/verify-article.py start passing the word-count check, and which Rank Math rule is that number taken from?",
-      "must": [["(?<!\\d)600(?!\\d)"], ["lengthContent", "content length", "內文字數|字數"]],
+      "must": [
+        [
+          "(?<!\\d)600(?!\\d)"
+        ],
+        [
+          "lengthContent",
+          "content length",
+          "內文字數|字數"
+        ]
+      ],
       "source": "tools/verify-article.py WORDS_PASS; data/rankmath-tests.csv lengthContent",
       "trust": "官方原始碼"
     },
     {
       "id": "site-howto-sizeslug",
       "question": "In the rankmath-seo-wp skill, the moksaweb.com site form for the HowTo block JSON requires which sizeSlug value, and which reference post is it taken from?",
-      "must": [["large"], ["8594"]],
+      "must": [
+        [
+          "large"
+        ],
+        [
+          "8594"
+        ]
+      ],
       "source": "data/site-rules.csv howto_sizeslug",
       "trust": "站內風格"
     },
     {
       "id": "internal-vs-external-points",
       "question": "Rank Math analyzer points: how many points for having at least one internal link (linksHasInternal), and how many for at least one external link (linksHasExternals)?",
-      "must": [["internal.{0,60}(?<!\\d)5(?!\\d)", "(?<!\\d)5(?!\\d).{0,40}internal"], ["external.{0,60}(?<!\\d)4(?!\\d)", "(?<!\\d)4(?!\\d).{0,40}external"]],
+      "must": [
+        [
+          "internal.{0,60}(?<!\\d)5(?!\\d)",
+          "(?<!\\d)5(?!\\d).{0,40}internal"
+        ],
+        [
+          "external.{0,60}(?<!\\d)4(?!\\d)",
+          "(?<!\\d)4(?!\\d).{0,40}external"
+        ]
+      ],
       "source": "analyzer.js linksHasInternal 5, linksHasExternals 4 (1.0.282)",
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 1 輪沒 skill 也答對（無鑑別度）"
+    },
+    {
+      "id": "density-075-gap",
+      "question": "In Rank Math 1.0.282's keywordDensity code, how many points does a density of exactly 0.75% get, and why?",
+      "must": [
+        [
+          "(?<!\\d)6(?!\\d)",
+          "best",
+          "full"
+        ],
+        [
+          "inRange",
+          "gap",
+          "exclusive",
+          "between",
+          "neither",
+          "falls through"
+        ]
+      ],
+      "source": "analyzer.js keywordDensity calculateScore: inRange(.5,.75) / inRange(.76,1) leave 0.75 to best (1.0.282)",
       "trust": "官方原始碼"
+    },
+    {
+      "id": "powerword-prefix",
+      "question": "Rank Math's title power-word test also accepts a title word that merely starts with a power word. At most how many extra characters may that title word have beyond the power word?",
+      "must": [
+        [
+          "(?<!\\d)4(?!\\d)",
+          "four"
+        ]
+      ],
+      "source": "analyzer.js titleHasPowerWords: startsWith && e.length-t.length<=4 (1.0.282)",
+      "trust": "官方原始碼"
+    },
+    {
+      "id": "powerword-locale-count",
+      "question": "How many language files of power words does the Rank Math 1.0.282 plugin ship (assets/vendor/powerwords/), and is Chinese among them?",
+      "must": [
+        [
+          "(?<!\\d)11(?!\\d)",
+          "eleven"
+        ],
+        [
+          "\bno\b",
+          "not",
+          "沒有",
+          "不"
+        ]
+      ],
+      "source": "assets/vendor/powerwords/*.php (1.0.282)",
+      "trust": "官方原始碼"
+    },
+    {
+      "id": "howto-empty-title",
+      "question": "In the rank-math/howto-block editor save() output, what is written for a step whose title is an empty string but whose content is not empty?",
+      "must": [
+        [
+          "(omit|no title|not (written|rendered|output)|skipp|leave[sd]? out|nothing|省略|不輸出|沒有標題|only the content)"
+        ]
+      ],
+      "source": "blocks/howto/assets/js/index.js save(): e.title&&… (1.0.282)",
+      "trust": "官方原始碼"
+    },
+    {
+      "id": "faq-skip-rules",
+      "question": "Which FAQ questions does the rank-math/faq-block save() leave out of the saved HTML? Name all conditions.",
+      "must": [
+        [
+          "empty title",
+          "title is empty",
+          "no title",
+          "title.{0,20}empty",
+          "標題.{0,6}空"
+        ],
+        [
+          "empty content",
+          "content is empty",
+          "no content",
+          "answer.{0,20}empty",
+          "content.{0,20}empty",
+          "內容.{0,6}空"
+        ],
+        [
+          "visible"
+        ]
+      ],
+      "source": "blocks/faq/assets/js/index.js save(): isEmpty(title)||isEmpty(content)||visible===false (1.0.282)",
+      "trust": "官方原始碼"
+    },
+    {
+      "id": "video-self-hosted",
+      "question": "Does Rank Math's media test (contentHasAssets) count a <video> tag that plays an .mp4 file hosted on your own server as a video?",
+      "must": [
+        [
+          "^\\W*no\b",
+          "\bno[,.]",
+          "does not",
+          "doesn't",
+          "不會",
+          "not count"
+        ],
+        [
+          "youtube",
+          "vimeo"
+        ]
+      ],
+      "source": "analyzer.js contentHasAssets hasVideoUrl (YouTube/Vimeo only) (1.0.282)",
+      "trust": "官方原始碼"
+    },
+    {
+      "id": "in10-kb-vs-code",
+      "question": "For the 'keyword in the first 10% of content' test, the Rank Math KB and the plugin code give different word thresholds for short posts. What number does each give?",
+      "must": [
+        [
+          "(?<!\\d)300(?!\\d)"
+        ],
+        [
+          "(?<!\\d)400(?!\\d)"
+        ]
+      ],
+      "source": "KB score-100-in-tests 8.4 (300) vs analyzer.js keywordIn10Percent (400)",
+      "trust": "官方原始碼"
+    },
+    {
+      "id": "skill-plugin-version",
+      "question": "Which exact Rank Math plugin version did the rankmath-seo-wp skill read its thresholds and block markup from?",
+      "must": [
+        [
+          "1\\.0\\.282"
+        ]
+      ],
+      "source": "data/rankmath-tests.csv source column",
+      "trust": "官方原始碼"
+    },
+    {
+      "id": "sample-density",
+      "question": "What keyword density and wp.wordcount word count does the rankmath-seo-wp skill's verifier report for examples/sample-article.html with focus keyword \"Claude Skills\"?",
+      "must": [
+        [
+          "1\\.96"
+        ],
+        [
+          "(?<!\\d)714(?!\\d)"
+        ]
+      ],
+      "source": "python tools/verify-article.py examples/sample-article.html \"Claude Skills\" (2026-11-15)",
+      "trust": "實測"
+    },
+    {
+      "id": "post-title-english-trust",
+      "question": "In the rankmath-seo-wp skill's data, what trust level is the rule 'keep post_title in English' given, and why?",
+      "must": [
+        [
+          "推論",
+          "inferred",
+          "inference"
+        ],
+        [
+          "never measured",
+          "not measured",
+          "未測",
+          "沒有測",
+          "no (measurement|evidence|reproduction)",
+          "unverified"
+        ]
+      ],
+      "source": "data/site-rules.csv post_title_english",
+      "trust": "站內風格"
     }
   ]
 }
