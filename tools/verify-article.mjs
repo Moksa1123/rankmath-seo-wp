@@ -224,7 +224,7 @@ function checkFkInOpening(content, fk) {
 async function main() {
   if (argv.length !== 4) {
     stderr.write('Usage: verify-article.mjs article.html "Focus Keyword"\n');
-    return 2;
+    return 1;
   }
   const path = argv[2];
   const fk = argv[3];

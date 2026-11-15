@@ -306,7 +306,7 @@ def check_forbidden_patterns(content):
 def main():
     if len(sys.argv) != 3:
         print("Usage: python verify-article.py article.html 'Focus Keyword'")
-        sys.exit(2)
+        sys.exit(1)
 
     path = sys.argv[1]
     fk = sys.argv[2]
