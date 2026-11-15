@@ -12,6 +12,7 @@ Usage:
     python scripts/search.py "faq 區塊" -n 3
     python scripts/search.py stats            # row counts + plugin version
     python scripts/search.py domains          # list domains
+    python scripts/search.py all --domain pending   # every row of one domain
 
 Standard library only.
 """
@@ -71,9 +72,11 @@ def expand(query: str) -> list[str]:
     return out
 
 
-def score_text(text: str, tokens: list[str]) -> int:
+def score_text(text: str, tokens: list[str]) -> float:
+    """Distinct-token coverage first, raw frequency second."""
     low = text.lower()
-    return sum(low.count(t) * (3 if len(t) > 3 else 1) for t in tokens)
+    hit = [t for t in tokens if t in low]
+    return len(hit) * 10 + sum(min(low.count(t), 3) for t in hit)
 
 
 def search(query: str, domain: str | None = None, max_results: int = 5) -> list[dict]:
@@ -84,7 +87,7 @@ def search(query: str, domain: str | None = None, max_results: int = 5) -> list[
         if d == "refs":
             for p in sorted(REFS.glob("*.md")):
                 for i, chunk in enumerate(re.split(r"\n(?=## )", p.read_text(encoding="utf-8"))):
-                    s = score_text(chunk, tokens)
+                    s = score_text(chunk, tokens) * 0.6  # prefer CSV rows (they carry source/trust)
                     if s:
                         title = chunk.strip().splitlines()[0].lstrip("# ")
                         hits.append({"_domain": "refs", "_score": s, "file": f"references/{p.name}",
@@ -92,6 +95,8 @@ def search(query: str, domain: str | None = None, max_results: int = 5) -> list[
             continue
         for r in load_csv(DOMAINS[d]):
             s = score_text(" ".join(r.values()), tokens)
+            if any(r.get(k, "").lower() == query.lower() for k in ("zh", "test_id", "rule_id")):
+                s += 50
             if s:
                 hits.append({"_domain": d, "_score": s, **r})
     hits.sort(key=lambda h: -h["_score"])
@@ -118,8 +123,9 @@ def print_hit(h: dict) -> None:
         return
     body = {k: v for k, v in h.items() if not k.startswith("_") and k not in ("source", "trust", "doc_url")}
     print(f"[{d}] " + " | ".join(f"{k}={v}" for k, v in body.items() if v))
-    src = h.get("doc_url") or ""
-    print(f"   trust={h.get('trust', '?')}  source={h.get('source', '?')}" + (f"  {src}" if src else ""))
+    if "trust" in h or "source" in h:
+        src = h.get("doc_url") or ""
+        print(f"   trust={h.get('trust', '?')}  source={h.get('source', '?')}" + (f"  {src}" if src else ""))
 
 
 def main() -> int:
@@ -142,6 +148,11 @@ def main() -> int:
         for d, stem in DOMAINS.items():
             print(f"{d:10s} data/{stem}.csv")
         print("refs       references/*.md")
+        return 0
+
+    if q == "all" and args.domain and args.domain != "refs":
+        for r in load_csv(DOMAINS[args.domain]):
+            print_hit({"_domain": args.domain, **r})
         return 0
 
     hits = search(q, args.domain, args.n)
