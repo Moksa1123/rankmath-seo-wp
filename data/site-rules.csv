@@ -1,6 +1,6 @@
 rule_id,zh,rule,value,rank_math_test,verifier,source,trust
 h2_count,12 個 H2,article uses the 12-H2 skeleton (FAQ under H2 #12),12,none (keywordInSubheadings needs only 1 subheading with FK),verify-article: Heading balance (any balanced count passes),moksaweb.com template; see data/h2-templates.csv,站內風格
-h2_with_fk,含關鍵字的 H2,5 of 12 H2s carry the FK (1 2 4 6 10); pronouns elsewhere to hold density,5,keywordInSubheadings passes with 1,verify-article: FK in H2 >= 1,moksaweb.com template,站內風格
+h2_with_fk,含關鍵字的 H2,5 of 12 H2s carry the FK (1/2/4/6/10); pronouns elsewhere to hold density,5,keywordInSubheadings passes with 1,verify-article: FK in H2 >= 1,moksaweb.com template,站內風格
 word_target,字數目標,aim for 1400+ wp.wordcount words (2000+ ideal); Rank Math itself passes from 600,1400,lengthContent (600 pass; 2500 full 8/8),not gated (verifier gates on 600),moksaweb.com habit; earlier versions called this a Rank Math minimum (it is not),站內風格
 faq_count,FAQ 題數,FAQ block has 8 questions; 4 carry the FK,8,none,not gated,moksaweb.com FAQ habit; see data/faq-topics.csv,站內風格
 howto_steps,HowTo 步驟數,HowTo block has 4 steps under H2 #4,4,none,not gated,moksaweb.com template,站內風格
