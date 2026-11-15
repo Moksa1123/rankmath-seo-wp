@@ -259,9 +259,9 @@
       "question": "In Rank Math 1.0.282's keywordDensity code, how many points does a density of exactly 0.75% get, and why?",
       "must": [
         [
-          "(?<!\\d)6(?!\\d)",
-          "best",
-          "full"
+          "(?<![\\d.])6(?![\\d.])",
+          "full (6|points|score)",
+          "best (band|tier|branch|score|range)"
         ],
         [
           "inRange",
@@ -296,7 +296,7 @@
           "eleven"
         ],
         [
-          "\bno\b",
+          "\\bno\\b",
           "not",
           "沒有",
           "不"
@@ -349,8 +349,8 @@
       "question": "Does Rank Math's media test (contentHasAssets) count a <video> tag that plays an .mp4 file hosted on your own server as a video?",
       "must": [
         [
-          "^\\W*no\b",
-          "\bno[,.]",
+          "^\\W*no\\b",
+          "\\bno[,.]",
           "does not",
           "doesn't",
           "不會",
@@ -460,7 +460,8 @@
         ]
       ],
       "source": "analyzer.js keywordInImageAlt gallery branch (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 3 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "platforms-trust",
@@ -491,7 +492,7 @@
           "sixteen"
         ],
         [
-          "\bh3\b"
+          "\\bh3\\b"
         ]
       ],
       "source": "blocks/howto/block.json (1.0.282)",

@@ -251,6 +251,19 @@ class Search(unittest.TestCase):
             self.assertTrue(search.search(q, domain or None), (q, domain))
 
 
+class Evals(unittest.TestCase):
+    def test_cases_are_well_formed(self):
+        cases = json.loads((ROOT / "evals" / "cases.json").read_text(encoding="utf-8"))["cases"]
+        active = [c for c in cases if not c.get("retired")]
+        self.assertGreaterEqual(len(active), 10)  # SOP 6-4
+        for c in cases:
+            for group in c["must"]:
+                for p in group:
+                    self.assertFalse(any(ord(ch) < 32 for ch in p), (c["id"], repr(p)))  # heredoc \b -> 0x08
+                    re.compile(p)
+            self.assertIn(c["trust"], TRUST, c["id"])
+
+
 class Numbers(unittest.TestCase):
     def test_skill_md_numbers(self):
         problems, _ = check_numbers.check()

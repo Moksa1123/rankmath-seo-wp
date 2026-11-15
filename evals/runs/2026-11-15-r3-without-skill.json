@@ -1,0 +1,21 @@
+{
+ "meta": {
+  "date": "2026-11-15",
+  "model": "claude-opus-5-5",
+  "how": "subagent, no tools, closed book"
+ },
+ "answers": {
+  "howto-save-classes": "(a) \"rank-math-step\", (b) \"rank-math-step-title\", (c) \"rank-math-step-content\".",
+  "site-howto-sizeslug": "Best guess: sizeSlug \"full\", copied from the HowTo block in an existing published moksaweb.com reference post (I can't recall the exact post ID).",
+  "density-075-gap": "Best guess: 0 points. The branches don't meet at 0.75: one band ends with a strict < 0.75 and the next starts above 0.75 (around 0.76), so exactly 0.75 matches neither band.",
+  "powerword-prefix": "Best guess: at most 2 extra characters beyond the power word.",
+  "powerword-locale-count": "Best guess: about 20 language files, and Chinese is not among them.",
+  "video-self-hosted": "Best guess: yes. contentHasAssets matches <video> tags (and [video] shortcodes) as well as iframe embeds, so a self-hosted .mp4 in a <video> tag counts.",
+  "sample-density": "Best guess: about 1.2% keyword density at roughly 1000 words (wp.wordcount).",
+  "post-title-english-trust": "Best guess: a low trust level (site convention / unverified). It is the moksaweb.com site's own habit, not something Rank Math scoring or WordPress requires.",
+  "wordcount-port-version": "Best guess: @wordpress/wordcount, version 4.x (about 4.24.0), compared on about 40 files.",
+  "gallery-alt": "The test still passes. Rank Math counts a [gallery] shortcode in the content as meeting the image-alt check even if no <img> alt contains the keyword.",
+  "platforms-trust": "Best guess: unverified (documented only). The install paths come from each platform's docs and were not tested by installing on all 8 platforms; 'verified' covers only the template content, not where each platform loads skills from.",
+  "howto-attr-count": "Best guess: about 15 attributes, and the default titleWrapper is \"h3\"."
+ }
+}

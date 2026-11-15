@@ -1,0 +1,14 @@
+{"meta": {"date": "2026-11-15", "model": "claude-opus-5-5", "how": "subagent reads SKILL.md, uses scripts/search.py and data/"}, "answers": {
+"howto-save-classes": "(a) step wrapper: <div class=\"rank-math-howto-step\">; (b) step title: <h3 class=\"rank-math-howto-title\"> (tag = titleWrapper, default h3; omitted if title empty); (c) step content: <div class=\"rank-math-howto-content\"> (omitted if content empty). (The PHP front-end render uses different classes: rank-math-step / rank-math-step-title / rank-math-step-content.)",
+"site-howto-sizeslug": "sizeSlug \"large\" (the plugin default is \"full\" and save() ignores it); this site style is taken from moksaweb.com post 8594, the canonical form. It is 站內風格, not a Rank Math requirement.",
+"density-075-gap": "Exactly 0.75% gets the full 6/6 points ('best'). It falls in a gap caused by lodash inRange's exclusive upper bound: fair is 0.5 up to but not including 0.75, good starts at 0.76, so 0.75 matches neither and drops through to the best (up to 2.5) branch.",
+"powerword-prefix": "At most 4 characters longer: the title word must equal a power word or start with one and be no more than 4 characters longer (analyzer.js titleHasPowerWords, 1.0.282).",
+"powerword-locale-count": "11 language files (de, en, es, fi, fr, hu, id, it, ja, nl, sv). Chinese is not among them, so the power-word test is skipped on zh sites.",
+"video-self-hosted": "No. A video counts only if its iframe/video/[video] URL or a bare URL is YouTube or Vimeo, so a self-hosted .mp4 does not count.",
+"sample-density": "FK density 1.96% (14 occurrences) and 714 wp.wordcount words; it passes 8 passed, 0 failed (content length 2/8, density 6/6 in the 1.0-2.5% band).",
+"post-title-english-trust": "Trust is 推論 (inferred). It is a moksaweb.com habit, and the reason behind it (CJK font / breakage) was never measured; it is listed as an open question in pending.csv.",
+"wordcount-port-version": "@wordpress/wordcount version 5.1.0, compared on 3 files (the port matched on all of them).",
+"gallery-alt": "The test still passes (2 points): a [gallery] shortcode in the content satisfies keywordInImageAlt even when no <img alt> contains the keyword.",
+"platforms-trust": "All 8 are 推論 (inferred). The templates say verified:true (since v1.1.0 commit 8c97a29), but they record no doc URL or date, so the paths cannot be traced to a source; re-checking them is an open pending.csv item.",
+"howto-attr-count": "16 attributes (hasDuration, days, hours, minutes, description, steps, sizeSlug, imageID, mainSizeSlug, listStyle, timeLabel, titleWrapper, listCssClasses, titleCssClasses, contentCssClasses, textAlign). The default titleWrapper is h3."
+}}

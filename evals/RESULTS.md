@@ -2,6 +2,35 @@
 
 最新的在最上面。題目與評分標準見 `cases.json`，評分程式 `grade.py`。
 
+## 2026-11-15 第 3 輪（現行題組，12 題）
+
+- 本輪是正式紀錄：計分題 11 題，有 skill 11/11，沒有 skill 0/11。
+- `gallery-alt` 沒 skill 也答對，已標 `retired`（下次換題）。
+- 評分規則本輪後修正兩處，上表用修正後的規則評分：(1) 4 個正規式的 `\b` 在寫檔時被當成 backspace 字元（`powerword-locale-count`、`video-self-hosted`、`howto-attr-count`），修好後有 skill 的 `howto-attr-count` 由 ❌ 變 ✅；(2) `density-075-gap` 原規則讓沒 skill 答案裡的「Best guess」對到 best，而它答的是 0 分（錯），改成要答出 6 分或 best band。用修正後的規則重評第 2 輪，結果和上次記錄相同。
+
+| 項目 | 有 skill | 沒有 skill |
+|---|---|---|
+| 計分題答對率（11 題） | **11/11（100.0%）** | 0/11（0.0%） |
+| 全部題目（12 題） | 12/12 | 1/12 |
+| 模型 | claude-opus-5-5 | claude-opus-5-5 |
+| 作答方式 | subagent reads SKILL.md, uses scripts/search.py and data/ | subagent, no tools, closed book |
+| 答案檔 | `evals/runs/2026-11-15-r3-with-skill.json` | `evals/runs/2026-11-15-r3-without-skill.json` |
+
+| 題目 | 可信度 | 有 skill | 沒有 skill | 備註 |
+|---|---|---|---|---|
+| `howto-save-classes` | 官方原始碼 | ✅ | ❌ |  |
+| `site-howto-sizeslug` | 站內風格 | ✅ | ❌ |  |
+| `density-075-gap` | 官方原始碼 | ✅ | ❌ |  |
+| `powerword-prefix` | 官方原始碼 | ✅ | ❌ |  |
+| `powerword-locale-count` | 官方原始碼 | ✅ | ❌ |  |
+| `video-self-hosted` | 官方原始碼 | ✅ | ❌ |  |
+| `sample-density` | 實測 | ✅ | ❌ |  |
+| `post-title-english-trust` | 站內風格 | ✅ | ❌ |  |
+| `wordcount-port-version` | 實測 | ✅ | ❌ |  |
+| `gallery-alt` | 官方原始碼 | ✅ | ✅ | 沒 skill 也對：不計分，要換題 |
+| `platforms-trust` | 站內風格 | ✅ | ❌ |  |
+| `howto-attr-count` | 官方原始碼 | ✅ | ❌ |  |
+
 ## 2026-11-15 第 2 輪（15 題）
 
 - 新題考外掛原始碼裡的冷門細節（0.75% 的 inRange 空隙、強力字前綴 4 字元、11 個語系檔、自架 mp4 不算影片）與 skill 自己的實測值。
