@@ -1,6 +1,6 @@
 date,question,why_not_found,asked_by,status
-2026-11-15,Does the text Rank Math feeds its analyzer in Gutenberg equal raw post_content (so verify-article word count / density match the sidebar exactly)?,verify-article ports wp.wordcount and the analyzer helpers (port matches @wordpress/wordcount 5.1.0 on 3 files) but has not been compared with a live Rank Math sidebar,skill 總機 (SOP 6-7 補齊),open
-2026-11-15,Does moksaweb.com's theme still print inline <script type=application/ld+json> as visible text?,rule comes from an old incident with no saved reproduction; marked 推論 in data/site-rules.csv,skill 總機 (SOP 自評),open
-2026-11-15,Why must post_title stay English (CJK font / breakage)?,reason never measured; the font limit is documented only for the featured image (references/image-specs.md),skill 總機 (SOP 自評),open
-2026-11-15,Are the 8 install paths in assets/templates/platforms/*.json still correct?,templates say verified:true but record no doc URL or date; data/platforms.csv marks them 推論,skill 總機 (SOP 第 5 項),open
-2026-11-15,Did 'score 80+ out of the box' ever get measured?,no saved Rank Math score readings for moksaweb.com articles; claim removed from SKILL.md,skill 總機 (SOP 自評),open
+2026-11-15,Does the text Rank Math feeds its analyzer in Gutenberg equal raw post_content (so verify-article word count / density match the sidebar exactly)?,verify-article ports wp.wordcount and the analyzer helpers (port matches @wordpress/wordcount 5.1.0 on 3 files) but has not been compared with a live Rank Math sidebar,maintainer (SOP review),open
+2026-11-15,Does moksaweb.com's theme still print inline <script type=application/ld+json> as visible text?,rule comes from an old incident with no saved reproduction; marked 推論 in data/site-rules.csv,maintainer (SOP review),open
+2026-11-15,Why must post_title stay English (CJK font / breakage)?,reason never measured; the font limit is documented only for the featured image (references/image-specs.md),maintainer (SOP review),open
+2026-11-15,Are the 8 install paths in assets/templates/platforms/*.json still correct?,templates say verified:true but record no doc URL or date; data/platforms.csv marks them 推論,maintainer (SOP review),open
+2026-11-15,Did 'score 80+ out of the box' ever get measured?,no saved Rank Math score readings for moksaweb.com articles; claim removed from SKILL.md,maintainer (SOP review),open

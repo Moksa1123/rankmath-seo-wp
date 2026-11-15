@@ -1,6 +1,6 @@
 {
   "name": "rankmath-seo-wp",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Agent skill that writes Rank Math SEO 80+ scoring WordPress articles in Traditional Chinese (or any language). Outputs Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, focus keyword density 1.0-1.5%, and a 12 H2 structure. Includes WP-CLI deployers and a clipboard-based block-paste exporter.",
   "bin": {
     "rankmath-export": "tools/export-blocks.mjs",
@@ -27,6 +27,7 @@
     "README.zh-TW.md",
     "README.ja.md",
     "README.ko.md",
+    "EXAMPLES.md",
     "LICENSE",
     "CLAUDE.md",
     "CONTRIBUTING.md",
@@ -34,7 +35,9 @@
     "data",
     "examples",
     "references",
-    "tools"
+    "scripts",
+    "tools",
+    "!**/__pycache__"
   ],
   "keywords": [
     "rank-math",

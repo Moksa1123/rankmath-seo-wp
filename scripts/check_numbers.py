@@ -40,6 +40,7 @@ import search  # noqa: E402
 # ---------------------------------------------------------------------------
 FACTS = {
     "csv_count": lambda: len(search.DOMAINS),
+    "pkg_version": lambda: __import__("json").loads((HERE.parent / "package.json").read_text(encoding="utf-8"))["version"],
 }
 
 # (regex, kind, arg). Group 1 is the claimed number; without a group the whole
@@ -69,7 +70,7 @@ RULES: list[tuple[str, str, str]] = [
     # ---- not from the data ----
     (r"Checked (2026-11-15)", "fixed", "date the plugin source and KB were read (data checked_on column)"),
     (r"(30)\+ published articles", "fixed", "history: moksaweb.com article count when the template was distilled"),
-    (r"version: (1\.1\.1)", "fixed", "package version (package.json); bumped only on release"),
+    (r"^version: (\d+\.\d+\.\d+)", "fact", "pkg_version"),
     (r"(?<![\d.v])\d\. \*\*", "fixed", "numbered task steps"),
     (r"(8) passed, (0) failed", "fixed", "verifier pass criterion"),
     (r"exit (0)", "fixed", "verifier pass criterion"),
