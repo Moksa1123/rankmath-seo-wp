@@ -1,0 +1,24 @@
+{
+ "meta": {
+  "date": "2026-11-15",
+  "model": "claude-opus-5-5",
+  "how": "subagent, no tools, closed book"
+ },
+ "answers": {
+  "media-three-images": "My best guess is 4 points. I believe images score in steps: 1 image gets 1, 2 get 2, 3 get 4 and 4 or more get 6. With no videos, nothing is added.",
+  "power-words-zh-skipped": "No, it does not run. The plugin only has power-word lists for a few languages and has no Chinese list, so on a zh_TW site the test is skipped rather than scored.",
+  "howto-save-classes": "(a) rank-math-step, (b) rank-math-step-title, (c) rank-math-step-content. Any custom title or content CSS classes from the block attributes are added after these.",
+  "verifier-word-gate": "My guess is that it starts passing at 600 visible words. That number comes from Rank Math's contentLength (content length) rule.",
+  "site-howto-sizeslug": "My guess is sizeSlug \"full\". It is copied from an existing moksaweb.com HowTo reference post, but I can't recall which post ID.",
+  "density-075-gap": "My guess is that exactly 0.75% falls into the lower bucket, worth about 2 points, not the next tier. The code compares with a strict greater-than, so 0.75 does not reach the higher band.",
+  "powerword-prefix": "My guess is up to 3 extra characters.",
+  "powerword-locale-count": "My guess is about 7 language files. Chinese is not among them.",
+  "howto-empty-title": "My guess is that no title element is written. Only the step wrapper and the step content div are output.",
+  "faq-skip-rules": "A question is left out when its title is empty, when its content is empty, or when its visible flag is false (hidden).",
+  "video-self-hosted": "Yes, I believe it does. The video check matches &lt;video&gt; tags as well as iframes and embeds, so a self-hosted .mp4 in a &lt;video&gt; tag counts.",
+  "in10-kb-vs-code": "My guess is that the KB gives 300 words for short posts, while the code uses 400 words.",
+  "skill-plugin-version": "Rank Math 1.0.282.",
+  "sample-density": "My guess is a density of about 1.2% and a wp.wordcount count of about 830 words.",
+  "post-title-english-trust": "My guess is a low trust level, marked as a site convention. The rule comes from moksaweb.com's own practice, not from Rank Math's plugin code or KB."
+ }
+}

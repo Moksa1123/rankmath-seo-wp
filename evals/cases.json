@@ -82,7 +82,8 @@
         ]
       ],
       "source": "analyzer.js contentHasAssets calculateImagesScore {0:0,1:1,2:2,3:4} else 6 (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 2 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "power-words-zh-skipped",
@@ -100,7 +101,8 @@
         ]
       ],
       "source": "class-screen.php power_words(): assets/vendor/powerwords/<locale>.php; 11 locales, no zh (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 2 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "wordcount-cjk",
@@ -218,7 +220,8 @@
         ]
       ],
       "source": "tools/verify-article.py WORDS_PASS; data/rankmath-tests.csv lengthContent",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 2 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "site-howto-sizeslug",
@@ -311,7 +314,8 @@
         ]
       ],
       "source": "blocks/howto/assets/js/index.js save(): e.title&&… (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 2 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "faq-skip-rules",
@@ -337,7 +341,8 @@
         ]
       ],
       "source": "blocks/faq/assets/js/index.js save(): isEmpty(title)||isEmpty(content)||visible===false (1.0.282)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 2 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "video-self-hosted",
@@ -371,7 +376,8 @@
         ]
       ],
       "source": "KB score-100-in-tests 8.4 (300) vs analyzer.js keywordIn10Percent (400)",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 2 輪沒 skill 也答對（無鑑別度）"
     },
     {
       "id": "skill-plugin-version",
@@ -382,7 +388,8 @@
         ]
       ],
       "source": "data/rankmath-tests.csv source column",
-      "trust": "官方原始碼"
+      "trust": "官方原始碼",
+      "retired": "2026-11-15 第 2 輪沒 skill 也答對（無鑑別度）；題組內洩題"
     },
     {
       "id": "sample-density",
@@ -408,8 +415,8 @@
           "inference"
         ],
         [
-          "never measured",
-          "not measured",
+          "never (been )?measured",
+          "not (been )?measured",
           "未測",
           "沒有測",
           "no (measurement|evidence|reproduction)",
@@ -418,6 +425,77 @@
       ],
       "source": "data/site-rules.csv post_title_english",
       "trust": "站內風格"
+    },
+    {
+      "id": "wordcount-port-version",
+      "question": "The rankmath-seo-wp skill ports WordPress's word counter into its verifier. Which npm package and exact version was the port compared against, and on how many files?",
+      "must": [
+        [
+          "@wordpress/wordcount",
+          "wordpress/wordcount"
+        ],
+        [
+          "5\\.1\\.0"
+        ],
+        [
+          "(?<!\\d)3(?!\\d) files",
+          "three files",
+          "3 個檔"
+        ]
+      ],
+      "source": "data/pending.csv row 1; scripts/test_verify.py",
+      "trust": "實測"
+    },
+    {
+      "id": "gallery-alt",
+      "question": "Rank Math's 'Focus Keyword in image alt' test: what happens if the content contains a [gallery] shortcode but no <img> alt contains the keyword?",
+      "must": [
+        [
+          "pass",
+          "green",
+          "scores?",
+          "給分",
+          "通過",
+          "assum"
+        ]
+      ],
+      "source": "analyzer.js keywordInImageAlt gallery branch (1.0.282)",
+      "trust": "官方原始碼"
+    },
+    {
+      "id": "platforms-trust",
+      "question": "In the rankmath-seo-wp skill, what trust level do the 8 AI-platform install paths (data/platforms.csv) carry, and why, given that the templates are marked verified?",
+      "must": [
+        [
+          "推論",
+          "inferred",
+          "inference"
+        ],
+        [
+          "(no|without) (doc|documentation|source)? ?url",
+          "no (doc|source|link)",
+          "未記錄|沒有記錄|沒有.{0,6}(網址|連結)",
+          "not recorded",
+          "no date"
+        ]
+      ],
+      "source": "data/platforms.csv source/trust",
+      "trust": "站內風格"
+    },
+    {
+      "id": "howto-attr-count",
+      "question": "How many attributes does Rank Math's HowTo block.json declare, and what is the default titleWrapper?",
+      "must": [
+        [
+          "(?<!\\d)16(?!\\d)",
+          "sixteen"
+        ],
+        [
+          "\bh3\b"
+        ]
+      ],
+      "source": "blocks/howto/block.json (1.0.282)",
+      "trust": "官方原始碼"
     }
   ]
 }

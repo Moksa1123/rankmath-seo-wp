@@ -1,0 +1,17 @@
+{"meta": {"date": "2026-11-15", "model": "claude-opus-5-5", "how": "subagent reads SKILL.md, uses scripts/search.py and data/"}, "answers": {
+"media-three-images": "4 points (out of 6). Image tiers are 1->1, 2->2, 3->4, 4+->6, the featured image counts as an image, and no videos adds nothing.",
+"power-words-zh-skipped": "No, it is skipped. The test loads assets/vendor/powerwords/<site language>.php, and the plugin ships only de, en, es, fi, fr, hu, id, it, ja, nl and sv lists. There is no zh list, so a Chinese site has nothing to check against.",
+"howto-save-classes": "(a) rank-math-howto-step, (b) rank-math-howto-title (an h3 by default, set by titleWrapper), (c) rank-math-howto-content. All of these sit inside the wp-block-rank-math-howto-block wrapper.",
+"verifier-word-gate": "It passes at 600 visible words (wp.wordcount) or more. 600 is the lowest scoring tier of Rank Math's lengthContent test (>=600 -> 2/8 points; the test fails below 600).",
+"site-howto-sizeslug": "sizeSlug \"large\" (the plugin default is \"full\", and save() ignores it). It comes from the moksaweb.com canonical post 8594. This is a site-style rule, not a Rank Math rule.",
+"density-075-gap": "6/6, which is full points. The code checks fair as 0.5 to <0.75 and good as 0.76 to <1 with lodash inRange. Exactly 0.75 falls between those two ranges, so it lands in the best branch.",
+"powerword-prefix": "At most 4 extra characters. The title word must equal a power word, or start with one and be no more than 4 characters longer.",
+"powerword-locale-count": "11 language files (de, en, es, fi, fr, hu, id, it, ja, nl, sv). Chinese is not among them.",
+"howto-empty-title": "Nothing. The title element (h3.rank-math-howto-title) is left out when the title is empty, so the step div holds only the rank-math-howto-content div.",
+"faq-skip-rules": "save() writes a question only if its title is not empty, its content is not empty, and visible is not false. A question with an empty title, empty content, or visible:false is left out.",
+"video-self-hosted": "No. A video counts only if its iframe, video tag, [video] shortcode or bare URL points to YouTube or Vimeo. A self-hosted .mp4 does not count.",
+"in10-kb-vs-code": "The KB says 300 words; the plugin code says 400. At or below that word count, the whole text is checked instead of only the first 10%.",
+"skill-plugin-version": "seo-by-rank-math (Rank Math SEO) 1.0.282.",
+"sample-density": "FK density 1.96% (14 visible occurrences) over 714 visible words. That is in the full-score band (6/6), and content length scores 2/8.",
+"post-title-english-trust": "推論 (inferred). It is a moksaweb.com habit, but the reason (CJK font or breakage) has never been measured. It is also listed as an open question in data/pending.csv."
+}}
