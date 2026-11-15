@@ -160,11 +160,19 @@ rankmath-verify article.html "Your Focus Keyword"
 Sample output:
 
 ```
-=== article.html ===
-Word count:      1495 visible words           OK above 1400 minimum
-FK count:        22 visible occurrences
-FK density:      1.47%                        OK in target range 1.0-1.5%
-Heading balance: 12 open / 12 close           OK 12/12 (target structure)
+=== examples/sample-article.html ===
+Focus keyword: Claude Skills
+
+Word count:      714 visible words
+                 OK at least 600 (content length 2/8)
+FK count:        14 visible occurrences
+FK density:      1.96%
+                 OK full score band 1.0-2.5% (6/6; KB recommends 1.0-1.5%)
+Heading balance: 12 open / 12 close
+                 OK 12/12 (site-style structure)
+FK in opening:   OK
+FK in H2:        4 occurrences
+                 OK at least 1 H2 contains FK
 HowTo block:     OK
 FAQ block:       OK (8 questions aligned)
 Forbidden:       OK none found

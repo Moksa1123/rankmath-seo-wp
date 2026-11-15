@@ -1,119 +1,64 @@
-# Rank Math SEO Checklist (100-point breakdown)
+# Rank Math SEO Checklist (what the plugin actually scores)
 
-Rank Math evaluates each post on multiple criteria. Hitting 80+ score is the
-goal. Below is the full checklist with how to satisfy each.
+Every number here is a row in `data/rankmath-tests.csv`, taken from the
+plugin source (seo-by-rank-math 1.0.282, `assets/admin/js/analyzer.js`) and
+the KB page <https://rankmath.com/kb/score-100-in-tests/>. Look a rule up with
+`python scripts/search.py "<words>"` instead of trusting memory.
 
-## Basic SEO (40 points)
+## How the score is computed
 
-### Focus keyword in URL/slug (5 pts)
-- `post_name` (slug) must contain the focus keyword
-- Use kebab-case English: `claude-skills`, `claude-for-excel`
-- Set via: `wp post update POST_ID --post_name='claude-skills'`
+- Each applicable test has a max score; the overall score is
+  `round(sum(points) / sum(max points) × 100)` (`refreshScore`).
+- Colour: **> 80 green**, > 50 orange, otherwise red (`getScoreClass`).
+- Tests that do not apply (e.g. sentiment on non-English sites, power words on
+  locales without a list) drop out of both sums.
+- There is **no** HowTo/FAQ schema test, no SEO-title-length test and no
+  meta-description-length test in the content analysis. Earlier versions of
+  this file listed "5 pts" for each; those rows were invented and are gone.
 
-### Focus keyword at start of SEO Title (5 pts)
-- `rank_math_title` must START with focus keyword
-- Format: `[FK] 完整教學：[數字] [量詞] [補充]`
-- ❌ "完整教學：Claude Skills 3 層架構" (FK not at start)
-- ✅ "Claude Skills 完整教學：3 層架構 + SKILL.md"
+## Tests and points
 
-### Focus keyword in Meta Description (5 pts)
-- `rank_math_description` should contain FK, ideally in first sentence
-- 100-160 characters total
-- Example: "Claude Skills 完整教學：Pre-built / Custom / Workspace 三層架構、SKILL.md 格式、Progressive Disclosure 機制與 Open Standard 跨平台。"
+| Test (id) | Rule | Points |
+|---|---|---|
+| FK in SEO title (`keywordInTitle`) | primary FK appears in SEO title | 38 (36 on en sites) |
+| FK in meta description (`keywordInMetaDescription`) | FK appears in description; KB: keep it within the first 120–160 chars | 2 |
+| FK in URL (`keywordInPermalink`) | slugified FK inside the slug | 5 |
+| FK at beginning (`keywordIn10Percent`) | FK in first 10% of words (whole text if ≤ 400 words) | 3 |
+| FK in content (`keywordInContent`) | FK appears in content | 3 |
+| Content length (`lengthContent`) | wp.wordcount words: 2500+ → 8, 2000+ → 5, 1500+ → 4, 1000+ → 3, 600+ → 2, else 0 | 8 |
+| FK in subheading (`keywordInSubheadings`) | FK inside any H2–H6 | 3 |
+| FK in image alt (`keywordInImageAlt`) | featured image alt or any `<img alt>` | 2 |
+| Keyword density (`keywordDensity`) | < 0.5 → 0; 0.5–0.75 → 2; 0.76–1 → 3; up to 2.5 → 6; > 2.5 → 0 | 6 |
+| URL length (`lengthPermalink`) | ≤ 75 characters | 4 |
+| External link (`linksHasExternals`) | ≥ 1 external link | 4 |
+| External dofollow (`linksNotAllExternals`) | ≥ 1 external link without nofollow | 2 |
+| Internal link (`linksHasInternal`) | ≥ 1 internal link | 5 |
+| Content AI (`hasContentAI`) | only when Content AI data exists | 5 |
+| FK near start of title (`titleStartWithKeyword`) | FK starts before the middle of the title | 3 |
+| Sentiment (`titleSentiment`) | English sites only | 1 |
+| Power word (`titleHasPowerWords`) | title word from the locale's list; **no zh list exists**, so skipped on zh sites | 1 |
+| Number in title (`titleHasNumber`) | title matches `\d+` | 1 |
+| Table of contents (`contentHasTOC`) | TOC plugin or `wp-block-rank-math-toc-block` | 2 |
+| Short paragraphs (`contentHasShortParagraphs`) | no paragraph over 120 words | 3 |
+| Media (`contentHasAssets`) | images (featured counts): 1→1, 2→2, 3→4, 4+→6; videos: 1→1, 2+→2; max 6 | 6 |
 
-### Focus keyword density (5 pts)
-- Target **1.0-1.5%** visible density
-- Below 0.4%: "too low" warning
-- Above 2.5%: "too high" warning
-- Sweet spot: 1.0-1.5% (sometimes up to 1.7% acceptable)
-- Computation: visible_FK_count × 100 ÷ visible_word_count
+## Two density numbers, one source each
 
-### Focus keyword in first 10% of content (5 pts)
-- FK should appear in opening paragraph (which is in first 10%)
-- Best practice: FK in first sentence
+- **Plugin scoring** (`官方原始碼`): full 6/6 from 1.0% up to 2.5%. The
+  verifier gates on this.
+- **KB advice** (`官方文件`): "between 1% and 1.5%". Aim here when writing;
+  the verifier prints a note when an article is in 1.5–2.5%.
+- Density = matches of all focus keywords (case-insensitive) ÷
+  `wp.wordcount` words × 100. HTML comments (block JSON) are removed first.
+- `wp.wordcount` counts whitespace-separated tokens, so a run of Chinese
+  without spaces is **one** word. Chinese articles show far lower word counts
+  than their character counts.
 
-### URL length under 75 characters (5 pts)
-- Short slugs preferred: `claude-skills` not `claude-skills-complete-guide-tutorial`
+## moksaweb.com conventions (站內風格, not Rank Math rules)
 
-### Use external links (5 pts)
-- At least 1 external link to authoritative source
-- moksaweb.com convention: 5 external links in section 11
-
-### Use internal links (5 pts)
-- At least 1 internal link to your own site
-- Convention: First link in section 11 is to category page
-- Example: `https://moksaweb.com/category/claude-code/`
-
-## Additional SEO (40 points)
-
-### Focus keyword in Subheading (5 pts)
-- FK must appear in at least one H2 or H3
-- Convention: 5 of 12 H2s contain FK (Sections 1, 2, 4, 6, 10)
-- Validation: search content for `<h2[^>]*>[^<]*FK[^<]*</h2>`
-
-### Focus keyword in Image Alt (5 pts)
-- Featured image alt attribute must contain FK
-- Set via: `wp media import file.webp --alt='[FK] sidebar generates X Y Z'`
-- Example: alt='Claude Skills three layer architecture SKILL.md progressive disclosure'
-
-### SEO Title contains a number (5 pts)
-- `rank_math_title` MUST contain at least one Arabic digit (0-9)
-- Without digit: "Your SEO title doesn't contain a number" warning
-- Pattern: `[FK] 完整教學：[N] [量詞] X`
-- Examples passing:
-  - "Claude for Excel 完整教學：6 大功能搶先 Setup"
-  - "Claude Pricing 完整指南：5 個方案 + API 計費"
-  - "Claude in Xcode 完整教學：6 大功能 + Visual Loop"
-- Examples failing:
-  - "Claude Research 完整教學：Multi Agent 深度研究" (no digit)
-  - "Claude Code Custom Themes 完整教學：客製化配色主題" (no digit)
-
-### SEO Title length (5 pts)
-- Optimal: 50-60 characters (English) or 25-30 chars (CJK width 2)
-- Too long → truncated in SERP
-- Too short → looks underdetermined
-
-### Meta Description length (5 pts)
-- Optimal: 120-160 characters
-- Too long → truncated
-- Too short → less informative
-
-### Use H2 (5 pts)
-- At least one H2 in content
-- Convention: 12 H2 sections per article
-
-### Use HowTo Schema (5 pts) [if HowTo article]
-- Use `wp:rank-math/howto-block` Gutenberg block
-- See `howto-block.md` for canonical format
-- Triggers HowTo Rich Snippet in Google search
-
-### Use FAQ Schema (5 pts)
-- Use `wp:rank-math/faq-block` Gutenberg block
-- See `faq-block.md` for canonical format
-- Triggers FAQ Rich Snippet in Google search
-
-## Title Readability (10 points)
-
-### Title contains power word (3 pts)
-- Use compelling adjectives: 完整, 終極, 最佳, 必看, 5 分鐘
-- "Claude Skills 完整教學" passes
-
-### Title contains a number (handled above)
-
-### Title length within range (handled above)
-
-## Content Length (10 points)
-
-### Word count (5 pts)
-- Minimum: 600 words
-- Recommended: 1000+ words
-- Excellent: 2000+ words
-- Convention: target 1400-2000 visible words
-
-### Content readability (5 pts)
-- Short paragraphs (under 150 chars each)
-- Use bullet lists, tables, code blocks for variety
-- Mix sentence lengths
+See `data/site-rules.csv`. The main ones: 12 H2s with the FK in 5, 1400+
+words, 8 FAQ questions, 4 HowTo steps, 3 YouTube embeds, 5 external links,
+meta description starting with the FK, `[FK] 完整教學：[digit] …` SEO title.
 
 ## Meta fields setup (WP-CLI commands)
 
@@ -141,42 +86,18 @@ wp post meta update $POST_ID _thumbnail_id $ATTACH_ID
 
 | Issue | Symptom | Fix |
 |-------|---------|-----|
-| FK density 3%+ | "Keyword stuffing" warning | Replace some FK with pronouns 它/這個工具 |
-| FK density 0.5% | "Too low" warning | Add FK to H2 headings or section openings |
-| No digit in SEO Title | "Title doesn't contain number" | Add 4 步驟 / 5 種 / 6 大功能 etc. |
-| No FK in subheading | Missing 5 pts | Make 1 of 12 H2s contain FK |
-| Inline `<script>` | Renders as visible text in some themes | Use rank-math blocks instead |
-| post_title in CJK | Font rendering / breaks character limits | Keep post_title English, CJK in rank_math_title |
+| FK density > 2.5% | "Keyword Density is X which is high" (0/6) | Replace some FK with pronouns 它/這個工具 |
+| FK density < 0.5% | "which is low" (0/6) | Add FK to H2 headings or section openings |
+| No digit in SEO title | "Your SEO title doesn't contain a number" | Add 4 步驟 / 5 種 / 6 大功能 etc. |
+| No FK in subheading | loses 3 points | Put the FK in one H2 |
+| Fewer than 600 words | content length 0/8 | Remember Chinese runs count as one word each |
+| Inline `<script>` | renders as visible text on moksaweb.com (推論, see pending) | Use rank-math blocks instead |
 
 ## Verification before publish
 
-Run `tools/verify-article.py article.html "Focus Keyword"` which checks:
-- Word count
-- FK count (visible only)
-- FK density (computed)
-- Heading balance
-- Forbidden patterns (HowTo Schema text, inline script)
-- HowTo block format compliance
-- FAQ block JSON+HTML alignment
-
-Sample output:
-```
-=== article.html ===
-Word count: 1495 visible
-FK count: 22
-Density: 1.47%  ✓ OK
-Headings: 12 / 12  ✓ balanced
-HowTo block: ✓ canonical format (4 steps)
-FAQ block: ✓ JSON 8 ↔ HTML 8 (all match)
-HowTo Schema text: 0  ✓
-Inline script: 0  ✓
-```
-
-## Real-world score targets
-
-Based on moksaweb.com experience:
-- 80-90 score: practical floor; passes Rank Math green light
-- 90-95 score: excellent; covers most points
-- 95+ score: requires manual tweaking and may sacrifice readability
-
-Don't chase 100. Hit 85+ consistently and focus on writing quality.
+Run `python tools/verify-article.py article.html "Focus Keyword"`. Pass
+criterion: `=== Result: 8 passed, 0 failed ===` and exit code 0. The
+verifier covers word count, density, heading balance, FK in first 10%, FK in
+H2, HowTo/FAQ HTML vs the block's `save()`, and forbidden patterns. Title,
+description, slug, links, images and media are set in WordPress and are not
+in the HTML file: check them in the Rank Math sidebar after pasting.

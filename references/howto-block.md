@@ -13,34 +13,33 @@ working on moksaweb.com (reference post 8594).
 <!-- /wp:rank-math/howto-block -->
 ```
 
-## Required structure rules
+## What makes the block valid (官方原始碼)
 
-### JSON metadata (in `<!-- wp:rank-math/howto-block ... -->` comment)
+The editor re-runs the block's `save()` on the JSON and compares the result
+with the saved HTML. Any difference shows "區塊包含未預期或無效的內容".
+`save()` (seo-by-rank-math 1.0.282, `blocks/howto/assets/js/index.js`) writes:
 
-ONLY these fields:
-```json
-{
-  "steps": [
-    {"id": "step-1", "visible": true, "title": "...", "content": "..."},
-    ...
-  ],
-  "sizeSlug": "large"
-}
-```
+- `<div class="wp-block-rank-math-howto-block">` (plus `className` if set)
+- one `<div class="rank-math-howto-step">` per step whose `visible` is not false
+- inside it `<{titleWrapper} class="rank-math-howto-title">` (titleWrapper
+  defaults to `h3`; omitted when the title is empty) and
+  `<div class="rank-math-howto-content">` (omitted when content is empty)
+- nothing else: no outer title, no wrapper around the steps
 
-**Forbidden** (will break block validation):
-- `hasDuration`, `days`, `hours`, `minutes`
-- `hasTotalTime`, `timeDays`, `timeHours`, `timeMinutes`
-- `titleWrapper` (FAQ has it, HowTo does not)
-- Any other field beyond `steps` + `sizeSlug`
+So the HTML title/content must be the exact JSON strings, and the heading tag
+must equal `titleWrapper`. `hasDuration`, `days`, `hours`, `minutes`,
+`titleWrapper`, `description` and `sizeSlug` are all real block attributes
+(`block.json`); `save()` ignores them, so they **do not** break validation.
+Only one HowTo block per post (`supports.multiple: false`). The front end is
+rendered separately by PHP (`render_callback`), so the saved HTML only matters
+to the editor. Row by row: `python scripts/search.py "howto" --domain blocks`.
 
-### HTML structure (between block comments)
+## moksaweb.com canonical form (站內風格, post 8594)
 
-Outermost: `<div class="wp-block-rank-math-howto-block">`
-Inside: directly contain step divs (NO wrapper, NO outer h3 title)
-Each step: `<div class="rank-math-howto-step">` containing:
-  - `<h3 class="rank-math-howto-title">` (NOT h4, NOT step-title)
-  - `<div class="rank-math-howto-content">` (NOT step-content)
+JSON with only `steps` + `sizeSlug: "large"`, no duration fields, no
+`titleWrapper`. This keeps every article identical; it is not a Rank Math
+requirement (plugin default `sizeSlug` is `"full"`). `verify-article`
+reports deviations as "Site style (post 8594)" issues.
 
 ## Common BROKEN formats (avoid)
 
@@ -60,7 +59,7 @@ Each step: `<div class="rank-math-howto-step">` containing:
 ```
 
 Problems:
-1. JSON has `hasDuration` etc — extra fields break validation
+1. JSON has `hasDuration` etc — valid attributes, but not the site form (site style)
 2. Outer `<h3 class="rank-math-howto-title">` outside step div
 3. `<div class="rank-math-howto-steps">` wrapper (extra layer)
 4. `<h4 class="rank-math-howto-step-title">` — wrong class name AND h4 not h3
@@ -83,7 +82,7 @@ level wrong. Found in many pre-canonical-fix articles.
 
 ## Step content rules
 
-- Always 4 steps (Rank Math HowTo schema preferred 4-step structure)
+- 4 steps (站內風格; Rank Math has no step-count rule)
 - Step title: 2-5 words English, action-oriented (Verb + Object)
   - ✅ "Verify Excel version"
   - ✅ "Install from Marketplace"
@@ -131,39 +130,9 @@ After publishing, open the post in Gutenberg editor. If you see:
 The HowTo block format is wrong. Fix using `tools/fix-howto-block.py` or
 manually rewrite to canonical format above.
 
-## Verifier checklist
+## Verifier
 
-```python
-content = fetch_post_content(post_id)
-import re
-
-# 1. Extract JSON
-m = re.search(r'wp:rank-math/howto-block (\{.*?\}) -->', content, re.DOTALL)
-if not m:
-    raise ValueError("No HowTo block")
-
-json_data = json.loads(m.group(1))
-
-# 2. Forbidden fields check
-for forbidden in ['hasDuration', 'days', 'hasTotalTime', 'titleWrapper']:
-    assert forbidden not in json_data, f"Forbidden field: {forbidden}"
-
-# 3. Required fields
-assert 'steps' in json_data
-assert 'sizeSlug' in json_data
-assert json_data['sizeSlug'] == 'large'
-
-# 4. HTML structure
-assert '<div class="rank-math-howto-step">' in content
-assert '<h3 class="rank-math-howto-title">' in content  # h3 not h4
-assert '<div class="rank-math-howto-content">' in content
-
-# 5. Forbidden HTML patterns
-assert '<h4 class="rank-math-howto-step-title">' not in content
-assert '<h4 class="rank-math-howto-title">' not in content
-assert '<div class="rank-math-howto-steps">' not in content
-assert '<div class="rank-math-howto-step-content">' not in content
-```
-
-See `tools/fix-howto-block.py` for batch fixer that converts old broken
-formats to canonical format.
+`python tools/verify-article.py article.html "FK"` rebuilds the `save()`
+output from the JSON and compares it with the HTML (entities decoded,
+whitespace between tags ignored). It also lists site-style deviations.
+`tools/fix-howto-block.py` converts old formats to the site form.

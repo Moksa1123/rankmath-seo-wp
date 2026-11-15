@@ -64,14 +64,21 @@ Both are valid because `&gt;` decodes to `>`.
 
 ### Forbidden differences (will break validation)
 
+Why (官方原始碼): the block's `save()` (seo-by-rank-math 1.0.282,
+`blocks/faq/assets/js/index.js`) writes `<div class="wp-block-rank-math-faq-block">`,
+then per question with non-empty title and content and `visible` not false
+`<div class="rank-math-faq-item"><{titleWrapper} class="rank-math-question">title</…><div class="rank-math-answer">content</div></div>`
+(`titleWrapper` defaults to `h3`). The editor compares that with the saved HTML.
+
+
 - JSON: `今天好` vs HTML: `今天 好` (extra space) ❌
 - JSON: `Hello World` vs HTML: `HelloWorld` (missing space) ❌
 - JSON: `Hello & welcome` vs HTML: `Hello and welcome` (paraphrased) ❌
 
 ## Number of questions
 
-Always **8 questions** per article. Anthropic's FAQ schema works best with 6-10
-questions; 8 is the moksaweb.com convention.
+**8 questions** per article is the moksaweb.com convention (站內風格). Rank
+Math's FAQ block has no question-count rule and no FAQ test in the score.
 
 ## FK distribution in FAQ
 

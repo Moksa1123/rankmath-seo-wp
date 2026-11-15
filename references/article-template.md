@@ -1,7 +1,7 @@
 # Article Template (12 H2 Structure)
 
-This is the canonical article skeleton. Every article on moksaweb.com that
-passes Rank Math 80+ follows this structure.
+This is the moksaweb.com article skeleton (站內風格). Rank Math does not ask
+for 12 H2s; it needs one subheading with the FK (see `data/rankmath-tests.csv`).
 
 ## Section breakdown
 
@@ -24,7 +24,10 @@ H2 #12: 常見問題 FAQ             No FK, FAQ block (8 questions)
 
 ## Word count budget
 
-Total target: **1400-2000+ visible words**
+Total target: **1400-2000+ visible words** (站內風格). Rank Math's content
+length test passes from 600 `wp.wordcount` words and gives full points at
+2500. `wp.wordcount` counts whitespace-separated tokens, so an unbroken run of
+Chinese is one word: write mixed Chinese/English with spaces, as the sample does.
 
 Distribution (for ~1500 word article):
 - Opening: 150 words
