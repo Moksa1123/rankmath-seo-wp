@@ -22,8 +22,11 @@ rankmath-seo-wp/
 ├── CONTRIBUTING.md         # Human contributor guide
 ├── LICENSE                 # MIT
 ├── package.json            # npm metadata + bin entries (rankmath-export, -verify)
-├── data/                   # CSV — density bands, H2 templates, FAQ topics, etc.
-├── examples/               # Sample articles that pass all checks
+├── EXAMPLES.md             # Example index
+├── data/                   # CSV — every row has source + trust; pending.csv = open questions
+├── examples/               # Sample article that passes verify-article
+├── evals/                  # cases.json + grade.py + RESULTS.md (with/without skill)
+├── scripts/                # search.py (entry), test_verify.py, check_numbers.py
 ├── references/             # Long-form guides (block formats, style, pitfalls)
 └── tools/                  # CLIs — Python and Node twins
     ├── export-blocks.py    # Block-paste-ready exporter (Python)
@@ -69,6 +72,10 @@ for related strings.
 ## Local verification before commit
 
 ```bash
+# Self-test + SKILL.md numbers (offline)
+python scripts/test_verify.py
+python scripts/check_numbers.py
+
 # Python
 python tools/verify-article.py examples/sample-article.html "Claude Skills"
 python tools/export-blocks.py examples/sample-article.html --print > /dev/null
@@ -93,9 +100,17 @@ block validation. If they diverge, fix the regression rather than the test.
 4. Add a script + bin entry to `package.json` if it's user-facing.
 5. Update each README's tool table.
 
+## Rules come from the plugin, not memory
+
+Rank Math thresholds and block markup are read from the plugin source
+(analyzer.js, blocks/*/block.json and save()); record the plugin version in
+the `source` column and `官方原始碼` in `trust`. moksaweb.com habits are
+`站內風格`; anything unverified is `推論` plus a row in `data/pending.csv`.
+Verifier constants must equal `data/rankmath-tests.csv` (the self-test checks).
+
 ## Adding a new CSV
 
-1. Place under `data/<name>.csv` with a header row.
+1. Place under `data/<name>.csv` with a header row and `source`/`trust` columns.
 2. Document the schema and intended consumers in `SKILL.md` under "Data".
 3. Keep cells short — long prose belongs in `references/`.
 
