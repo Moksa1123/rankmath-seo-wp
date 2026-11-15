@@ -6,14 +6,17 @@ Usage:
 
 Outputs a checklist report. Exit code 0 if all pass, 1 if any fail.
 
+Every threshold below is a row in data/rankmath-tests.csv (test_id in the
+comment). Rank Math rules come from the plugin source (seo-by-rank-math
+1.0.282, assets/admin/js/analyzer.js); site-style rules are labelled as such.
+
 Checks:
-- Word count (target 1400+ visible)
-- FK density 1.0-1.5% (visible content only, excludes JSON metadata)
-- Heading balance (12 H2 expected)
-- HowTo block canonical format (rank-math/howto-block)
-- FAQ block JSON ↔ HTML alignment
-- Forbidden patterns ("HowTo Schema" text, inline <script>)
-- FK in opening, in 1+ subheading
+- Word count: Rank Math lengthContent passes from 600 words (wp.wordcount "words")
+- FK density: Rank Math keywordDensity full score band 1.0-2.5%
+- Heading balance (12 H2 is site style; any balanced count passes)
+- FK in first 10% of content (keywordIn10Percent) and in 1+ H2
+- HowTo / FAQ block HTML equals what the block's save() would write
+- Forbidden patterns ("HowTo Schema" text, inline ld+json script)
 """
 import re
 import json
@@ -21,44 +24,125 @@ import html
 import sys
 from pathlib import Path
 
+# --- thresholds (single source: data/rankmath-tests.csv) ---------------------
+WORDS_PASS = 600              # lengthContent: lowest boundary with score > 0
+LENGTH_TIERS = [(2500, 8), (2000, 5), (1500, 4), (1000, 3), (600, 2)]  # lengthContent
+DENSITY_FAIL_LOW = 0.5        # keywordDensity: below = fail (0/6)
+DENSITY_FAIR = (0.5, 0.75)    # keywordDensity: fair 2/6 (lodash inRange, end exclusive)
+DENSITY_GOOD = (0.76, 1.0)    # keywordDensity: good 3/6
+DENSITY_FAIL_HIGH = 2.5       # keywordDensity: above = fail (0/6); otherwise best 6/6
+DENSITY_KB_RECOMMENDED = (1.0, 1.5)  # rankmath.com/kb/score-100-in-tests/#keyword-density
+IN10_MIN_WORDS = 400          # keywordIn10Percent: only slices to 10% above 400 words
+SITE_H2_COUNT = 12            # site style (moksaweb.com template)
+SITE_HOWTO_SIZESLUG = 'large'  # site style (post 8594); plugin default is "full"
+SITE_HOWTO_DROP_FIELDS = ['hasDuration', 'days', 'hours', 'minutes',
+                          'hasTotalTime', 'timeDays', 'timeHours', 'timeMinutes',
+                          'titleWrapper']  # site style (post 8594); valid plugin attributes
+
+# --- ports of the text helpers Rank Math and WordPress use -----------------------
+_TAG = re.compile(r'</?[a-z][^>]*?>', re.I)
+_COMMENT = re.compile(r'<!--[\s\S]*?-->')
+_SC_NAME = r'[^<>&/\[\]\x00- =]+?'
+_SHORTCODE_OPEN = re.compile(r'\[' + _SC_NAME + r'( [^\]]+?)?\]')
+_SHORTCODE_CLOSE = re.compile(r'\[/' + _SC_NAME + r'\]')
+_ENTITY = re.compile(r'&\S+?;')
+_RM_SYMBOLS = re.compile('[\x80-\xbf\xd7\xf7 -⯿⸀-⹿]')
+_WP_REMOVE = re.compile('[!-/:-@\\[-`{-~\x80-\xbf\xd7\xf7 -⯿⸀-⹿]')
+_EDGE = "[\\u2013\\-\\(\\)_\\[\\]’“”\"'.?!:;,\xbf\xa1\xab\xbb‹›—\xd7+&<>]+"
+_EDGE_START = re.compile('^' + _EDGE)
+_EDGE_END = re.compile(_EDGE + '$')
+
 
 def load(path):
     return Path(path).read_text(encoding='utf-8')
 
 
+def _normalize_whitespace(text):
+    """Rank Math helper p(): nbsp to space, collapse runs, trim."""
+    text = re.sub(r'&nbsp;|&#160;', ' ', text, flags=re.I)
+    text = re.sub(r'\s{2,}', ' ', text)
+    text = re.sub(r'\s\.', '.', text)
+    return text.strip()
+
+
+def _normalize_quotes(text):
+    """Rank Math helper $e(): curly quotes to straight quotes."""
+    text = re.sub('[‘’‛`]', "'", text)
+    return re.sub('[“”〝〞〟‟„]', '"', text)
+
+
+def rm_words(text):
+    """Port of Rank Math getWords (analyzer.js research `getWords`)."""
+    text = _TAG.sub('', text)
+    text = _COMMENT.sub('', text)
+    text = _SHORTCODE_CLOSE.sub('', _SHORTCODE_OPEN.sub('', text))
+    text = _normalize_whitespace(text)
+    text = _ENTITY.sub('', text)
+    text = re.sub('--|—', ' ', text)
+    text = _RM_SYMBOLS.sub('', text)
+    if text == '':
+        return []
+    words = [_EDGE_END.sub('', _EDGE_START.sub('', w)) for w in re.split(r'\s', text)]
+    return [w for w in words if w.strip() != '']
+
+
+def wp_word_count(text):
+    """Port of @wordpress/wordcount count(text, 'words') with default settings."""
+    text = _TAG.sub('\n', text)
+    text = _COMMENT.sub('', text)
+    text = re.sub(r'&nbsp;|&#160;', ' ', text, flags=re.I)
+    text = _ENTITY.sub('', text)
+    text = re.sub('--|—', ' ', text)
+    text = _WP_REMOVE.sub('', text)
+    return len(re.findall(r'\S\s+', text + '\n'))
+
+
 def strip_metadata(content):
     """Remove block JSON metadata + all comments — leaves only visible HTML."""
-    # Strip rank-math block JSON metadata (could span multiple lines)
-    # `[\s\S]*?` (non-greedy any-char) handles JSON whose values contain `>`.
-    v = re.sub(
-        r'<!-- wp:rank-math/(?:faq|howto)-block \{[\s\S]*?\} -->',
-        '',
-        content,
-        flags=re.DOTALL,
-    )
-    # Strip all other Gutenberg block comments
-    v = re.sub(r'<!--.*?-->', '', v, flags=re.DOTALL)
-    return v
+    return _COMMENT.sub('', content)
 
 
 def visible_word_count(content):
-    """Count words in visible text (HTML stripped)."""
-    visible = strip_metadata(content)
-    text = re.sub(r'<[^>]+>', ' ', visible)
-    return len(re.findall(r'\S+', text))
+    """Word count exactly as Rank Math's lengthContent/keywordDensity compute it."""
+    return wp_word_count(content.lower())
 
 
 def visible_fk_count(content, fk):
-    """Count FK occurrences in visible text only."""
-    visible = strip_metadata(content)
-    return visible.count(fk)
+    """FK matches as Rank Math's keywordDensity counts them (case-insensitive,
+    tags and comments removed, words re-joined with single spaces)."""
+    text = ' '.join(rm_words(_normalize_whitespace(_TAG.sub('', content))))
+    kw = ' '.join(rm_words(_normalize_quotes(fk)))
+    if not kw:
+        return 0
+    return len(re.findall(re.escape(kw), text, flags=re.I))
 
 
 def fk_density(content, fk):
-    """Density = FK count × 100 / word count."""
+    """Density = FK count × 100 / word count, rounded like Rank Math (toFixed(2))."""
     fk_n = visible_fk_count(content, fk)
     w_n = visible_word_count(content)
-    return fk_n, w_n, (fk_n * 100 / w_n) if w_n else 0
+    return fk_n, w_n, float(f'{fk_n * 100 / w_n:.2f}') if w_n else 0
+
+
+def density_score(density):
+    """keywordDensity calculateScore(): returns (verdict, points out of 6)."""
+    if density < DENSITY_FAIL_LOW:
+        return 'low', 0
+    if density > DENSITY_FAIL_HIGH:
+        return 'high', 0
+    if DENSITY_FAIR[0] <= density < DENSITY_FAIR[1]:
+        return 'fair', 2
+    if DENSITY_GOOD[0] <= density < DENSITY_GOOD[1]:
+        return 'good', 3
+    return 'best', 6
+
+
+def length_score(words):
+    """lengthContent calculateScore(): points out of 8."""
+    for boundary, score in LENGTH_TIERS:
+        if words >= boundary:
+            return score
+    return 0
 
 
 def check_headings(content):
@@ -68,91 +152,124 @@ def check_headings(content):
     return opens, closes
 
 
-def check_howto_block(content):
-    """Verify rank-math/howto-block canonical format."""
-    issues = []
-
-    # Find HowTo block
+def _block(content, name):
     m = re.search(
-        r'<!-- wp:rank-math/howto-block (\{.*?\}) -->\s*'
-        r'(.*?)'
-        r'<!-- /wp:rank-math/howto-block -->',
+        r'<!-- wp:rank-math/' + name + r' (\{.*?\}) -->\s*(.*?)\s*<!-- /wp:rank-math/' + name + ' -->',
         content, re.DOTALL,
     )
-    if not m:
+    return (m.group(1), m.group(2)) if m else None
+
+
+def _same_html(a, b):
+    """Loose equivalent of Gutenberg's block validation: entities decoded,
+    whitespace between tags ignored, runs of whitespace collapsed."""
+    def norm(s):
+        s = html.unescape(s)
+        s = re.sub(r'>\s+<', '><', s.strip())
+        return re.sub(r'\s+', ' ', s)
+    return norm(a) == norm(b)
+
+
+def _wrapper_class(data, block):
+    cls = 'wp-block-rank-math-' + block
+    return cls + (' ' + data['className'] if data.get('className') else '')
+
+
+def howto_save_html(data):
+    """What rank-math/howto-block save() writes (blocks/howto/assets/js/index.js)."""
+    steps = data.get('steps') or []
+    if not steps:
+        return ''
+    tw = data.get('titleWrapper', 'h3')
+    out = [f'<div class="{_wrapper_class(data, "howto-block")}">']
+    for s in steps:
+        if s.get('visible') is False:
+            continue
+        out.append('<div class="rank-math-howto-step">')
+        if s.get('title'):
+            out.append(f'<{tw} class="rank-math-howto-title">{s["title"]}</{tw}>')
+        if s.get('content'):
+            out.append(f'<div class="rank-math-howto-content">{s["content"]}</div>')
+        out.append('</div>')
+    out.append('</div>')
+    return ''.join(out)
+
+
+def faq_save_html(data):
+    """What rank-math/faq-block save() writes (blocks/faq/assets/js/index.js)."""
+    qs = data.get('questions') or []
+    if not qs:
+        return ''
+    tw = data.get('titleWrapper', 'h3')
+    out = [f'<div class="{_wrapper_class(data, "faq-block")}">']
+    for q in qs:
+        if not q.get('title') or not q.get('content') or q.get('visible') is False:
+            continue
+        out.append(f'<div class="rank-math-faq-item"><{tw} class="rank-math-question">{q["title"]}</{tw}>'
+                   f'<div class="rank-math-answer">{q["content"]}</div></div>')
+    out.append('</div>')
+    return ''.join(out)
+
+
+def check_howto_block(content):
+    """HowTo HTML must equal save() output; site-style JSON rules flagged separately."""
+    found = _block(content, 'howto-block')
+    if not found:
         return ['No HowTo block found']
-
-    json_str, html_part = m.group(1), m.group(2)
-
-    # JSON checks
+    json_str, html_part = found
     try:
         data = json.loads(json_str)
     except json.JSONDecodeError as e:
         return [f'JSON parse error: {e}']
 
-    forbidden_fields = ['hasDuration', 'days', 'hours', 'minutes',
-                        'hasTotalTime', 'timeDays', 'timeHours', 'timeMinutes',
-                        'titleWrapper']
-    for f in forbidden_fields:
-        if f in data:
-            issues.append(f'Forbidden JSON field: {f}')
-
+    issues = []
     if 'steps' not in data:
         issues.append('Missing JSON.steps')
-    if data.get('sizeSlug') != 'large':
-        issues.append('JSON.sizeSlug should be "large"')
-
-    # HTML checks
-    if 'rank-math-howto-step-title' in html_part:
-        issues.append('Old class: rank-math-howto-step-title (use rank-math-howto-title)')
-    if 'rank-math-howto-step-content' in html_part:
-        issues.append('Old class: rank-math-howto-step-content (use rank-math-howto-content)')
-    if '<div class="rank-math-howto-steps">' in html_part:
-        issues.append('Wrapper div rank-math-howto-steps found (should be removed)')
-    if re.search(r'rank-math-howto-step"><h4', html_part):
-        issues.append('h4 inside step (should be h3)')
-    if re.search(r'wp-block-rank-math-howto-block"><h3 class="rank-math-howto-title">', html_part):
-        issues.append('Outer h3 title (should not exist, only step-level h3)')
-
+    elif not _same_html(html_part, howto_save_html(data)):
+        issues.append('HTML differs from save() output (editor will show "invalid content")')
+        for i, s in enumerate([s for s in data['steps'] if s.get('visible') is not False], 1):
+            if s.get('title') and s['title'] not in html.unescape(html_part) and s['title'] not in html_part:
+                issues.append(f'Step {i} title not found in HTML')
+            if s.get('content') and s['content'] not in html.unescape(html_part) and s['content'] not in html_part:
+                issues.append(f'Step {i} content not found in HTML')
+    for f in SITE_HOWTO_DROP_FIELDS:
+        if f in data:
+            issues.append(f'Site style (post 8594): drop JSON field {f}')
+    if data.get('sizeSlug') != SITE_HOWTO_SIZESLUG:
+        issues.append(f'Site style (post 8594): JSON.sizeSlug should be "{SITE_HOWTO_SIZESLUG}"')
     return issues if issues else ['OK']
 
 
 def check_faq_alignment(content):
-    """Verify FAQ block JSON ↔ HTML alignment after html.unescape."""
-    m = re.search(
-        r'<!-- wp:rank-math/faq-block (\{.*?\}) -->\s*'
-        r'(<div class="wp-block-rank-math-faq-block">.*?</div>)\s*'
-        r'<!-- /wp:rank-math/faq-block -->',
-        content, re.DOTALL,
-    )
-    if not m:
+    """FAQ HTML must equal save() output (JSON ↔ HTML aligned)."""
+    found = _block(content, 'faq-block')
+    if not found:
         return ['No FAQ block found']
-
     try:
-        data = json.loads(m.group(1))
+        data = json.loads(found[0])
     except json.JSONDecodeError as e:
         return [f'FAQ JSON parse error: {e}']
+    html_part = found[1]
+    shown = [q for q in data.get('questions', [])
+             if q.get('title') and q.get('content') and q.get('visible') is not False]
+    if _same_html(html_part, faq_save_html(data)):
+        return [f'OK ({len(shown)} questions aligned)']
 
-    html_part = m.group(2)
+    tw = data.get('titleWrapper', 'h3')
     items = re.findall(
-        r'<div class="rank-math-faq-item">'
-        r'<h3 class="rank-math-question">([^<]+)</h3>'
-        r'<div class="rank-math-answer">(.*?)</div>'
-        r'</div>',
+        r'<div class="rank-math-faq-item"><' + tw + r' class="rank-math-question">(.*?)</' + tw + '>'
+        r'<div class="rank-math-answer">(.*?)</div></div>',
         html_part, re.DOTALL,
     )
-
+    if len(items) != len(shown):
+        return [f'Count mismatch: JSON {len(shown)}, HTML {len(items)}']
     issues = []
-    if len(items) != len(data['questions']):
-        return [f'Count mismatch: JSON {len(data["questions"])}, HTML {len(items)}']
-
-    for i, (q, (h_t, h_c)) in enumerate(zip(data['questions'], items), 1):
-        if html.unescape(h_t) != q['title']:
+    for i, (q, (h_t, h_c)) in enumerate(zip(shown, items), 1):
+        if not _same_html(h_t, q['title']):
             issues.append(f'Q{i} title mismatch')
-        if html.unescape(h_c) != q['content']:
+        if not _same_html(h_c, q['content']):
             issues.append(f'Q{i} content mismatch')
-
-    return issues if issues else [f'OK (8 questions aligned)' if len(items) == 8 else f'OK ({len(items)} questions aligned)']
+    return issues or ['HTML differs from save() output (wrapper or markup)']
 
 
 def check_fk_subheading(content, fk):
@@ -163,21 +280,18 @@ def check_fk_subheading(content, fk):
 
 
 def check_fk_in_opening(content, fk):
-    """FK should appear in first paragraph (within first 500 chars of visible)."""
-    visible = strip_metadata(content)
-    # Find first paragraph
-    m = re.search(r'<p>(.+?)</p>', visible, re.DOTALL)
-    if not m:
-        return False
-    first_p = m.group(1)
-    return fk in first_p
+    """keywordIn10Percent: FK in the first 10% of words (whole text if ≤ 400 words)."""
+    words = rm_words(content.lower())
+    if len(words) > IN10_MIN_WORDS:
+        words = words[:int(0.1 * len(words))]
+    kw = ' '.join(rm_words(_normalize_quotes(fk.lower())))
+    return bool(kw) and kw in ' '.join(words)
 
 
 def check_forbidden_patterns(content):
     """Check for known broken patterns."""
     issues = []
     if 'HowTo Schema' in content:
-        # Check if appears in H2 specifically
         if re.search(r'<h2[^>]*>[^<]*HowTo Schema[^<]*</h2>', content):
             issues.append('"HowTo Schema" in H2 heading (forbidden)')
         else:
@@ -192,51 +306,51 @@ def check_forbidden_patterns(content):
 def main():
     if len(sys.argv) != 3:
         print("Usage: python verify-article.py article.html 'Focus Keyword'")
-        sys.exit(1)
+        sys.exit(2)
 
     path = sys.argv[1]
     fk = sys.argv[2]
-    content = load(path)
+    try:
+        content = load(path)
+    except OSError as e:
+        print(f"File error: {e}", file=sys.stderr)
+        sys.exit(2)
 
     print(f"=== {path} ===")
     print(f"Focus keyword: {fk}")
     print()
 
-    # 1. Word count
-    fk_n, w_n, density = fk_density(content, fk)
-    print(f"Word count:      {w_n} visible words")
-
     pass_count = 0
     fail_count = 0
 
-    if w_n >= 1400:
-        print(f"                 OK above 1400 minimum")
+    # 1. Word count
+    fk_n, w_n, density = fk_density(content, fk)
+    print(f"Word count:      {w_n} visible words")
+    if w_n >= WORDS_PASS:
+        print(f"                 OK at least {WORDS_PASS} (content length {length_score(w_n)}/8)")
         pass_count += 1
     else:
-        print(f"                 FAIL below 1400 (recommend 1500+)")
+        print(f"                 FAIL below {WORDS_PASS} (content length 0/8)")
         fail_count += 1
 
     # 2. FK density
+    verdict, points = density_score(density)
+    kb_lo, kb_hi = DENSITY_KB_RECOMMENDED
     print(f"FK count:        {fk_n} visible occurrences")
     print(f"FK density:      {density:.2f}%")
-    if 1.0 <= density <= 1.7:
-        print(f"                 OK in target range 1.0-1.5% (sweet spot)")
+    if verdict == 'best':
+        note = '' if kb_lo <= density <= kb_hi else f'; KB recommends {kb_lo}-{kb_hi}%'
+        print(f"                 OK full score band {DENSITY_GOOD[1]}-{DENSITY_FAIL_HIGH}% (6/6{note})")
         pass_count += 1
-    elif 0.7 <= density < 1.0:
-        print(f"                 FAIL slightly low (target 1.0-1.5%)")
-        fail_count += 1
-    elif 1.7 < density <= 2.5:
-        print(f"                 FAIL slightly high (target 1.0-1.5%)")
-        fail_count += 1
     else:
-        print(f"                 FAIL outside acceptable range")
+        print(f"                 FAIL {verdict} ({points}/6; full score {DENSITY_GOOD[1]}-{DENSITY_FAIL_HIGH}%)")
         fail_count += 1
 
     # 3. Heading balance
     h_open, h_close = check_headings(content)
     print(f"Heading balance: {h_open} open / {h_close} close")
-    if h_open == h_close == 12:
-        print(f"                 OK 12/12 (target structure)")
+    if h_open == h_close == SITE_H2_COUNT:
+        print(f"                 OK {SITE_H2_COUNT}/{SITE_H2_COUNT} (site-style structure)")
         pass_count += 1
     elif h_open == h_close:
         print(f"                 OK balanced {h_open}/{h_close} (non-standard count)")
@@ -265,25 +379,22 @@ def main():
 
     # 6. HowTo block
     howto_issues = check_howto_block(content)
-    print(f"HowTo block:     {howto_issues[0] if len(howto_issues) == 1 else 'has issues'}")
-    if len(howto_issues) > 1 or howto_issues[0] != 'OK':
+    print(f"HowTo block:     {howto_issues[0] if howto_issues == ['OK'] or len(howto_issues) == 1 and howto_issues[0].startswith('No ') else 'has issues'}")
+    if howto_issues != ['OK']:
         for i in howto_issues:
-            if i != 'OK':
-                print(f"                 - {i}")
-        if howto_issues != ['OK']:
-            fail_count += 1
+            print(f"                 - {i}")
+        fail_count += 1
     else:
         pass_count += 1
 
     # 7. FAQ alignment
     faq_issues = check_faq_alignment(content)
-    print(f"FAQ block:       {faq_issues[0] if len(faq_issues) == 1 else 'has issues'}")
-    if len(faq_issues) > 1 or not faq_issues[0].startswith('OK'):
+    print(f"FAQ block:       {faq_issues[0] if faq_issues[0].startswith(('OK', 'No ')) else 'has issues'}")
+    if not faq_issues[0].startswith('OK'):
         for i in faq_issues:
-            if not i.startswith('OK'):
+            if not i.startswith('No '):
                 print(f"                 - {i}")
-        if not faq_issues[0].startswith('OK'):
-            fail_count += 1
+        fail_count += 1
     else:
         pass_count += 1
 

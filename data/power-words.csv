@@ -1,20 +1,20 @@
-language,category,word,note
-zh-TW,authority,完整教學,canonical Moksa SEO Title prefix
-zh-TW,authority,終極指南,strong but use sparingly
-zh-TW,authority,完整指南,formal alternative to 教學
-zh-TW,urgency,5 分鐘,implies quick value; pairs with digit
-zh-TW,urgency,搶先,implies first-mover knowledge
-zh-TW,scale,大功能,quantifier for feature counts
-zh-TW,scale,大重點,quantifier for takeaway lists
-zh-TW,scale,個方案,for plan/tier counts (e.g. 5 個方案)
-zh-TW,scale,步驟,canonical for HowTo (4 步驟)
-zh-TW,credibility,實戰,implies real-world experience
-zh-TW,credibility,必看,strong CTA; use carefully
-zh-TW,credibility,精修,implies refined / curated
-en,authority,Complete Guide,equivalent of 完整教學
-en,authority,Ultimate Guide,strong but overused
-en,urgency,5-Minute,quick-value framing
-en,scale,Top X,classic listicle frame
-en,scale,X Best,for ranking lists
-en,credibility,Battle-Tested,strong real-world signal
-en,credibility,Production-Ready,for technical audiences
+language,category,word,note,rank_math_power_word,source,trust
+zh-TW,authority,完整教學,canonical Moksa SEO Title prefix,n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+zh-TW,authority,終極指南,strong but use sparingly,n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+zh-TW,authority,完整指南,formal alternative to 教學,n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+zh-TW,urgency,5 分鐘,implies quick value; pairs with digit,n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+zh-TW,urgency,搶先,implies first-mover knowledge,n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+zh-TW,scale,大功能,quantifier for feature counts,n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+zh-TW,scale,大重點,quantifier for takeaway lists,n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+zh-TW,scale,個方案,for plan/tier counts (e.g. 5 個方案),n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+zh-TW,scale,步驟,canonical for HowTo (4 步驟),n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+zh-TW,credibility,實戰,implies real-world experience,n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+zh-TW,credibility,必看,strong CTA; use carefully,n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+zh-TW,credibility,精修,implies refined / curated,n/a (plugin has no zh list; test skipped on zh sites),moksaweb.com title habit; plugin lists only de en es fi fr hu id it ja nl sv,站內風格
+en,authority,Complete Guide,equivalent of 完整教學,yes,assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords,官方原始碼
+en,authority,Ultimate Guide,strong but overused,yes,assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords,官方原始碼
+en,urgency,5-Minute,quick-value framing,no,assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords,官方原始碼
+en,scale,Top X,classic listicle frame,no,assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords,官方原始碼
+en,scale,X Best,for ranking lists,yes,assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords,官方原始碼
+en,credibility,Battle-Tested,strong real-world signal,no,assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords,官方原始碼
+en,credibility,Production-Ready,for technical audiences,no,assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords,官方原始碼

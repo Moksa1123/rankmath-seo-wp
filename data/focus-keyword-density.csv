@@ -1,8 +1,8 @@
-density_low,density_high,verdict,rank_math_signal,action
-0.00,0.39,critical_low,Focus keyword density is too low,Add FK to opening + 5 H2 headings + 4 FAQ titles
-0.40,0.69,low,Focus keyword density is too low,Restore FK in 5 H2 + section-opening sentences
-0.70,0.99,below_target,Marginal — below sweet spot,Add 2-3 FK occurrences in body or FAQ titles
-1.00,1.50,sweet_spot,Optimal density for Rank Math,Maintain — do not add more
-1.51,1.79,above_target,Slightly high — still passes,Replace 1-2 FK in H2 with pronouns (它 / 這個工具)
-1.80,2.49,high,Approaching keyword stuffing,Replace FK with pronouns in 3-4 H2/FAQ
-2.50,99.00,critical_high,Focus keyword density is too high,Replace FK with pronouns in 7 H2s and 4 FAQ titles
+density_low,density_high,verdict,rank_math_points,rank_math_signal,action,source,trust
+0.00,0.49,low,0/6,Keyword Density is X which is low,Add FK to opening + H2 headings + FAQ titles,analyzer.js keywordDensity calculateScore (seo-by-rank-math 1.0.282),官方原始碼
+0.50,0.74,fair,2/6,Keyword Density is X,Add 3-5 FK occurrences in body or FAQ titles,analyzer.js keywordDensity calculateScore (1.0.282),官方原始碼
+0.75,0.75,best (gap),6/6,Keyword Density is X,lodash inRange quirk: 0.75 falls between the fair and good ranges and scores best,analyzer.js keywordDensity calculateScore (1.0.282),官方原始碼
+0.76,0.99,good,3/6,Keyword Density is X,Add 1-3 FK occurrences in body or FAQ titles,analyzer.js keywordDensity calculateScore (1.0.282),官方原始碼
+1.00,1.50,best (KB recommended),6/6,Keyword Density is X,Maintain; KB recommends this range,analyzer.js + https://rankmath.com/kb/score-100-in-tests/#keyword-density-primary-and-secondary-focus-keywords,官方原始碼
+1.51,2.50,best,6/6,Keyword Density is X,Full points but above KB advice; swap 1-2 FK for pronouns (它 / 這個工具) if the copy reads stuffed,analyzer.js keywordDensity calculateScore (1.0.282),官方原始碼
+2.51,99.00,high,0/6,Keyword Density is X which is high,Replace FK with pronouns in H2s and FAQ titles until <= 2.5,analyzer.js keywordDensity calculateScore (1.0.282),官方原始碼

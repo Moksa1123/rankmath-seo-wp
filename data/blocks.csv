@@ -1,0 +1,17 @@
+block,item,rule,value,source,trust
+rank-math/howto-block,wrapper,saved HTML wrapper div (plus className if set),"<div class=""wp-block-rank-math-howto-block"">",blocks/howto/assets/js/index.js save() (seo-by-rank-math 1.0.282),官方原始碼
+rank-math/howto-block,step,one div per step whose visible is not false; no extra wrapper around steps,"<div class=""rank-math-howto-step"">",blocks/howto/assets/js/index.js save() (1.0.282),官方原始碼
+rank-math/howto-block,step title,title written in the titleWrapper tag (default h3); omitted when title is empty,"<h3 class=""rank-math-howto-title"">",blocks/howto/assets/js/index.js save() + block.json titleWrapper default (1.0.282),官方原始碼
+rank-math/howto-block,step content,content div; omitted when content is empty,"<div class=""rank-math-howto-content"">",blocks/howto/assets/js/index.js save() (1.0.282),官方原始碼
+rank-math/howto-block,attributes,"block.json attributes: hasDuration days hours minutes description steps sizeSlug(full) imageID mainSizeSlug(full) listStyle timeLabel titleWrapper(h3) listCssClasses titleCssClasses contentCssClasses textAlign(left)",16 attributes,blocks/howto/block.json (1.0.282),官方原始碼
+rank-math/howto-block,validity,saved HTML must equal save() output from the JSON (title/content text identical); otherwise the editor shows invalid content,save() == HTML,blocks/howto/assets/js/index.js save() (1.0.282),官方原始碼
+rank-math/howto-block,multiple,only one HowTo block per post (supports.multiple false),1,blocks/howto/block.json (1.0.282),官方原始碼
+rank-math/howto-block,frontend,front end is rendered by PHP render_callback (classes rank-math-steps / rank-math-step / rank-math-step-title / rank-math-step-content); saved HTML is for the editor only,dynamic,blocks/howto/class-block-howto.php (1.0.282),官方原始碼
+rank-math/faq-block,wrapper,saved HTML wrapper div (plus className if set),"<div class=""wp-block-rank-math-faq-block"">",blocks/faq/assets/js/index.js save() (1.0.282),官方原始碼
+rank-math/faq-block,item,one div per question with non-empty title and content and visible not false,"<div class=""rank-math-faq-item"">",blocks/faq/assets/js/index.js save() (1.0.282),官方原始碼
+rank-math/faq-block,question,question in the titleWrapper tag (default h3),"<h3 class=""rank-math-question"">",blocks/faq/assets/js/index.js save() + block.json (1.0.282),官方原始碼
+rank-math/faq-block,answer,answer div,"<div class=""rank-math-answer"">",blocks/faq/assets/js/index.js save() (1.0.282),官方原始碼
+rank-math/faq-block,attributes,block.json attributes: listStyle titleWrapper(h3) sizeSlug(thumbnail) questions listCssClasses titleCssClasses contentCssClasses textAlign(left),8 attributes,blocks/faq/block.json (1.0.282),官方原始碼
+rank-math/faq-block,validity,saved HTML must equal save() output from the JSON; regenerate HTML from JSON with tools/regenerate-faq.py,save() == HTML,blocks/faq/assets/js/index.js save() (1.0.282),官方原始碼
+rank-math/faq-block,frontend,front end is rendered by PHP render_callback (div#rank-math-faq .rank-math-list-item),dynamic,blocks/faq/class-block-faq.php (1.0.282),官方原始碼
+rank-math/toc-block,toc test,content containing wp-block-rank-math-toc-block passes contentHasTOC (2 points),wp-block-rank-math-toc-block,analyzer.js contentHasTOC (1.0.282),官方原始碼

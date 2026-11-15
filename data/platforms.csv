@@ -1,9 +1,9 @@
-platform,project_path,global_path,frontmatter_required,notes
-claude-code,.claude/skills/rankmath-seo-wp/SKILL.md,~/.claude/skills/rankmath-seo-wp/SKILL.md,name+description,Auto-loads on session start
-claude-ai,(zip upload),n/a,name+description,Settings > Capabilities > Skills > Upload
-cursor,.cursor/rules/rankmath-seo-wp.mdc,~/.cursor/rules/rankmath-seo-wp.mdc,description+globs,Cursor reads .mdc as Project Rules
-codex-cli,.codex/skills/rankmath-seo-wp/SKILL.md,~/.codex/skills/rankmath-seo-wp/SKILL.md,name+description,Verified; also honours cross-tool .agents/skills/ standard (--to .agents)
-gemini-cli,.gemini/skills/rankmath-seo-wp/SKILL.md,~/.gemini/skills/rankmath-seo-wp/SKILL.md,name+description,Agent Skills standard (SKILL.md); legacy .gemini/extensions/<name>/GEMINI.md fallback
-windsurf,.devin/rules/rankmath-seo-wp.md,n/a,trigger+description,Devin Desktop (ex-Windsurf June 2026); legacy .windsurf/rules/ fallback; embeds references inline
-copilot,.github/skills/rankmath-seo-wp/SKILL.md,n/a,name+description,Agent Skills (Dec 2025); legacy append to .github/copilot-instructions.md fallback
-continue,.continue/rules/rankmath-seo-wp.md,~/.continue/rules/rankmath-seo-wp.md,name+description+alwaysApply,Treats .md as a rule file
+platform,project_path,global_path,frontmatter_required,notes,source,trust
+claude-code,.claude/skills/rankmath-seo-wp/SKILL.md,~/.claude/skills/rankmath-seo-wp/SKILL.md,name+description,Auto-loads on session start,assets/templates/platforms/claude-code.json (verified:true since v1.1.0 commit 8c97a29; no doc URL recorded),推論
+claude-ai,(zip upload),n/a,name+description,Settings > Capabilities > Skills > Upload,assets/templates/platforms/claude-ai.json (verified:true since v1.1.0 commit 8c97a29; no doc URL recorded),推論
+cursor,.cursor/rules/rankmath-seo-wp.mdc,~/.cursor/rules/rankmath-seo-wp.mdc,description+globs,Cursor reads .mdc as Project Rules,assets/templates/platforms/cursor.json (verified:true since v1.1.0 commit 8c97a29; no doc URL recorded),推論
+codex-cli,.codex/skills/rankmath-seo-wp/SKILL.md,~/.codex/skills/rankmath-seo-wp/SKILL.md,name+description,Verified; also honours cross-tool .agents/skills/ standard (--to .agents),assets/templates/platforms/codex-cli.json (verified:true since v1.1.0 commit 8c97a29; no doc URL recorded),推論
+gemini-cli,.gemini/skills/rankmath-seo-wp/SKILL.md,~/.gemini/skills/rankmath-seo-wp/SKILL.md,name+description,Agent Skills standard (SKILL.md); legacy .gemini/extensions/<name>/GEMINI.md fallback,assets/templates/platforms/gemini-cli.json (verified:true since v1.1.0 commit 8c97a29; no doc URL recorded),推論
+windsurf,.devin/rules/rankmath-seo-wp.md,n/a,trigger+description,Devin Desktop (ex-Windsurf June 2026); legacy .windsurf/rules/ fallback; embeds references inline,assets/templates/platforms/windsurf.json (verified:true since v1.1.0 commit 8c97a29; no doc URL recorded),推論
+copilot,.github/skills/rankmath-seo-wp/SKILL.md,n/a,name+description,Agent Skills (Dec 2025); legacy append to .github/copilot-instructions.md fallback,assets/templates/platforms/copilot.json (verified:true since v1.1.0 commit 8c97a29; no doc URL recorded),推論
+continue,.continue/rules/rankmath-seo-wp.md,~/.continue/rules/rankmath-seo-wp.md,name+description+alwaysApply,Treats .md as a rule file,assets/templates/platforms/continue.json (verified:true since v1.1.0 commit 8c97a29; no doc URL recorded),推論

@@ -1,13 +1,13 @@
-order,heading_pattern,fk_in_heading,body_type,word_target,notes
-1,什麼是 [FK]?,yes,4 paragraphs,180,Definition + maker + launch context
-2,[FK] 和 [Competitor] 怎麼選?,yes,table + 2 paragraphs,200,Comparison table 6-7 rows ending with Best For
-3,如何啟用這個工具?,no,2 paragraphs + code,160,Setup walkthrough; pronoun in heading
-4,[FK] 4 步驟啟用設定,yes,howto block,240,HowTo block goes here; 4 steps; h3 not h4
-5,它能做哪些 X 工作?,no,3 paragraphs,180,Capability survey; pronoun in heading
-6,[Persona] 怎麼用 [FK]?,yes,prompt examples,200,4-5 use-case prompts in code block
-7,[Killer feature] 怎麼運作?,no,3 paragraphs,200,Technical deep dive; signature feature
-8,進階主題或場景,no,3 paragraphs,180,Edge cases / advanced flows
-9,哪裡可以找到更多官方資源?,no,intro + 3 youtube embeds,120,Always 3 YouTube embeds
-10,使用 [FK] 有哪些限制?,yes,6 paragraphs,360,Limitations + privacy + ALWAYS Review final paragraph
-11,參考依據,no,5 external links,80,First link is internal Moksa category page
-12,常見問題 FAQ,no,faq block,480,8 questions; 4 with FK in title
+order,heading_pattern,fk_in_heading,body_type,word_target,notes,source,trust
+1,什麼是 [FK]?,yes,4 paragraphs,180,Definition + maker + launch context,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格
+2,[FK] 和 [Competitor] 怎麼選?,yes,table + 2 paragraphs,200,Comparison table 6-7 rows ending with Best For,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格
+3,如何啟用這個工具?,no,2 paragraphs + code,160,Setup walkthrough; pronoun in heading,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格
+4,[FK] 4 步驟啟用設定,yes,howto block,240,HowTo block goes here; 4 steps; h3 not h4,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格
+5,它能做哪些 X 工作?,no,3 paragraphs,180,Capability survey; pronoun in heading,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格
+6,[Persona] 怎麼用 [FK]?,yes,prompt examples,200,4-5 use-case prompts in code block,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格
+7,[Killer feature] 怎麼運作?,no,3 paragraphs,200,Technical deep dive; signature feature,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格
+8,進階主題或場景,no,3 paragraphs,180,Edge cases / advanced flows,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格
+9,哪裡可以找到更多官方資源?,no,intro + 3 youtube embeds,120,Always 3 YouTube embeds,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格
+10,使用 [FK] 有哪些限制?,yes,6 paragraphs,360,Limitations + privacy + ALWAYS Review final paragraph,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格
+11,參考依據,no,5 external links,80,First link is internal Moksa category page,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格
+12,常見問題 FAQ,no,faq block,480,8 questions; 4 with FK in title,moksaweb.com 12-H2 template (30+ articles); word_target counts wp.wordcount words,站內風格

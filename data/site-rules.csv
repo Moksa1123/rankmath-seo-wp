@@ -1,0 +1,19 @@
+rule_id,zh,rule,value,rank_math_test,verifier,source,trust
+h2_count,12 個 H2,article uses the 12-H2 skeleton (FAQ under H2 #12),12,none (keywordInSubheadings needs only 1 subheading with FK),verify-article: Heading balance (any balanced count passes),moksaweb.com template; see data/h2-templates.csv,站內風格
+h2_with_fk,含關鍵字的 H2,5 of 12 H2s carry the FK (1 2 4 6 10); pronouns elsewhere to hold density,5,keywordInSubheadings passes with 1,verify-article: FK in H2 >= 1,moksaweb.com template,站內風格
+word_target,字數目標,aim for 1400+ wp.wordcount words (2000+ ideal); Rank Math itself passes from 600,1400,lengthContent (600 pass; 2500 full 8/8),not gated (verifier gates on 600),moksaweb.com habit; earlier versions called this a Rank Math minimum (it is not),站內風格
+faq_count,FAQ 題數,FAQ block has 8 questions; 4 carry the FK,8,none,not gated,moksaweb.com FAQ habit; see data/faq-topics.csv,站內風格
+howto_steps,HowTo 步驟數,HowTo block has 4 steps under H2 #4,4,none,not gated,moksaweb.com template,站內風格
+youtube_embeds,YouTube 影片數,3 YouTube embeds in H2 #9; Rank Math media test counts at most 2 points for videos,3,contentHasAssets (images 4+ for 6/6 or 3 images + 2 videos),not gated,moksaweb.com template,站內風格
+external_links,外部連結數,5 external links in H2 #11 (first link internal category page),5,linksHasExternals + linksNotAllExternals need 1 dofollow external,not gated,moksaweb.com template,站內風格
+meta_desc_starts_fk,描述以關鍵字開頭,rank_math_description starts with the FK,start,keywordInMetaDescription only needs FK anywhere (KB: first 120-160 chars),not gated,moksaweb.com habit (stricter than Rank Math),站內風格
+seo_title_template,SEO 標題範本,"rank_math_title = [FK] 完整教學：[digit] [量詞] [補充]",template,titleStartWithKeyword + titleHasNumber + keywordInTitle,not gated,moksaweb.com habit,站內風格
+post_title_english,post_title 只用英文,keep post_title English; Chinese goes in rank_math_title,English,none,not gated,moksaweb.com habit; reason (CJK font / breakage) never measured,推論
+no_inline_ldjson,不用 inline ld+json,no <script type=application/ld+json> in content; moksaweb.com theme printed it as text,0,none,verify-article: Forbidden,moksaweb.com incident; no saved reproduction,推論
+no_schema_word_in_h2,H2 不寫 HowTo Schema,"no ""HowTo Schema""/""FAQ Schema"" text in H2 headings",0,none,verify-article: Forbidden,moksaweb.com editorial rule,站內風格
+howto_sizeslug,HowTo sizeSlug,"HowTo JSON sizeSlug ""large"" (plugin default ""full""; save() ignores it)",large,none,verify-article: HowTo block (site-style issue),moksaweb.com post 8594 canonical,站內風格
+howto_drop_fields,HowTo 不放時間欄位,"omit hasDuration/days/hours/minutes/titleWrapper from HowTo JSON (they are valid plugin attributes; save() ignores them)",omit,none,verify-article: HowTo block (site-style issue),moksaweb.com post 8594 canonical,站內風格
+moksa_quote,Moksa 觀點引言,opening blockquote in natural conversational Chinese,1,none,not gated,references/moksa-style.md,站內風格
+featured_image,特色圖規格,2000x2000 webp; English text; Montserrat SemiBold,2000x2000,contentHasAssets counts the featured image as 1 image,not gated,references/image-specs.md,站內風格
+lf_newlines,LF 換行,write article files with LF on Windows (newline='\n'),LF,none,not gated,references/wp-cli-pitfalls.md (moksaweb.com deploys),站內風格
+wpcli_file_arg,WP-CLI 用檔案參數,wp post update ID file.html instead of --post_content=$(cat ...),file arg,none,not gated,references/wp-cli-pitfalls.md (moksaweb.com deploys),站內風格
