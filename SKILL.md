@@ -13,7 +13,7 @@ description: |
   焦點關鍵字密度、FAQ 區塊、HowTo 區塊、區塊無效內容、WP-CLI 發文。
 author: moksa (https://moksaweb.com)
 license: MIT
-version: 1.2.0
+version: 1.2.1
 user-invocable: true
 ---
 

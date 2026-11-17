@@ -108,8 +108,8 @@ Claude plugin (Claude Code; the Claude directory once listed):
 npx (Claude Code and the other AI tools below):
 
 ```bash
-npx -p rankmath-seo-wp@1.2.0 rankmath-install claude-code --global
-npx -p rankmath-seo-wp@1.2.0 rankmath-install --list
+npx -p rankmath-seo-wp@1.2.1 rankmath-install claude-code --global
+npx -p rankmath-seo-wp@1.2.1 rankmath-install --list
 ```
 
 Manual copy:
@@ -135,7 +135,7 @@ cp -r rankmath-seo-wp ~/.claude/skills/rankmath-seo-wp
 ### Step 2: Check an article
 
 ```bash
-npx -p rankmath-seo-wp@1.2.0 rankmath-verify examples/sample-article.html "Claude Skills"
+npx -p rankmath-seo-wp@1.2.1 rankmath-verify examples/sample-article.html "Claude Skills"
 ```
 
 ```

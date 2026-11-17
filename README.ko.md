@@ -108,8 +108,8 @@ Claude plugin(Claude Code. Claude 공식 디렉터리에 등록된 뒤에는 디
 npx(Claude Code와 아래 표의 다른 AI 도구):
 
 ```bash
-npx -p rankmath-seo-wp@1.2.0 rankmath-install claude-code --global
-npx -p rankmath-seo-wp@1.2.0 rankmath-install --list
+npx -p rankmath-seo-wp@1.2.1 rankmath-install claude-code --global
+npx -p rankmath-seo-wp@1.2.1 rankmath-install --list
 ```
 
 수동 복사:
@@ -135,7 +135,7 @@ cp -r rankmath-seo-wp ~/.claude/skills/rankmath-seo-wp
 ### Step 2: 글 검사
 
 ```bash
-npx -p rankmath-seo-wp@1.2.0 rankmath-verify examples/sample-article.html "Claude Skills"
+npx -p rankmath-seo-wp@1.2.1 rankmath-verify examples/sample-article.html "Claude Skills"
 ```
 
 ```

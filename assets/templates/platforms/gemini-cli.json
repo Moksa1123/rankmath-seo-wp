@@ -20,7 +20,7 @@
     "description": "Write Rank Math SEO-compliant WordPress articles in Traditional Chinese (or any language). Outputs Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, focus keyword density 1.0-1.5%, 12 H2 structure, and SEO Title containing a digit.",
     "license": "MIT",
     "author": "moksa (https://moksaweb.com)",
-    "version": "1.2.0"
+    "version": "1.2.1"
   },
   "loaderBehaviour": "Gemini CLI supports the Agent Skills standard (same SKILL.md format as Claude Code). Place SKILL.md under .gemini/skills/<name>/ (project) or ~/.gemini/skills/<name>/ (global) and it auto-discovers on session start. References, tools, and data are copied alongside.",
   "verified": true,
