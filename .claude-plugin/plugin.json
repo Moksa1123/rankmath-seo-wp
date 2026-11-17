@@ -1,0 +1,48 @@
+{
+  "name": "rankmath-seo-wp",
+  "displayName": "Rank Math SEO WP Writer (unofficial)",
+  "version": "1.2.0",
+  "description": "Write WordPress articles that pass Rank Math's own SEO tests: block-editor HTML with valid HowTo and FAQ blocks, a verifier that scores the article the way the plugin does, and rules read from the plugin's source. Unofficial: not made by or affiliated with Rank Math.",
+  "author": {
+    "name": "Moksa",
+    "url": "https://moksaweb.com"
+  },
+  "homepage": "https://github.com/Moksa1123/rankmath-seo-wp#readme",
+  "repository": "https://github.com/Moksa1123/rankmath-seo-wp",
+  "license": "MIT",
+  "keywords": [
+    "wordpress",
+    "seo",
+    "rank-math",
+    "gutenberg",
+    "howto-block",
+    "faq-block",
+    "wp-cli"
+  ],
+  "documentationUrl": "https://github.com/Moksa1123/rankmath-seo-wp#readme",
+  "supportUrl": "https://github.com/Moksa1123/rankmath-seo-wp/issues",
+  "privacyPolicyUrl": "https://github.com/Moksa1123/rankmath-seo-wp#what-it-runs-and-connects-to",
+  "userConfig": {
+    "wp_ssh_host": {
+      "type": "string",
+      "title": "SSH user and host",
+      "description": "Only for publishing or batch-fixing posts over WP-CLI: the SSH login for your WordPress server, e.g. user@your-wp-host.example.com. Export it as WP_SSH_HOST for a tool run. The tools contact only this server.",
+      "required": false
+    },
+    "wp_ssh_key": {
+      "type": "string",
+      "title": "SSH private key path",
+      "description": "Path to the SSH private key used to log in to that server, e.g. ~/.ssh/id_rsa. Only the path is stored; the key stays on your machine and is used by ssh. Export it as WP_SSH_KEY for a tool run.",
+      "required": false
+    },
+    "wp_path": {
+      "type": "string",
+      "title": "WordPress path on the server",
+      "description": "The WordPress install directory on that server, e.g. /path/to/wordpress. Export it as WP_PATH for a tool run.",
+      "required": false
+    }
+  },
+  "skills": [
+    "./"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "rankmath-seo-wp",
+  "description": "Write WordPress articles that pass Rank Math's own SEO tests. Unofficial.",
+  "owner": {
+    "name": "Moksa",
+    "url": "https://moksaweb.com"
+  },
+  "plugins": [
+    {
+      "name": "rankmath-seo-wp",
+      "description": "Write WordPress articles that pass Rank Math's own SEO tests, with valid HowTo and FAQ blocks and a verifier that scores the article the way the plugin does. Unofficial: not made by or affiliated with Rank Math.",
+      "source": "./",
+      "category": "development",
+      "homepage": "https://github.com/Moksa1123/rankmath-seo-wp"
+    }
+  ]
+}
