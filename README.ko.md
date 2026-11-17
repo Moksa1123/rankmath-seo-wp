@@ -1,385 +1,231 @@
-<div align="center">
+<h1 align="center">Rank Math SEO WP Writer</h1>
 
-# Rank Math SEO WP
+<h3 align="center">Rank Math SEO 文章撰寫工具</h3>
 
-### Rank Math 80 점 이상의 WordPress 글을 AI 가 작성하는 Skill. 클립보드에서 복사 후 붙여넣기로 Gutenberg 블록 복원, SSH 불필요.
+<p align="center">
+  <strong>Rank Math 테스트 규칙 · 유효한 HowTo/FAQ 블록 · 게시 전 검증기</strong>
+</p>
 
-<p>
+<p align="center">
+  <img src="https://img.shields.io/badge/node-%3E%3D18-339933?style=flat-square&logo=node.js&logoColor=white" alt="Node 18+">
+  <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.9+">
+  <img src="https://img.shields.io/badge/format-Agent%20Skill-blue?style=flat-square" alt="Agent Skill">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Rank%20Math%20tests-25-success?style=flat-square" alt="25 Rank Math tests">
+  <img src="https://img.shields.io/badge/AI%20platforms-8-blueviolet?style=flat-square" alt="8 AI platforms">
   <a href="https://www.npmjs.com/package/rankmath-seo-wp"><img src="https://img.shields.io/npm/v/rankmath-seo-wp?style=flat-square&color=cb3837&logo=npm&logoColor=white&label=npm" alt="npm version"></a>
   <a href="https://www.npmjs.com/package/rankmath-seo-wp"><img src="https://img.shields.io/npm/dm/rankmath-seo-wp?style=flat-square&color=cb3837&logo=npm&logoColor=white" alt="npm downloads"></a>
   <a href="https://github.com/Moksa1123/rankmath-seo-wp"><img src="https://img.shields.io/github/stars/Moksa1123/rankmath-seo-wp?style=flat-square&logo=github&logoColor=white&color=181717" alt="GitHub stars"></a>
+</p>
+
+<p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT"></a>
 </p>
 
-<p>
-  <img src="https://img.shields.io/badge/format-Agent%20Skill-blue?style=flat-square" alt="Agent Skill">
-  <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.9+">
-  <img src="https://img.shields.io/badge/node-%3E%3D18-339933?style=flat-square&logo=node.js&logoColor=white" alt="Node 18+">
-  <img src="https://img.shields.io/badge/AI%20%ED%94%8C%EB%9E%AB%ED%8F%BC-8-blueviolet?style=flat-square" alt="8 AI 플랫폼">
-</p>
+<p align="center"><a href="README.md">English</a> · <a href="README.zh-TW.md">正體中文</a> · <a href="README.ja.md">日本語</a> · <strong>한국어</strong></p>
 
-<p>
-  <a href="#빠른-시작"><strong>지금 시작</strong></a> ·
-  <a href="https://github.com/Moksa1123/rankmath-seo-wp"><strong>GitHub</strong></a> ·
-  <a href="https://www.npmjs.com/package/rankmath-seo-wp"><strong>npm</strong></a> ·
-  <a href="https://moksaweb.com"><strong>moksaweb.com</strong></a>
-</p>
+> 이 프로젝트는 비공식 커뮤니티 프로젝트입니다. Rank Math 또는 그 개발사가 만들거나 보증한 것이 아니며 관계도 없습니다. Rank Math SEO는 서드파티 소프트웨어이며 이 저장소에 포함되어 있지 않습니다.
 
-<p>
-  <a href="README.md">English</a> ·
-  <a href="README.zh-TW.md">繁體中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <strong>한국어</strong>
-</p>
+## 기능
 
-</div>
+"WordPress 글을 써 줘"라는 요청을, Rank Math 자체 테스트를 통과하고 80점 이상을 받는 글로 바꿉니다. Rank Math 규칙을 추측할 필요가 없습니다.
 
----
+| 영역 | 내용 |
+|---|---|
+| Rank Math 규칙 | 점수, 기준값, KB 링크를 포함한 25개 테스트와 채점 규칙. seo-by-rank-math 1.0.282 소스 코드에서 읽음 |
+| 블록 | 각 블록의 `save()`와 같은 HowTo/FAQ 마크업이라 에디터에 "유효하지 않은 콘텐츠"가 뜨지 않음 |
+| 검증기 | 단어 수와 밀도를 Rank Math와 같은 방식으로 세며, 하나라도 실패하면 종료 코드 1을 반환 |
+| 검색 | 중국어나 영어 질문을 `data/`에서 답하고 출처를 붙임 |
+| 게시 | 클립보드로 블록 붙여 넣기(서버 권한 불필요) 또는 자신의 서버에서 WP-CLI |
+| 도구 | 모든 CLI에 Python·Node 버전이 있고 표준 라이브러리만 사용. 8개 AI 플랫폼에 설치 가능 |
 
-<table>
-<tr>
-<td width="33%" valign="top">
+### 규칙은 플러그인에서 직접
 
-#### 블록 붙여넣기, SSH 불필요
+```bash
+python scripts/search.py "密度"
+# [tests] keywordDensity ... <0.5 fail 0; ... up to 2.5 best 6; >2.5 fail 0
+#    trust=官方原始碼  source=analyzer.js keywordDensity calculateScore (1.0.282)
+```
 
-`rankmath-export article.html` 로 글 전체를 클립보드에 복사. WP 블록 에디터에 붙여넣으면 HowTo / FAQ / 임베드 모두 완벽 복원.
+### 게시 전 검증기
 
-</td>
-<td width="33%" valign="top">
+```bash
+rankmath-verify article.html "포커스 키워드"    # 또는 python tools/verify-article.py
+```
 
-#### 8 플랫폼 인스톨러
+### SSH 없이 블록 붙여 넣기
 
-`rankmath-install <platform>` 으로 Claude Code, Claude.ai, Cursor, Codex CLI, Gemini CLI, Devin Desktop (구 Windsurf), Copilot, Continue 의 정규 경로와 frontmatter 에 자동 배치.
+```bash
+rankmath-export article.html                    # 글 전체를 클립보드로
+rankmath-export article.html --only faq         # FAQ 블록만
+```
 
-</td>
-<td width="33%" valign="top">
+### 블록 수정 도구
 
-#### 발행 전 검증기
+```bash
+python tools/regenerate-faq.py article.html     # JSON에서 FAQ HTML 다시 생성
+python tools/fix-howto-block.py 101 --dry       # 글 101의 HowTo 수정 미리 보기
+```
 
-`rankmath-verify article.html "FK"` 로 포커스 키워드 밀도 (1.0–1.5%), 12 H2 구조, HowTo / FAQ 정합성, 30+ 안티패턴 자동 검사.
+### 해결하는 문제
 
-</td>
-</tr>
-<tr>
-<td valign="top">
+| 문제 | 이 skill의 해결 방법 |
+|---|---|
+| 밀도가 너무 높거나 낮음 | `data/focus-keyword-density.csv`는 플러그인의 채점 구간. 검증기는 플러그인과 같은 방식으로 셈 |
+| HowTo나 FAQ 블록에 "유효하지 않은 콘텐츠" | HTML이 블록의 `save()`와 같아야 함. `fix-howto-block`, `regenerate-faq`가 다시 만듦 |
+| JSON-LD `<script>`가 글자로 보임 | rank-math 블록 사용. 검증기가 인라인 `ld+json`을 잡아냄 |
+| "Your SEO title doesn't contain a number" | 제목 템플릿 `[FK] 完整教學：N 大功能` |
+| `--post_content="$(cat …)"` 실패, Windows가 `\r\n`을 씀 | 파일을 `wp post update`에 넘김. 모든 도구가 LF로 씀 |
+| 서버 SSH 권한이 없음 | `rankmath-export`가 붙여 넣을 수 있는 블록을 복사 |
 
-#### Python 과 Node 트윈 도구
+## 사용 시점
 
-각 CLI 가 `.py` 와 `.mjs` 트윈 버전, 패리티 테스트 완료. 사용 환경에 맞춰 선택 가능.
+| 사용 | 사용하지 않음(대신) |
+|---|---|
+| Rank Math SEO를 쓰는 WordPress 사이트에서 글을 쓰거나 고치거나 게시 | 그 밖의 블록 에디터 페이지 → `gutenberg-headless` |
+| HowTo·FAQ 블록이 들어간 튜토리얼, 가이드, 블로그 글(번체 중국어 또는 다른 언어) | Elementor나 Mosaic 페이지 → `elementor-headless`, `mosaic-headless` |
+| 에디터가 유효하지 않다고 표시한 HowTo/FAQ 블록 복구 | Yoast 등 다른 SEO 플러그인을 쓰는 사이트(테스트 항목이 다름) |
 
-</td>
-<td valign="top">
+## 설치
 
-#### 구조화된 CSV 데이터
+| 필요한 것 | 용도 |
+|---|---|
+| Python 3.9 이상 또는 Node.js 18 이상 | 도구 실행(표준 라이브러리만 사용) |
+| `ssh`와 서버의 WP-CLI | WP-CLI로 게시하거나 일괄 수정할 때만 |
+| Windows, macOS, Linux | 전체 |
 
-밀도 구간, H2 템플릿, FAQ 주제, SEO 파워 워드, 플랫폼 설치 경로 — 기계 읽기 가능한 CSV, 도구와 사람 모두 읽음.
+### Step 1: 설치 방법 선택
 
-</td>
-<td valign="top">
+Claude plugin(Claude Code. Claude 공식 디렉터리에 등록된 뒤에는 디렉터리에서도 가능):
 
-#### 다국어 문서
+```
+/plugin marketplace add Moksa1123/rankmath-seo-wp
+/plugin install rankmath-seo-wp@rankmath-seo-wp
+```
 
-English, 繁體中文, 日本語, 한국어 완전 README, 섹션 구조 동기화, 중국어 SEO 기본값 실전 검증 완료.
+npx(Claude Code와 아래 표의 다른 AI 도구):
 
-</td>
-</tr>
-</table>
+```bash
+npx -p rankmath-seo-wp@1.2.0 rankmath-install claude-code --global
+npx -p rankmath-seo-wp@1.2.0 rankmath-install --list
+```
 
----
+수동 복사:
+
+```bash
+git clone https://github.com/Moksa1123/rankmath-seo-wp.git
+cp -r rankmath-seo-wp ~/.claude/skills/rankmath-seo-wp
+```
+
+| 플랫폼 | 키 | 방식 | 기본 경로 |
+|---|---|---|---|
+| Claude Code | `claude-code` | full | `.claude/skills/rankmath-seo-wp/SKILL.md` |
+| Claude.ai(웹) | `claude-ai` | zip-upload | `./rankmath-seo-wp.zip` → Settings → Skills |
+| Cursor | `cursor` | rule | `.cursor/rules/rankmath-seo-wp.mdc` |
+| OpenAI Codex CLI | `codex-cli` | full | `.codex/skills/rankmath-seo-wp/SKILL.md` |
+| Gemini CLI | `gemini-cli` | full | `.gemini/skills/rankmath-seo-wp/SKILL.md` |
+| Devin Desktop(이전 Windsurf) | `windsurf` | rule | `.devin/rules/rankmath-seo-wp.md` |
+| GitHub Copilot | `copilot` | full | `.github/skills/rankmath-seo-wp/SKILL.md` |
+| Continue | `continue` | rule | `.continue/rules/rankmath-seo-wp.md` |
 
 ## 빠른 시작
 
-```bash
-# npx 로 즉시 사용 (설치 불필요)
-npx -p rankmath-seo-wp rankmath-install claude-code              # full skill -> .claude/skills/rankmath-seo-wp/
-npx -p rankmath-seo-wp rankmath-export article.html              # 붙이면 바로 HTML 클립보드로
-npx -p rankmath-seo-wp rankmath-verify article.html "Claude Skills"
-
-# 또는 글로벌 설치
-npm install -g rankmath-seo-wp
-rankmath-install --list                       # 지원하는 8 개 AI 플랫폼
-```
-
-설치 후 AI 도구 재시작하고 시도:
-
-```
-> Claude Code Hooks 튜토리얼 글을 써줘
-```
-
-Skill 이 WordPress 글 작성 요청에서 자동 트리거. 출력은 Gutenberg 블록 붙여넣기 가능, Rank Math 80 점 이상.
-
-> [!TIP]
-> 설치 전에 확인하고 싶다면? `rankmath-install --info cursor` 로 각 플랫폼의 정확한 경로, frontmatter, 로더 동작을 볼 수 있습니다.
-
----
-
-## 지원 AI 플랫폼
-
-| # | 플랫폼 | Key | 전략 | 기본 경로 |
-|---|-------|-----|------|----------|
-| 1 | **Claude Code** | `claude-code` | full | `.claude/skills/rankmath-seo-wp/SKILL.md` |
-| 2 | **Claude.ai (web)** | `claude-ai` | zip-upload | `./rankmath-seo-wp.zip` → 설정 → Skills |
-| 3 | **Cursor** | `cursor` | rule | `.cursor/rules/rankmath-seo-wp.mdc` |
-| 4 | **OpenAI Codex CLI** | `codex-cli` | full | `.codex/skills/rankmath-seo-wp/SKILL.md` (`--to .agents` 로 크로스툴 표준 `.agents/skills/` 에도 설치 가능) |
-| 5 | **Gemini CLI** | `gemini-cli` | full | `.gemini/skills/rankmath-seo-wp/SKILL.md` |
-| 6 | **Devin Desktop** (구 Windsurf) | `windsurf` | rule | `.devin/rules/rankmath-seo-wp.md` |
-| 7 | **GitHub Copilot** | `copilot` | full | `.github/skills/rankmath-seo-wp/SKILL.md` |
-| 8 | **Continue** | `continue` | rule | `.continue/rules/rankmath-seo-wp.md` |
-
-> [!NOTE]
-> 8 개 플랫폼 모두 2026 년 7 월 기준 검증 완료. 구버전 도구는 레거시 경로 사용: Gemini CLI 는 `.gemini/extensions/<name>/GEMINI.md`, Windsurf 는 `.windsurf/rules/`, Copilot 은 `.github/copilot-instructions.md` 에 추가 — 자세한 내용은 `rankmath-install --info <platform>`.
-
----
-
-## CLI 치트시트
-
-<details>
-<summary><strong>블록 붙여넣기 출력</strong> — <code>rankmath-export</code></summary>
+### Step 2: 글 검사
 
 ```bash
-rankmath-export article.html                  # 글 전체를 클립보드로
-rankmath-export article.html --only howto     # HowTo 블록만
-rankmath-export article.html --only faq       # FAQ 블록만
-rankmath-export article.html --to-file out.html
-rankmath-export article.html --print > out.html
-rankmath-export article.html --no-validate    # 블록 검증 건너뛰기
+npx -p rankmath-seo-wp@1.2.0 rankmath-verify examples/sample-article.html "Claude Skills"
 ```
 
-WordPress 관리자: **글 → 새로 추가 → 에디터 안에 커서 → Ctrl+V / Cmd+V**.
-Gutenberg 가 블록 코멘트를 파싱해서 각 블록 복원.
-
-</details>
-
-<details>
-<summary><strong>글 검증기</strong> — <code>rankmath-verify</code></summary>
-
-```bash
-rankmath-verify article.html "당신의 포커스 키워드"
 ```
-
-샘플 출력:
-
-```
-=== examples/sample-article.html ===
-Focus keyword: Claude Skills
-
-Word count:      714 visible words
-                 OK at least 600 (content length 2/8)
-FK count:        14 visible occurrences
 FK density:      1.96%
                  OK full score band 1.0-2.5% (6/6; KB recommends 1.0-1.5%)
-Heading balance: 12 open / 12 close
-                 OK 12/12 (site-style structure)
-FK in opening:   OK
-FK in H2:        4 occurrences
-                 OK at least 1 H2 contains FK
-HowTo block:     OK
-FAQ block:       OK (8 questions aligned)
-Forbidden:       OK none found
-
+...
 === Result: 8 passed, 0 failed ===
 ```
 
-</details>
+### Step 3: 어시스턴트에게 요청
 
-<details>
-<summary><strong>멀티 플랫폼 인스톨러</strong> — <code>rankmath-install</code></summary>
+| 요청 | 결과 |
+|---|---|
+| "Claude Code Hooks에 관한 WordPress 튜토리얼을 써 줘. 포커스 키워드는 Claude Code Hooks야." | 글을 쓰고 검증기를 실행 |
+| "이 글의 FAQ 블록에 유효하지 않은 콘텐츠라고 나와. 고쳐 줘." | 블록의 JSON에서 FAQ HTML을 다시 생성 |
+| "Rank Math에서 키워드 밀도가 얼마면 만점이야?" | `data/`를 찾아 플러그인 규칙을 인용 |
 
-```bash
-rankmath-install --list                       # 8 플랫폼 목록
-rankmath-install --info cursor                # 상세 보기
-rankmath-install claude-code                  # ./.claude/skills/... 에 설치
-rankmath-install claude-code --global         # ~/.claude/skills/... 에 설치
-rankmath-install claude-ai --to ./build       # ./build/ 에 zip 생성
-rankmath-install --dry-run claude-code        # 쓰지 않고 계획만 표시
-rankmath-install                              # 인터랙티브 선택
+| CLI | 역할 |
+|---|---|
+| `rankmath-verify article.html "FK"` | 글 채점. 모두 통과하면 exit 0 |
+| `rankmath-export article.html` | 붙여 넣을 수 있는 블록 복사(`--only faq`, `--to-file`, `--print`) |
+| `rankmath-install <platform>` | AI 도구에 설치(`--list`, `--info`, `--global`) |
+| `python scripts/search.py "<검색어>"` | Rank Math 규칙, 블록 마크업, 사이트 규칙 검색 |
+| `python tools/regenerate-faq.py <파일 또는 글 ID>` | JSON에서 FAQ HTML 다시 생성(`--dry`로 미리 보기) |
+| `python tools/fix-howto-block.py <파일 또는 글 ID>` | 옛 HowTo 마크업 변환(`--dry`로 미리 보기) |
+
+전체 출력, 모든 옵션, 글 구성: [docs/guide.md](docs/guide.md).
+
+## 트리거 문구
+
+English: write a WordPress article, blog post or tutorial, Rank Math score, SEO green light, focus keyword density, FAQ block, HowTo block, block contains invalid content, publish with WP-CLI.
+
+中文：寫 WordPress 文章、部落格文章、教學文、Rank Math 分數、SEO 綠燈、焦點關鍵字密度、FAQ 區塊、HowTo 區塊、區塊無效內容、WP-CLI 發文。
+
+## 실행 내용과 연결 대상
+
+스스로 실행되는 것은 없습니다. 이 plugin에는 훅, MCP 서버, 백그라운드 프로세스가 없습니다. Claude가 `SKILL.md`를 따르고 사용자가 명령을 승인할 때만 도구가 실행됩니다.
+
+| 도구 | 읽는 것 | 쓰는 것 | 연결 대상 |
+|---|---|---|---|
+| `scripts/search.py`, `tools/verify-article.*`, 자체 테스트, 숫자 검사 | 이 폴더의 파일, 지정한 글 | 없음 | 없음 |
+| `rankmath-export` | 글 | 클립보드(`clip`, `pbcopy`, `xclip`, `xsel`, `wl-copy`) 또는 지정한 파일 | 없음 |
+| `rankmath-install` | 이 폴더 | AI 도구의 skill/rule 폴더(프로젝트 안, 또는 `--global`이면 홈 폴더) 또는 zip | 없음 |
+| `regenerate-faq`, `fix-howto-block`에 로컬 `.html` | 그 파일 | 그 파일 | 없음 |
+| `regenerate-faq`, `fix-howto-block`에 글 ID | 글(`wp post get`) | 글(`wp post update`, 날짜 유지), 서버 `/tmp`의 임시 파일(실행 후에도 남음) | 사용자 서버(`ssh`) |
+| 게시(요청하면 Claude가 WP-CLI 실행) | 사용자의 WordPress | 글, Rank Math 필드(`rank_math_focus_keyword`, `rank_math_title`, `rank_math_description`), 카테고리, 슬러그, 대표 이미지 | 사용자 서버(`ssh`) |
+
+| 설정 | 환경 변수 | `userConfig` 키 | 예 |
+|---|---|---|---|
+| SSH 사용자와 호스트 | `WP_SSH_HOST` | `wp_ssh_host` | `user@your-wp-host.example.com` |
+| SSH 개인 키 경로 | `WP_SSH_KEY` | `wp_ssh_key` | `~/.ssh/id_rsa`(없을 때 사용) |
+| 서버의 WordPress 경로 | `WP_PATH` | `wp_path` | `/path/to/wordpress` |
+
+plugin으로 설치하면 Claude Code가 이 값들을 `userConfig`로 물어봅니다. 도구를 실행할 때는 위 환경 변수 이름으로 내보내세요. 개인 키는 사용자의 컴퓨터를 떠나지 않고 `ssh`가 로그인에만 씁니다. WordPress 비밀번호나 API 키는 필요 없고, 설치할 때 아무것도 내려받지 않으며, 작성자나 다른 누구에게도 데이터를 보내지 않습니다.
+
+## 검증 방법
+
+| 항목 | 결과 | 근거 |
+|---|---|---|
+| Rank Math 규칙 | seo-by-rank-math 1.0.282(`analyzer.js`, HowTo/FAQ의 `save()`와 `block.json`)에서 읽고, 2026-11-15에 [Rank Math KB](https://rankmath.com/kb/score-100-in-tests/)와 대조 | `data/rankmath-tests.csv`, `data/blocks.csv` |
+| 사이트 관례 | 사이트 스타일로 구분하고 Rank Math 규칙으로 취급하지 않음 | `data/site-rules.csv` |
+| 단어 수 계산 | 비교한 모든 파일에서 `@wordpress/wordcount` 패키지와 같음 | `scripts/test_verify.py` |
+| 자체 테스트 | 오프라인 테스트 30개: Python·Node 검증기 일치, 망가진 글은 실패, 기준값과 데이터 일치 | `python scripts/test_verify.py` |
+| evals | 11문항. skill 사용 시 11/11, 미사용 시 0/11 | [evals/RESULTS.md](evals/RESULTS.md) |
+| 문서의 숫자 | `SKILL.md`와 이 README들의 모든 숫자가 데이터와 일치 | `python scripts/check_numbers.py` |
+
+## 제한 사항
+
+| 제한 | 내용 |
+|---|---|
+| Rank Math 버전 | 규칙은 Rank Math 1.0.282(무료 버전)에서 읽음. Pro 전용 테스트와 이후 버전은 다시 읽어야 함 |
+| 검증기가 보는 범위 | 글의 HTML만. SEO 제목, 메타 설명, 슬러그, 링크, 이미지는 Rank Math 사이드바에서 확인 |
+| 실제 대조 | 검증기의 숫자는 아직 실제 Rank Math 사이드바와 대조하지 않음 |
+| 플랫폼 경로 | 다른 AI 도구의 설치 경로는 최신 문서로 아직 재확인하지 않음([data/platforms.csv](data/platforms.csv)) |
+| 미해결 질문 | [data/pending.csv](data/pending.csv) |
+
+## 저장소 구조
+
+```
+SKILL.md          어시스턴트가 읽는 내용: 출처, 라우팅, 작업, 검증
+data/             Rank Math 테스트, 블록 마크업, 사이트 규칙(CSV), 미해결 목록
+references/       블록 형식, 체크리스트, 문체, WP-CLI 함정
+scripts/          search.py(진입점), 자체 테스트, 숫자 검사
+tools/            검증, 내보내기, 설치, FAQ/HowTo 수정(Python + Node)
+examples/         검증기를 통과하는 예제 글
+evals/            채점 문항과 결과
+docs/             자세한 가이드
+.claude-plugin/   plugin과 marketplace 매니페스트
 ```
 
-</details>
+## 라이선스와 작성자
 
-<details>
-<summary><strong>WP-CLI 일괄 수정</strong> — Python 또는 Node (서버 접근 필요)</summary>
-
-```bash
-export WP_SSH_KEY=~/.ssh/id_rsa
-export WP_SSH_HOST=user@your-wp-host.example.com
-export WP_PATH=/path/to/wordpress
-
-# 구식 HowTo 블록을 여러 글에서 일괄 수정
-python tools/fix-howto-block.py 8489 8478 8466
-node   tools/fix-howto-block.mjs 8489 8478 8466
-
-# FAQ JSON↔HTML 정합성을 여러 글에서 일괄 수정
-python tools/regenerate-faq.py 8489 8478 8579
-node   tools/regenerate-faq.mjs 8489 8478 8579
-```
-
-</details>
-
----
-
-## 글 골격
-
-Skill 은 다음 골격을 따르는 글을 출력합니다 — moksaweb.com 의 모든 발행 글이 이 구조:
-
-```
-[도입 문단]                   ~150 단어, FK 2-3 회
-[Moksa 관점]                  자연스러운 중국어, FK 1 회, 영어 전문 용어 없음
-H2 #1   什麼是 [FK]?
-H2 #2   [FK] 和 [Competitor] 怎麼選?       ← 비교 테이블
-H2 #3   如何啟用這個工具?                   ← 코드 블록
-H2 #4   [FK] 4 步驟啟用設定                 ← HowTo 블록
-H2 #5   它能做哪些 X 工作?
-H2 #6   [Persona] 怎麼用 [FK]?
-H2 #7   [Killer feature] 怎麼運作?
-H2 #8   進階主題或場景
-H2 #9   哪裡可以找到更多官方資源?           ← YouTube 임베드 3 개
-H2 #10  使用 [FK] 有哪些限制?               ← 6 단락
-H2 #11  參考依據                             ← 외부 링크 5 개
-H2 #12  常見問題 FAQ                         ← FAQ 블록
-```
-
-결과: 1,400–2,000+ 단어, FK 밀도 1.0–1.5%, Rank Math 80 점 이상, 블록 붙여넣기 가능.
-
----
-
-## 레포지토리 구조
-
-<details>
-<summary>클릭해서 펼치기</summary>
-
-```
-rankmath-seo-wp/
-├── SKILL.md                          # Skill 본체 (자동 로드)
-├── README.md / .zh-TW / .ja / .ko    # 다국어 문서
-├── CLAUDE.md                         # AI 가 Skill 자체를 편집할 때의 규칙
-├── CONTRIBUTING.md                   # 사람 기여자 가이드
-├── LICENSE                           # MIT
-├── package.json                      # npm 메타 + 3 개 bin
-│
-├── assets/templates/platforms/       # 8 개 플랫폼 설치 설정
-│   ├── claude-code.json              # full
-│   ├── claude-ai.json                # zip-upload
-│   ├── cursor.json                   # rule (.mdc + globs)
-│   ├── codex-cli.json                # full (.agents/skills/ optional)
-│   ├── gemini-cli.json               # full (SKILL.md standard)
-│   ├── windsurf.json                 # rule (.devin/rules, model_decision)
-│   ├── copilot.json                  # full (.github/skills/)
-│   └── continue.json                 # rule (alwaysApply)
-│
-├── data/                             # 구조화된 CSV 레퍼런스
-│   ├── focus-keyword-density.csv
-│   ├── h2-templates.csv
-│   ├── faq-topics.csv
-│   ├── power-words.csv
-│   └── platforms.csv
-│
-├── references/                       # 상세 가이드
-│   ├── article-template.md
-│   ├── howto-block.md
-│   ├── faq-block.md
-│   ├── seo-checklist.md              # Rank Math 100점 분해표
-│   ├── moksa-style.md                # Moksa 관점 문체 가이드
-│   ├── image-specs.md                # 대표 이미지 PIL 템플릿
-│   └── wp-cli-pitfalls.md            # WP-CLI 배포 함정 9 가지
-│
-├── tools/                            # 트윈 도구 (Python + Node)
-│   ├── verify-article.py    / .mjs   # FK 밀도 + 구조 검증
-│   ├── export-blocks.py     / .mjs   # 블록 붙여넣기 출력
-│   ├── install-skill.py     / .mjs   # 멀티 플랫폼 인스톨러
-│   ├── regenerate-faq.py    / .mjs   # FAQ JSON↔HTML 정렬 (일괄 지원)
-│   └── fix-howto-block.py   / .mjs   # 구식 HowTo 포맷 변환 (일괄 지원)
-│
-└── examples/
-    └── sample-article.html
-```
-
-</details>
-
----
-
-## 어떤 문제를 해결하나
-
-30 편 이상 발행하면서 반복적으로 부딪힌 문제들:
-
-| 문제 | 이 Skill 의 해결 방식 |
-|------|----------------------|
-| Rank Math 점수 60 미만 | `references/seo-checklist.md` 의 100점 체크리스트 |
-| FK 밀도 3% 이상 (키워드 채우기) | 분포표: 5 H2 + 4 FAQ + 본문 |
-| FK 밀도 0.5% (너무 낮음 경고) | `verify-article.{py,mjs}` 자동 측정 |
-| HowTo "예상치 못한 내용" 오류 | `references/howto-block.md` 의 8594 표준 포맷 |
-| FAQ 블록 검증 오류 | `regenerate-faq.{py,mjs}` 로 JSON ↔ HTML 정렬 |
-| `<script>` JSON-LD 가 원본 텍스트 노출 | inline script 사용을 명시적으로 금지 |
-| H2 에 "HowTo Schema" 노출 | Skill 과 검증기 양쪽에서 검출 |
-| Windows Python 이 `\r\n` 으로 기록 | 도구가 `newline='\n'` 강제 |
-| `--post_content="$(cat)"` 셸 오류 | `wp post update file.html` 구문 안내 |
-| SEO Title 에 숫자 없음 경고 | `[FK] 完整教學：N 大功能` 템플릿 강제 |
-| **서버 SSH 권한 없음** | **`rankmath-export` 가 블록 붙여넣기용 HTML 을 클립보드로** |
-
----
-
-## 다른 분야에 적용
-
-이 Skill 은 중국어 기술 튜토리얼 타깃이지만 규칙은 범용:
-
-- `Moksa 觀點` 도입부를 자기 브랜드의 시그니처로 교체
-- `references/article-template.md` H2 구조를 자기 분야에 맞게 변경
-- 1.0–1.5% FK 밀도는 대부분 언어에서 통용
-- `references/wp-cli-pitfalls.md` 의 WP 호스트 / 경로를 본인 환경으로
-- `references/image-specs.md` 의 베이스 이미지 경로를 본인 환경으로
-
----
-
-## 오픈 스탠다드
-
-[Anthropic Agent Skills 규격](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) 을 따릅니다:
-`SKILL.md` + YAML frontmatter (`name`, `description`) + 평면 reference 파일.
-여러 AI 플랫폼 간 호환.
-
----
-
-## 작성자
-
-<table>
-<tr>
-<td>
-
-**[moksa](https://moksaweb.com)** — [moksaweb.com](https://moksaweb.com) 운영자, 공개된 모든 Claude AI 튜토리얼 글에서 실전 사용되는 Skill 입니다.
-
-30+ 편의 Rank Math 디버깅 경험을 재사용 가능한 멀티 플랫폼·다국어 툴킷으로 응축.
-
-</td>
-<td align="center" width="200">
-
-<a href="https://moksaweb.com">
-  <img src="https://img.shields.io/badge/website-moksaweb.com-2563EB?style=for-the-badge" alt="Website">
-</a>
-<br>
-<a href="https://github.com/Moksa1123">
-  <img src="https://img.shields.io/badge/GitHub-Moksa1123-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-</a>
-
-</td>
-</tr>
-</table>
-
-이 Skill 이 Rank Math 디버깅 시간을 줄여줬다면, GitHub 에 star 또는 [moksaweb.com](https://moksaweb.com) 으로의 백링크 환영합니다.
-
----
-
-## 라이선스 및 기여
-
-MIT — [LICENSE](LICENSE) 참고. Copyright © 2026 moksa (moksaweb.com).
-
-PR 환영 — [CONTRIBUTING.md](CONTRIBUTING.md) 참고. 특히:
-
-- 번역 (EN, zh-TW, ja, ko 외 다른 로케일)
-- 추가 수정 도구 (이미지 깨짐, 외부 링크 끊김 등)
-- 다른 분야용 글 템플릿 (이커머스, 뉴스, 금융 등)
-- 다른 SEO 플러그인 검증 규칙 (Yoast, AIOSEO, SEOPress 등)
-
----
-
-<div align="center">
-  <sub><a href="https://moksaweb.com">moksa</a> 제작 · <a href="https://github.com/Moksa1123/rankmath-seo-wp">GitHub</a> · <a href="https://www.npmjs.com/package/rankmath-seo-wp">npm</a></sub>
-</div>
+MIT 라이선스. 작성자 Moksa([moksaweb.com](https://moksaweb.com)). 이슈: [GitHub](https://github.com/Moksa1123/rankmath-seo-wp/issues).
