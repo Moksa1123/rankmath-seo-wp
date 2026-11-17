@@ -20,7 +20,7 @@
     "description": "Write Rank Math SEO-compliant WordPress articles in Traditional Chinese (or any language). Outputs Gutenberg block-paste-ready HTML with HowTo/FAQ blocks, focus keyword density 1.0-1.5%, 12 H2 structure, and SEO Title containing a digit.",
     "license": "MIT",
     "author": "moksa (https://moksaweb.com)",
-    "version": "1.2.1"
+    "version": "1.2.2"
   },
   "loaderBehaviour": "GitHub Copilot supports Agent Skills (introduced December 2025): SKILL.md under .github/skills/<name>/ is auto-discovered by the Copilot coding agent and Copilot in VS Code. Project scope only. References, tools, and data are copied alongside.",
   "verified": true,

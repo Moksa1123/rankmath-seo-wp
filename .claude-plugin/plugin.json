@@ -1,7 +1,7 @@
 {
   "name": "rankmath-seo-wp",
   "displayName": "Rank Math SEO WP Writer (unofficial)",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Write WordPress articles that pass Rank Math's own SEO tests: block-editor HTML with valid HowTo and FAQ blocks, a verifier that scores the article the way the plugin does, and rules read from the plugin's source. Unofficial: not made by or affiliated with Rank Math.",
   "author": {
     "name": "Moksa",
