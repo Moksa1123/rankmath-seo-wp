@@ -84,6 +84,75 @@ RULES: list[tuple[str, str, str]] = [
 
 
 # ---------------------------------------------------------------------------
+# The four READMEs (en / zh-TW / ja / ko): same facts, each language's wording
+# ---------------------------------------------------------------------------
+ROOT = HERE.parent
+READMES = ["README.md", "README.zh-TW.md", "README.ja.md", "README.ko.md"]
+
+
+def _csv_value(stem: str, key_col: str, key: str, col: str) -> str:
+    return next(r[col] for r in search.load_csv(stem) if r[key_col] == key)
+
+
+def _eval_result() -> tuple[str, str, str]:
+    res = (ROOT / "evals" / "RESULTS.md").read_text(encoding="utf-8")
+    m = re.search(r"計分題答對率（(\d+) 題） \| \*\*(\d+)/\d+（[^|]*\| (\d+)/\d+", res)
+    return m.group(1), m.group(2), m.group(3)
+
+
+FACTS.update({
+    "rm_version": search.plugin_version,
+    "rm_tests": lambda: len(search.load_csv("rankmath-tests")),
+    "rm_checked": lambda: _csv_value("rankmath-tests", "test_id", "keywordDensity", "checked_on"),
+    "green": lambda: _csv_value("rankmath-tests", "test_id", "scoreColor", "threshold"),
+    "platforms": lambda: len(search.load_csv("platforms")),
+    "self_tests": lambda: len(re.findall(r"^[ \t]+def test_", (HERE / "test_verify.py").read_text(encoding="utf-8"), re.M)),
+    "eval_n": lambda: _eval_result()[0],
+    "eval_with": lambda: _eval_result()[1],
+    "eval_without": lambda: _eval_result()[2],
+    "node_min": lambda: re.search(r"(\d+)", __import__("json").loads((ROOT / "package.json").read_text(encoding="utf-8"))["engines"]["node"]).group(1),
+})
+
+README_RULES: list[tuple[str, str, str]] = [
+    (r"(?:seo-by-rank-math|Rank Math) (\d+\.\d+\.\d+)", "fact", "rm_version"),
+    (r"(\d+) ?(?:Rank Math tests|項 Rank Math 測試|項目のテスト|개 테스트)", "fact", "rm_tests"),
+    (r"(20\d\d-\d\d-\d\d)", "fact", "rm_checked"),
+    (r"(?:scores? (\d+)\+|(\d+) 分以上|(\d+) 点以上|(\d+)점 이상)", "fact", "green"),
+    (r"(?:green band|綠燈|緑|녹색)[^\n|]{0,20}?(?:&gt;|>|above|超過|超|초과) ?(\d+)", "fact", "green"),
+    (r"(\d+) ?(?:AI platforms|個 AI 平台|つの AI プラットフォーム|개 AI 플랫폼)", "fact", "platforms"),
+    (r"(\d+)%20(?:AI|platforms)|AI%20platforms-(\d+)", "fact", "platforms"),
+    (r"(?:(\d+) offline tests|(\d+) 項離線測試|オフラインの (\d+) 項目|오프라인 테스트 (\d+)개)", "fact", "self_tests"),
+    (r"(?:(\d+) questions|(\d+) 題|(\d+) 問|(\d+)문항)", "fact", "eval_n"),
+    (r"(?:with the skill|(?<!沒)有 skill|skill ありで|skill 사용 시) (\d+)/\d+", "fact", "eval_with"),
+    (r"(?:with the skill|(?<!沒)有 skill|skill ありで|skill 사용 시) \d+/(\d+)", "fact", "eval_n"),
+    (r"(?:without it|沒有 skill|なしで|미사용 시) (\d+)/\d+", "fact", "eval_without"),
+    (r"(?:without it|沒有 skill|なしで|미사용 시) \d+/(\d+)", "fact", "eval_n"),
+    (r"Node(?:\.js)? (\d+)|node-%3E%3D(\d+)", "fact", "node_min"),
+    (r"Python 3(?:\.9)?\+?|python-3\.9%2B", "fixed", "runtime requirement (stdlib only; from __future__ annotations need 3.7+)"),
+    (r"exit code 1|終了コード 1|종료 코드 1|exit code 1", "fixed", "verifier exit code (tools/verify-article.py)"),
+    (r"どれか 1 項目|1 台のサーバー", "fixed", "wording, not a measurement"),
+    (r"Step [1-3]", "fixed", "quick-start step numbers"),
+    (r"exit 0", "fixed", "verifier pass exit code"),
+    (r"\b[Hh][1-6]\b", "fixed", "heading tag names"),
+]
+
+
+def pin_problems() -> list[str]:
+    """npx pins in the READMEs and docs, and plugin.json, must equal package.json."""
+    import json
+    want = FACTS["pkg_version"]()
+    out = []
+    for name in READMES + ["docs/guide.md"]:
+        for got in re.findall(r"rankmath-seo-wp@(\d+\.\d+\.\d+)", (ROOT / name).read_text(encoding="utf-8")):
+            if got != want:
+                out.append(f"{name}: rankmath-seo-wp@{got}, package.json is {want}")
+    pj = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))["version"]
+    if pj != want:
+        out.append(f".claude-plugin/plugin.json version {pj}, package.json is {want}")
+    return out
+
+
+# ---------------------------------------------------------------------------
 # Engine (copied)
 # ---------------------------------------------------------------------------
 NUM = re.compile(r"\d+(?:[.,]\d+)*")
@@ -116,7 +185,9 @@ def _norm(s: str) -> str:
     return s.replace("–", "-").replace(" ", "")
 
 
-def check(path: Path = SKILL_MD, fix: bool = False) -> tuple[list[str], int]:
+def check(path: Path = SKILL_MD, fix: bool = False, rules=None,
+          allow_unused: bool = False) -> tuple[list[str], int]:
+    rules = RULES if rules is None else rules
     text = path.read_text(encoding="utf-8")
     scan = _masked(text)
     match_view = _masked(text, keep_inline=True)
@@ -124,20 +195,22 @@ def check(path: Path = SKILL_MD, fix: bool = False) -> tuple[list[str], int]:
     covered: set[int] = set()
     edits: list[tuple[int, int, str]] = []
 
-    for pattern, kind, arg in RULES:
+    for pattern, kind, arg in rules:
         found = list(re.finditer(pattern, match_view, re.M))
         if not found:
-            problems.append(f"rule unused (SKILL.md wording changed?): {pattern}")
+            if not allow_unused:
+                problems.append(f"rule unused ({path.name} wording changed?): {pattern}")
             continue
         for m in found:
             covered.update(range(*m.span()))
-            spans = [m.span(g) for g in range(1, (m.re.groups or 0) + 1)] or [m.span()]
+            groups = range(1, (m.re.groups or 0) + 1)
+            spans = [m.span(g) for g in groups if m.group(g) is not None] or [m.span()]
             for span in spans:
                 got = text[span[0]:span[1]]
                 if kind == "fact":
                     want = str(FACTS[arg]())
                     if got != want:
-                        problems.append(f"fact {arg}: SKILL.md says {got}, data says {want}")
+                        problems.append(f"fact {arg}: {path.name} says {got}, data says {want}")
                         edits.append((span[0], span[1], want))
                 elif kind == "row":
                     domain, key_col, col, word = arg.split("|")
@@ -159,7 +232,7 @@ def check(path: Path = SKILL_MD, fix: bool = False) -> tuple[list[str], int]:
     if fix and edits:
         for start, end, want in sorted(edits, reverse=True):
             text = text[:start] + want + text[end:]
-        path.write_text(text, encoding="utf-8")
+        path.write_text(text, encoding="utf-8", newline="\n")
     n = sum(1 for _ in NUM.finditer(scan))
     return problems, n
 
@@ -169,14 +242,28 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[1])
     ap.add_argument("--fix", action="store_true", help="rewrite fact values in SKILL.md")
     args = ap.parse_args()
-    problems, n = check(fix=args.fix)
-    if not problems:
-        print(f"All {n} numbers in SKILL.md are registered and match the data.")
-        return 0
-    print(f"SKILL.md has {len(problems)} number problem(s):")
-    for p in problems:
-        print("  ✗", p)
-    return 1
+    report = [("SKILL.md", *check(fix=args.fix))]
+    for name in READMES:
+        # each README uses its own language's alternatives, so a rule may be unused in one file
+        report.append((name, *check(ROOT / name, fix=args.fix, rules=README_RULES, allow_unused=True)))
+    pins = pin_problems()
+    bad = 0
+    for name, problems, n in report:
+        if not problems:
+            print(f"{name}: all {n} numbers are registered and match the data.")
+            continue
+        bad += 1
+        print(f"{name} has {len(problems)} number problem(s):")
+        for p in problems:
+            print("  ✗", p)
+    if pins:
+        bad += 1
+        print("Version pins out of step with package.json:")
+        for p in pins:
+            print("  ✗", p)
+    else:
+        print("Version pins (README npx commands, plugin.json) match package.json.")
+    return 1 if bad else 0
 
 
 if __name__ == "__main__":

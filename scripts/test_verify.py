@@ -269,6 +269,20 @@ class Numbers(unittest.TestCase):
         problems, _ = check_numbers.check()
         self.assertEqual(problems, [])
 
+    def test_readme_numbers_and_pins(self):
+        for name in check_numbers.READMES:
+            problems, _ = check_numbers.check(ROOT / name, rules=check_numbers.README_RULES, allow_unused=True)
+            self.assertEqual(problems, [], name)
+        self.assertEqual(check_numbers.pin_problems(), [])
+
+    def test_wrong_readme_number_is_caught(self):
+        text = (ROOT / "README.zh-TW.md").read_text(encoding="utf-8").replace("有 skill 11/11", "有 skill 10/11")
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "README.zh-TW.md"
+            p.write_text(text, encoding="utf-8")
+            problems, _ = check_numbers.check(p, rules=check_numbers.README_RULES, allow_unused=True)
+        self.assertTrue(any("eval_with" in x for x in problems), problems)
+
     def test_wrong_number_is_caught(self):
         text = (ROOT / "SKILL.md").read_text(encoding="utf-8").replace("word count ≥ 600", "word count ≥ 1400")
         with tempfile.TemporaryDirectory() as d:
