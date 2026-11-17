@@ -23,6 +23,8 @@ rankmath-seo-wp/
 ├── LICENSE                 # MIT
 ├── package.json            # npm metadata + bin entries (rankmath-export, -verify)
 ├── EXAMPLES.md             # Example index
+├── .claude-plugin/         # plugin.json + marketplace.json (Claude plugin / directory)
+├── docs/guide.md           # Long guide moved out of the README (CLI, platforms, skeleton)
 ├── data/                   # CSV — every row has source + trust; pending.csv = open questions
 ├── examples/               # Sample article that passes verify-article
 ├── evals/                  # cases.json + grade.py + RESULTS.md (with/without skill)
