@@ -47,7 +47,38 @@ DATA_FILES = {
 REFERENCE_NOTE = (
     "> Directory edition: commands that mention `tools/` or `scripts/` need the full "
     "edition (`npm` package `rankmath-seo-wp`); this folder ships reference files only.\n"
+    "> The `wp` commands below run on your WordPress server; how you connect to the "
+    "server is up to you.\n"
 )
+
+# The directory edition must not tell Claude to log in to a server or read a
+# credential from the user's machine. These patterns may not survive the build.
+FORBIDDEN = re.compile(
+    r"\bssh\b|\bscp\b|wp-config|\.env\b|id_rsa|id_ed25519|\.pem\b|password|passwd|SSH_KEY|YOUR_[A-Z_]{3,}",
+    re.I)
+# Reference sections about moving files to the server are dropped whole.
+DROP_SECTION = re.compile(r"^## .*(?:\bSCP\b|\bSSH\b|push function)", re.I)
+
+
+def serverless(text: str) -> str:
+    """Rewrite server examples to the bare `wp` command; drop transfer steps."""
+    # whole sections about transferring files over SSH / SCP
+    parts = re.split(r"(?m)^(?=## )", text)
+    text = "".join(p for p in parts if not DROP_SECTION.match(p))
+    # multi-line: ssh host "cd /path && wp db query \" ... \""  ->  wp db query " ... "
+    text = re.sub(r'ssh \S+ "(?:cd [^&"\n]+&& )?(wp [^"\n]*?)\\"(.*?)\\""', r'\1"\2"', text, flags=re.S)
+    # one-line: ssh host "cd /path && wp ..." rest  ->  wp ... rest
+    text = re.sub(r'(?m)^ssh \S+ "(?:cd [^&"\n]+&& )?([^"\n]*)"', r"\1", text)
+    # upload pipes and the comment that introduces them
+    text = re.sub(r"(?m)^.*\| ssh .*\n", "", text)
+    text = re.sub(r"(?m)^(# \d+\. )Upload via .*$",
+                  r"\1Put the file on the server (how you connect is up to you)", text)
+    text = re.sub(r"(?m)^# Upload (?:binary|text) file.*\n", "", text)
+    text = text.replace(" (cat | ssh)", "")
+    # keep pitfall numbers continuous after dropping sections
+    n = iter(range(1, 100))
+    text = re.sub(r"(?m)^## Pitfall \d+:", lambda m: f"## Pitfall {next(n)}:", text)
+    return text
 
 
 def sanitize(text: str) -> str:
@@ -139,7 +170,7 @@ def plugin_json() -> str:
 
 
 def reference(path: Path) -> str:
-    text = sanitize(path.read_text(encoding="utf-8"))
+    text = serverless(sanitize(path.read_text(encoding="utf-8")))
     first, _, rest = text.partition("\n")
     return f"{first}\n\n{REFERENCE_NOTE}{rest}"
 
@@ -160,7 +191,17 @@ def build() -> dict[str, bytes]:
         data = {"source_file": f"data/{stem}.csv",
                 "rows": [{k: sanitize(v) for k, v in r.items()} for r in rows(stem)]}
         files[f"{SKILL_DIR}/data/{stem}.json"] = json.dumps(data, ensure_ascii=False, indent=1) + "\n"
-    return {k: v if isinstance(v, bytes) else v.replace("\r\n", "\n").encode("utf-8") for k, v in files.items()}
+    out = {k: v if isinstance(v, bytes) else v.replace("\r\n", "\n").encode("utf-8") for k, v in files.items()}
+    hits = []
+    for rel, data in out.items():
+        if rel.endswith(".png"):
+            continue
+        for i, line in enumerate(data.decode("utf-8").splitlines(), 1):
+            if FORBIDDEN.search(line):
+                hits.append(f"{rel}:{i}: {line.strip()[:100]}")
+    if hits:
+        raise SystemExit("directory edition would mention server login or credentials:\n  " + "\n  ".join(hits))
+    return out
 
 
 def existing() -> dict[str, bytes]:
