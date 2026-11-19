@@ -1,6 +1,7 @@
 # Article Template (12 H2 Structure)
 
 > Directory edition: commands that mention `tools/` or `scripts/` need the full edition (`npm` package `rankmath-seo-wp`); this folder ships reference files only.
+> The `wp` commands below run on your WordPress server; how you connect to the server is up to you.
 
 This is the author's site article skeleton (站內風格). Rank Math does not ask
 for 12 H2s; it needs one subheading with the FK (see `data/rankmath-tests.csv`).

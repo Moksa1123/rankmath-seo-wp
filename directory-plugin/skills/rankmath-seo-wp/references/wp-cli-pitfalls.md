@@ -1,6 +1,7 @@
 # WP-CLI Pitfalls — From Real Debugging
 
 > Directory edition: commands that mention `tools/` or `scripts/` need the full edition (`npm` package `rankmath-seo-wp`); this folder ships reference files only.
+> The `wp` commands below run on your WordPress server; how you connect to the server is up to you.
 
 Two critical gotchas that broke production debugging on the author's site. Document
 exists because these took hours to identify the first time.
@@ -62,7 +63,7 @@ blocks that were perfectly fine in source HTML.
 Python's `tempfile.NamedTemporaryFile` and `open()` on Windows default to
 "text mode with universal newlines" — writes `\n` but converts to `\r\n` on
 disk. Then:
-1. File is uploaded to Linux server (cat | ssh)
+1. File is uploaded to Linux server
 2. wp post update reads file with `\r\n` endings
 3. WP saves content with `\r\n` characters preserved
 4. Gutenberg compares stored HTML vs expected HTML
@@ -98,7 +99,7 @@ If posts mysteriously show block validation errors after batch processing on
 Windows, check for `\r` characters in saved content:
 
 ```bash
-ssh user@wp-host "wp post get POST_ID --field=content" | tr -cd '\r' | wc -c
+wp post get POST_ID --field=content | tr -cd '\r' | wc -c
 # Output > 0 means CR characters present
 ```
 
@@ -139,7 +140,7 @@ or days past their `post_date`.
 
 ```bash
 # Force publish any stuck future posts
-ssh user@wp-host "cd /path/to/wp && wp db query \"
+wp db query "
   UPDATE wp_posts
   SET post_status='publish'
   WHERE ID IN (SELECT ID FROM (
@@ -147,34 +148,15 @@ ssh user@wp-host "cd /path/to/wp && wp db query \"
     WHERE post_status='future'
     AND post_date <= NOW()
   ) AS x)
-\""
+"
 
 # Clear cache
-ssh user@wp-host "cd /path/to/wp && wp cache flush"
+wp cache flush
 ```
 
 Run daily via cron or as part of deploy script.
 
-## Pitfall 5: SCP often restricted on managed hosting
-
-### Issue
-
-Cloudways and many managed WordPress hosts disable SCP for security. `scp`
-fails silently or with permission errors.
-
-### Workaround: base64 pipe over SSH
-
-```bash
-# Upload binary file (image)
-base64 -w 0 image.webp | ssh user@host "base64 -d > /tmp/image.webp"
-
-# Upload text file
-cat article.html | ssh user@host "cat > /tmp/article.html"
-```
-
-Both work over standard SSH connection without SCP-specific permissions.
-
-## Pitfall 6: Cache flush after meta updates
+## Pitfall 5: Cache flush after meta updates
 
 ### Issue
 
@@ -195,7 +177,7 @@ If using Object Cache (Redis, Memcached), also:
 wp redis flush  # If wp-cli redis plugin installed
 ```
 
-## Pitfall 7: Post body argument restrictions
+## Pitfall 6: Post body argument restrictions
 
 `wp post update` accepts file as positional only. These don't work:
 
@@ -214,7 +196,7 @@ Only the file as second positional argument works:
 wp post update POST_ID article.html
 ```
 
-## Pitfall 8: Term ID vs Slug for categories
+## Pitfall 7: Term ID vs Slug for categories
 
 ### Issue
 
@@ -235,7 +217,7 @@ If you must use IDs, use the `--by=id` flag:
 wp post term set POST_ID category 64 101 --by=id
 ```
 
-## Pitfall 9: FileBird folder assignment
+## Pitfall 8: FileBird folder assignment
 
 ### Issue
 
@@ -253,59 +235,6 @@ wp db query "INSERT INTO wp_fbv_attachment_folder (folder_id, attachment_id) \
 ```
 
 Replace `$FBV_FOLDER_ID` with your FileBird folder's numeric ID.
-
-## Recommended Python push function
-
-Distilled from real-world fixes:
-
-```python
-import subprocess, os, tempfile
-
-SSH_KEY = os.path.expanduser("~/.ssh/wp_key")
-SSH_HOST = "user@wp-host"
-WP_PATH = "/path/to/wordpress"
-
-
-def ssh(cmd):
-    full = f'ssh -i {SSH_KEY} {SSH_HOST} "cd {WP_PATH} && {cmd}"'
-    return subprocess.run(full, shell=True, capture_output=True, text=True, encoding='utf-8')
-
-
-def push_post(post_id, content, post_date=None, post_status=None):
-    """Push article content to WP via file argument syntax with LF newlines."""
-    
-    # Critical: newline='\n' to prevent Windows \r\n
-    with tempfile.NamedTemporaryFile(
-        mode='w', encoding='utf-8',
-        delete=False, suffix='.html',
-        newline='\n',
-    ) as f:
-        f.write(content)
-        local_tmp = f.name
-    
-    remote_tmp = f"/tmp/push_{post_id}.html"
-    
-    # Upload via cat | ssh (works around SCP restrictions)
-    upload = subprocess.run(
-        f'cat "{local_tmp}" | ssh -i {SSH_KEY} {SSH_HOST} "cat > {remote_tmp}"',
-        shell=True, capture_output=True, text=True
-    )
-    if upload.returncode != 0:
-        return False, upload.stderr
-    
-    # Build wp post update command with file argument
-    flags = []
-    if post_date:
-        flags.append(f"--post_date='{post_date}'")
-    if post_status:
-        flags.append(f"--post_status={post_status}")
-    
-    cmd = f"wp post update {post_id} {remote_tmp} {' '.join(flags)}"
-    r = ssh(cmd)
-    
-    os.unlink(local_tmp)
-    return r.returncode == 0, r.stdout + r.stderr
-```
 
 ## Pre-flight check
 

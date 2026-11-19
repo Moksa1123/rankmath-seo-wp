@@ -1,6 +1,7 @@
 # Moksa Observation Quote — Style Guide
 
 > Directory edition: commands that mention `tools/` or `scripts/` need the full edition (`npm` package `rankmath-seo-wp`); this folder ships reference files only.
+> The `wp` commands below run on your WordPress server; how you connect to the server is up to you.
 
 The Moksa observation quote is the article's signature opening device. It's a
 first-person personal experience block that sets tone and credibility.

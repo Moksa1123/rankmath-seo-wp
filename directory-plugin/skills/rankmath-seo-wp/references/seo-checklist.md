@@ -1,6 +1,7 @@
 # Rank Math SEO Checklist (what the plugin actually scores)
 
 > Directory edition: commands that mention `tools/` or `scripts/` need the full edition (`npm` package `rankmath-seo-wp`); this folder ships reference files only.
+> The `wp` commands below run on your WordPress server; how you connect to the server is up to you.
 
 Every number here is a row in `data/rankmath-tests.csv`, taken from the
 plugin source (seo-by-rank-math 1.0.282, `assets/admin/js/analyzer.js`) and

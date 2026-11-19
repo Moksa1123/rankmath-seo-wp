@@ -1,6 +1,7 @@
 # Featured Image Specs
 
 > Directory edition: commands that mention `tools/` or `scripts/` need the full edition (`npm` package `rankmath-seo-wp`); this folder ships reference files only.
+> The `wp` commands below run on your WordPress server; how you connect to the server is up to you.
 
 Every published article requires a featured image (post thumbnail). Below are
 The author's site specs.
@@ -165,8 +166,7 @@ or via Google Fonts API.
 # 1. Generate image locally
 python gen_image.py
 
-# 2. Upload via base64 pipe (SCP often blocked on Cloudways)
-base64 -w 0 image.webp | ssh user@host "base64 -d > /tmp/image.webp"
+# 2. Put the file on the server (how you connect is up to you)
 
 # 3. Import to WP media library
 ATTACH_ID=$(wp media import /tmp/image.webp \
