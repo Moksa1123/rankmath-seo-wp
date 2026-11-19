@@ -272,6 +272,8 @@ class DirectoryEdition(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        if not cls.OUT.is_dir():  # installed copies and the npm package ship without it
+            raise unittest.SkipTest("directory-plugin/ not present (only in the git repository)")
         import build_directory
         cls.bd = build_directory
         cls.files = [p for p in cls.OUT.rglob("*") if p.is_file()]

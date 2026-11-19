@@ -146,14 +146,18 @@ def pin_problems() -> list[str]:
         for got in re.findall(r"rankmath-seo-wp@(\d+\.\d+\.\d+)", (ROOT / name).read_text(encoding="utf-8")):
             if got != want:
                 out.append(f"{name}: rankmath-seo-wp@{got}, package.json is {want}")
-    for manifest in (ROOT / ".claude-plugin" / "plugin.json",
-                     ROOT / "directory-plugin" / ".claude-plugin" / "plugin.json"):
+    has_dir = (ROOT / "directory-plugin").is_dir()  # only in the git repository
+    manifests = [ROOT / ".claude-plugin" / "plugin.json"]
+    if has_dir:
+        manifests.append(ROOT / "directory-plugin" / ".claude-plugin" / "plugin.json")
+    for manifest in manifests:
         pj = json.loads(manifest.read_text(encoding="utf-8"))["version"]
         if pj != want:
             out.append(f"{manifest.relative_to(ROOT).as_posix()} version {pj}, package.json is {want}")
-    # the directory edition is generated; its numbers come from the same data
-    import build_directory
-    out += [f"directory-plugin/ {d}" for d in build_directory.differences(build_directory.build(), build_directory.existing())]
+    if has_dir:
+        # the directory edition is generated; its numbers come from the same data
+        import build_directory
+        out += [f"directory-plugin/ {d}" for d in build_directory.differences(build_directory.build(), build_directory.existing())]
     return out
 
 
