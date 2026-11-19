@@ -1,0 +1,176 @@
+{
+ "source_file": "data/power-words.csv",
+ "rows": [
+  {
+   "language": "zh-TW",
+   "category": "authority",
+   "word": "完整教學",
+   "note": "canonical Moksa SEO Title prefix",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "zh-TW",
+   "category": "authority",
+   "word": "終極指南",
+   "note": "strong but use sparingly",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "zh-TW",
+   "category": "authority",
+   "word": "完整指南",
+   "note": "formal alternative to 教學",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "zh-TW",
+   "category": "urgency",
+   "word": "5 分鐘",
+   "note": "implies quick value; pairs with digit",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "zh-TW",
+   "category": "urgency",
+   "word": "搶先",
+   "note": "implies first-mover knowledge",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "zh-TW",
+   "category": "scale",
+   "word": "大功能",
+   "note": "quantifier for feature counts",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "zh-TW",
+   "category": "scale",
+   "word": "大重點",
+   "note": "quantifier for takeaway lists",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "zh-TW",
+   "category": "scale",
+   "word": "個方案",
+   "note": "for plan/tier counts (e.g. 5 個方案)",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "zh-TW",
+   "category": "scale",
+   "word": "步驟",
+   "note": "canonical for HowTo (4 步驟)",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "zh-TW",
+   "category": "credibility",
+   "word": "實戰",
+   "note": "implies real-world experience",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "zh-TW",
+   "category": "credibility",
+   "word": "必看",
+   "note": "strong CTA; use carefully",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "zh-TW",
+   "category": "credibility",
+   "word": "精修",
+   "note": "implies refined / curated",
+   "rank_math_power_word": "n/a (plugin has no zh list; test skipped on zh sites)",
+   "source": "The author's site title habit; plugin lists only de en es fi fr hu id it ja nl sv",
+   "trust": "站內風格"
+  },
+  {
+   "language": "en",
+   "category": "authority",
+   "word": "Complete Guide",
+   "note": "equivalent of 完整教學",
+   "rank_math_power_word": "yes",
+   "source": "assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords",
+   "trust": "官方原始碼"
+  },
+  {
+   "language": "en",
+   "category": "authority",
+   "word": "Ultimate Guide",
+   "note": "strong but overused",
+   "rank_math_power_word": "yes",
+   "source": "assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords",
+   "trust": "官方原始碼"
+  },
+  {
+   "language": "en",
+   "category": "urgency",
+   "word": "5-Minute",
+   "note": "quick-value framing",
+   "rank_math_power_word": "no",
+   "source": "assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords",
+   "trust": "官方原始碼"
+  },
+  {
+   "language": "en",
+   "category": "scale",
+   "word": "Top X",
+   "note": "classic listicle frame",
+   "rank_math_power_word": "no",
+   "source": "assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords",
+   "trust": "官方原始碼"
+  },
+  {
+   "language": "en",
+   "category": "scale",
+   "word": "X Best",
+   "note": "for ranking lists",
+   "rank_math_power_word": "yes",
+   "source": "assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords",
+   "trust": "官方原始碼"
+  },
+  {
+   "language": "en",
+   "category": "credibility",
+   "word": "Battle-Tested",
+   "note": "strong real-world signal",
+   "rank_math_power_word": "no",
+   "source": "assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords",
+   "trust": "官方原始碼"
+  },
+  {
+   "language": "en",
+   "category": "credibility",
+   "word": "Production-Ready",
+   "note": "for technical audiences",
+   "rank_math_power_word": "no",
+   "source": "assets/vendor/powerwords/en.php (seo-by-rank-math 1.0.282); match rule from analyzer.js titleHasPowerWords",
+   "trust": "官方原始碼"
+  }
+ ]
+}

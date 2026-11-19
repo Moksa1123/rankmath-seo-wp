@@ -1,0 +1,125 @@
+{
+ "source_file": "data/h2-templates.csv",
+ "rows": [
+  {
+   "order": "1",
+   "heading_pattern": "什麼是 [FK]?",
+   "fk_in_heading": "yes",
+   "body_type": "4 paragraphs",
+   "word_target": "180",
+   "notes": "Definition + maker + launch context",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  },
+  {
+   "order": "2",
+   "heading_pattern": "[FK] 和 [Competitor] 怎麼選?",
+   "fk_in_heading": "yes",
+   "body_type": "table + 2 paragraphs",
+   "word_target": "200",
+   "notes": "Comparison table 6-7 rows ending with Best For",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  },
+  {
+   "order": "3",
+   "heading_pattern": "如何啟用這個工具?",
+   "fk_in_heading": "no",
+   "body_type": "2 paragraphs + code",
+   "word_target": "160",
+   "notes": "Setup walkthrough; pronoun in heading",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  },
+  {
+   "order": "4",
+   "heading_pattern": "[FK] 4 步驟啟用設定",
+   "fk_in_heading": "yes",
+   "body_type": "howto block",
+   "word_target": "240",
+   "notes": "HowTo block goes here; 4 steps; h3 not h4",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  },
+  {
+   "order": "5",
+   "heading_pattern": "它能做哪些 X 工作?",
+   "fk_in_heading": "no",
+   "body_type": "3 paragraphs",
+   "word_target": "180",
+   "notes": "Capability survey; pronoun in heading",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  },
+  {
+   "order": "6",
+   "heading_pattern": "[Persona] 怎麼用 [FK]?",
+   "fk_in_heading": "yes",
+   "body_type": "prompt examples",
+   "word_target": "200",
+   "notes": "4-5 use-case prompts in code block",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  },
+  {
+   "order": "7",
+   "heading_pattern": "[Killer feature] 怎麼運作?",
+   "fk_in_heading": "no",
+   "body_type": "3 paragraphs",
+   "word_target": "200",
+   "notes": "Technical deep dive; signature feature",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  },
+  {
+   "order": "8",
+   "heading_pattern": "進階主題或場景",
+   "fk_in_heading": "no",
+   "body_type": "3 paragraphs",
+   "word_target": "180",
+   "notes": "Edge cases / advanced flows",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  },
+  {
+   "order": "9",
+   "heading_pattern": "哪裡可以找到更多官方資源?",
+   "fk_in_heading": "no",
+   "body_type": "intro + 3 youtube embeds",
+   "word_target": "120",
+   "notes": "Always 3 YouTube embeds",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  },
+  {
+   "order": "10",
+   "heading_pattern": "使用 [FK] 有哪些限制?",
+   "fk_in_heading": "yes",
+   "body_type": "6 paragraphs",
+   "word_target": "360",
+   "notes": "Limitations + privacy + ALWAYS Review final paragraph",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  },
+  {
+   "order": "11",
+   "heading_pattern": "參考依據",
+   "fk_in_heading": "no",
+   "body_type": "5 external links",
+   "word_target": "80",
+   "notes": "First link is internal Moksa category page",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  },
+  {
+   "order": "12",
+   "heading_pattern": "常見問題 FAQ",
+   "fk_in_heading": "no",
+   "body_type": "faq block",
+   "word_target": "480",
+   "notes": "8 questions; 4 with FK in title",
+   "source": "The author's site 12-H2 template (30+ articles); word_target counts wp.wordcount words",
+   "trust": "站內風格"
+  }
+ ]
+}

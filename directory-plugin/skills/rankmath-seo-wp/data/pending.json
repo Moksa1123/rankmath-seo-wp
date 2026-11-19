@@ -1,0 +1,40 @@
+{
+ "source_file": "data/pending.csv",
+ "rows": [
+  {
+   "date": "2026-11-15",
+   "question": "Does the text Rank Math feeds its analyzer in Gutenberg equal raw post_content (so verify-article word count / density match the sidebar exactly)?",
+   "why_not_found": "verify-article ports wp.wordcount and the analyzer helpers (port matches @wordpress/wordcount 5.1.0 on 3 files) but has not been compared with a live Rank Math sidebar",
+   "asked_by": "maintainer (SOP review)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-15",
+   "question": "Does the author's site's theme still print inline <script type=application/ld+json> as visible text?",
+   "why_not_found": "rule comes from an old incident with no saved reproduction; marked 推論 in data/site-rules.csv",
+   "asked_by": "maintainer (SOP review)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-15",
+   "question": "Why must post_title stay English (CJK font / breakage)?",
+   "why_not_found": "reason never measured; the font limit is documented only for the featured image (references/image-specs.md)",
+   "asked_by": "maintainer (SOP review)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-15",
+   "question": "Are the 8 install paths in assets/templates/platforms/*.json still correct?",
+   "why_not_found": "templates say verified:true but record no doc URL or date; data/platforms.csv marks them 推論",
+   "asked_by": "maintainer (SOP review)",
+   "status": "open"
+  },
+  {
+   "date": "2026-11-15",
+   "question": "Did 'score 80+ out of the box' ever get measured?",
+   "why_not_found": "no saved Rank Math score readings for the author's site articles; claim removed from SKILL.md",
+   "asked_by": "maintainer (SOP review)",
+   "status": "open"
+  }
+ ]
+}

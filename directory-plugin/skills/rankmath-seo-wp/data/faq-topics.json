@@ -1,0 +1,77 @@
+{
+ "source_file": "data/faq-topics.csv",
+ "rows": [
+  {
+   "slot": "1",
+   "topic": "competitor_comparison",
+   "fk_in_title": "yes",
+   "sample_zh": "[FK] 和 ChatGPT 比起來差在哪?",
+   "sample_en": "How does [FK] compare to ChatGPT or Gemini?",
+   "source": "The author's site FAQ habit (8 questions); Rank Math FAQ block has no question count rule",
+   "trust": "站內風格"
+  },
+  {
+   "slot": "2",
+   "topic": "free_tier",
+   "fk_in_title": "yes",
+   "sample_zh": "[FK] Free 帳號真的可以用嗎?",
+   "sample_en": "Can I use [FK] for free?",
+   "source": "The author's site FAQ habit (8 questions); Rank Math FAQ block has no question count rule",
+   "trust": "站內風格"
+  },
+  {
+   "slot": "3",
+   "topic": "pricing_cost",
+   "fk_in_title": "no",
+   "sample_zh": "Token 消耗會不會很貴?",
+   "sample_en": "How much does it cost in tokens?",
+   "source": "The author's site FAQ habit (8 questions); Rank Math FAQ block has no question count rule",
+   "trust": "站內風格"
+  },
+  {
+   "slot": "4",
+   "topic": "compliance_privacy",
+   "fk_in_title": "yes",
+   "sample_zh": "[FK] 能處理機密資料嗎?",
+   "sample_en": "Can [FK] handle confidential data safely?",
+   "source": "The author's site FAQ habit (8 questions); Rank Math FAQ block has no question count rule",
+   "trust": "站內風格"
+  },
+  {
+   "slot": "5",
+   "topic": "technical_capability",
+   "fk_in_title": "no",
+   "sample_zh": "它能做 X 任務嗎?",
+   "sample_en": "Can it perform task X?",
+   "source": "The author's site FAQ habit (8 questions); Rank Math FAQ block has no question count rule",
+   "trust": "站內風格"
+  },
+  {
+   "slot": "6",
+   "topic": "integration_platform",
+   "fk_in_title": "no",
+   "sample_zh": "和 Y 平台整合怎麼設?",
+   "sample_en": "How does it integrate with platform Y?",
+   "source": "The author's site FAQ habit (8 questions); Rank Math FAQ block has no question count rule",
+   "trust": "站內風格"
+  },
+  {
+   "slot": "7",
+   "topic": "error_handling",
+   "fk_in_title": "no",
+   "sample_zh": "出錯了怎麼辦?",
+   "sample_en": "What should I do when it errors out?",
+   "source": "The author's site FAQ habit (8 questions); Rank Math FAQ block has no question count rule",
+   "trust": "站內風格"
+  },
+  {
+   "slot": "8",
+   "topic": "language_support",
+   "fk_in_title": "yes",
+   "sample_zh": "[FK] 中文支援怎麼樣?",
+   "sample_en": "How well does [FK] support Chinese?",
+   "source": "The author's site FAQ habit (8 questions); Rank Math FAQ block has no question count rule",
+   "trust": "站內風格"
+  }
+ ]
+}

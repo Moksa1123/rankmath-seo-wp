@@ -1,0 +1,133 @@
+{
+ "source_file": "data/blocks.csv",
+ "rows": [
+  {
+   "block": "rank-math/howto-block",
+   "item": "wrapper",
+   "rule": "saved HTML wrapper div (plus className if set)",
+   "value": "<div class=\"wp-block-rank-math-howto-block\">",
+   "source": "blocks/howto/assets/js/index.js save() (seo-by-rank-math 1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/howto-block",
+   "item": "step",
+   "rule": "one div per step whose visible is not false; no extra wrapper around steps",
+   "value": "<div class=\"rank-math-howto-step\">",
+   "source": "blocks/howto/assets/js/index.js save() (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/howto-block",
+   "item": "step title",
+   "rule": "title written in the titleWrapper tag (default h3); omitted when title is empty",
+   "value": "<h3 class=\"rank-math-howto-title\">",
+   "source": "blocks/howto/assets/js/index.js save() + block.json titleWrapper default (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/howto-block",
+   "item": "step content",
+   "rule": "content div; omitted when content is empty",
+   "value": "<div class=\"rank-math-howto-content\">",
+   "source": "blocks/howto/assets/js/index.js save() (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/howto-block",
+   "item": "attributes",
+   "rule": "block.json attributes: hasDuration days hours minutes description steps sizeSlug(full) imageID mainSizeSlug(full) listStyle timeLabel titleWrapper(h3) listCssClasses titleCssClasses contentCssClasses textAlign(left)",
+   "value": "16 attributes",
+   "source": "blocks/howto/block.json (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/howto-block",
+   "item": "validity",
+   "rule": "saved HTML must equal save() output from the JSON (title/content text identical); otherwise the editor shows invalid content",
+   "value": "save() == HTML",
+   "source": "blocks/howto/assets/js/index.js save() (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/howto-block",
+   "item": "multiple",
+   "rule": "only one HowTo block per post (supports.multiple false)",
+   "value": "1",
+   "source": "blocks/howto/block.json (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/howto-block",
+   "item": "frontend",
+   "rule": "front end is rendered by PHP render_callback (classes rank-math-steps / rank-math-step / rank-math-step-title / rank-math-step-content); saved HTML is for the editor only",
+   "value": "dynamic",
+   "source": "blocks/howto/class-block-howto.php (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/faq-block",
+   "item": "wrapper",
+   "rule": "saved HTML wrapper div (plus className if set)",
+   "value": "<div class=\"wp-block-rank-math-faq-block\">",
+   "source": "blocks/faq/assets/js/index.js save() (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/faq-block",
+   "item": "item",
+   "rule": "one div per question with non-empty title and content and visible not false",
+   "value": "<div class=\"rank-math-faq-item\">",
+   "source": "blocks/faq/assets/js/index.js save() (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/faq-block",
+   "item": "question",
+   "rule": "question in the titleWrapper tag (default h3)",
+   "value": "<h3 class=\"rank-math-question\">",
+   "source": "blocks/faq/assets/js/index.js save() + block.json (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/faq-block",
+   "item": "answer",
+   "rule": "answer div",
+   "value": "<div class=\"rank-math-answer\">",
+   "source": "blocks/faq/assets/js/index.js save() (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/faq-block",
+   "item": "attributes",
+   "rule": "block.json attributes: listStyle titleWrapper(h3) sizeSlug(thumbnail) questions listCssClasses titleCssClasses contentCssClasses textAlign(left)",
+   "value": "8 attributes",
+   "source": "blocks/faq/block.json (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/faq-block",
+   "item": "validity",
+   "rule": "saved HTML must equal save() output from the JSON; regenerate HTML from JSON with tools/regenerate-faq.py",
+   "value": "save() == HTML",
+   "source": "blocks/faq/assets/js/index.js save() (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/faq-block",
+   "item": "frontend",
+   "rule": "front end is rendered by PHP render_callback (div#rank-math-faq .rank-math-list-item)",
+   "value": "dynamic",
+   "source": "blocks/faq/class-block-faq.php (1.0.282)",
+   "trust": "官方原始碼"
+  },
+  {
+   "block": "rank-math/toc-block",
+   "item": "toc test",
+   "rule": "content containing wp-block-rank-math-toc-block passes contentHasTOC (2 points)",
+   "value": "wp-block-rank-math-toc-block",
+   "source": "analyzer.js contentHasTOC (1.0.282)",
+   "trust": "官方原始碼"
+  }
+ ]
+}

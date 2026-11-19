@@ -1,0 +1,28 @@
+{
+  "name": "rankmath-seo-wp",
+  "displayName": "Rank Math SEO WP Writer (unofficial)",
+  "version": "1.2.2",
+  "description": "Write WordPress articles that pass Rank Math's own SEO tests: block-editor HTML with valid HowTo and FAQ blocks, a pre-publish checklist, and rules read from the plugin's source. Directory edition: reference files only, no scripts. Unofficial: not made by or affiliated with Rank Math.",
+  "author": {
+    "name": "Moksa"
+  },
+  "homepage": "https://github.com/Moksa1123/rankmath-seo-wp/tree/main/directory-plugin#readme",
+  "repository": "https://github.com/Moksa1123/rankmath-seo-wp",
+  "license": "MIT",
+  "keywords": [
+    "wordpress",
+    "seo",
+    "rank-math",
+    "gutenberg",
+    "howto-block",
+    "faq-block",
+    "wp-cli"
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/Moksa1123/rankmath-seo-wp/tree/main/directory-plugin#readme",
+  "supportUrl": "https://github.com/Moksa1123/rankmath-seo-wp/issues",
+  "privacyPolicyUrl": "https://github.com/Moksa1123/rankmath-seo-wp/tree/main/directory-plugin#what-it-runs-and-connects-to",
+  "skills": [
+    "./skills/rankmath-seo-wp"
+  ]
+}

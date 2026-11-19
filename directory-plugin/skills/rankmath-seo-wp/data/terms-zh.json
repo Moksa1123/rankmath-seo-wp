@@ -1,0 +1,280 @@
+{
+ "source_file": "data/terms-zh.csv",
+ "rows": [
+  {
+   "zh": "關鍵字",
+   "en": "keyword focus",
+   "note": "focus keyword (FK)"
+  },
+  {
+   "zh": "焦點關鍵字",
+   "en": "focus keyword",
+   "note": ""
+  },
+  {
+   "zh": "密度",
+   "en": "density keywordDensity",
+   "note": ""
+  },
+  {
+   "zh": "關鍵字密度",
+   "en": "keywordDensity density",
+   "note": ""
+  },
+  {
+   "zh": "字數",
+   "en": "lengthContent word count words",
+   "note": ""
+  },
+  {
+   "zh": "內文長度",
+   "en": "lengthContent length",
+   "note": ""
+  },
+  {
+   "zh": "文章長度",
+   "en": "lengthContent length",
+   "note": ""
+  },
+  {
+   "zh": "標題",
+   "en": "title",
+   "note": "SEO title (rank_math_title) or post_title"
+  },
+  {
+   "zh": "SEO 標題",
+   "en": "rank_math_title title",
+   "note": ""
+  },
+  {
+   "zh": "描述",
+   "en": "description meta",
+   "note": ""
+  },
+  {
+   "zh": "Meta 描述",
+   "en": "keywordInMetaDescription description",
+   "note": ""
+  },
+  {
+   "zh": "網址",
+   "en": "permalink url slug",
+   "note": ""
+  },
+  {
+   "zh": "永久連結",
+   "en": "permalink slug",
+   "note": ""
+  },
+  {
+   "zh": "網址長度",
+   "en": "lengthPermalink url length",
+   "note": ""
+  },
+  {
+   "zh": "小標",
+   "en": "subheading h2 heading",
+   "note": ""
+  },
+  {
+   "zh": "副標題",
+   "en": "subheading heading",
+   "note": ""
+  },
+  {
+   "zh": "外部連結",
+   "en": "external linksHasExternals",
+   "note": ""
+  },
+  {
+   "zh": "外連",
+   "en": "external links",
+   "note": ""
+  },
+  {
+   "zh": "內部連結",
+   "en": "internal linksHasInternal",
+   "note": ""
+  },
+  {
+   "zh": "內連",
+   "en": "internal links",
+   "note": ""
+  },
+  {
+   "zh": "dofollow",
+   "en": "dofollow linksNotAllExternals",
+   "note": ""
+  },
+  {
+   "zh": "圖片",
+   "en": "image img alt contentHasAssets",
+   "note": ""
+  },
+  {
+   "zh": "替代文字",
+   "en": "alt image",
+   "note": ""
+  },
+  {
+   "zh": "影片",
+   "en": "video youtube contentHasAssets",
+   "note": ""
+  },
+  {
+   "zh": "段落",
+   "en": "paragraph contentHasShortParagraphs",
+   "note": ""
+  },
+  {
+   "zh": "短段落",
+   "en": "contentHasShortParagraphs paragraph",
+   "note": ""
+  },
+  {
+   "zh": "目錄",
+   "en": "toc contentHasTOC",
+   "note": ""
+  },
+  {
+   "zh": "數字",
+   "en": "number digit titleHasNumber",
+   "note": ""
+  },
+  {
+   "zh": "強力字",
+   "en": "power word titleHasPowerWords",
+   "note": ""
+  },
+  {
+   "zh": "情緒字",
+   "en": "sentiment titleSentiment",
+   "note": ""
+  },
+  {
+   "zh": "分數",
+   "en": "score points",
+   "note": ""
+  },
+  {
+   "zh": "總分",
+   "en": "overallScore score",
+   "note": ""
+  },
+  {
+   "zh": "綠燈",
+   "en": "scoreColor green",
+   "note": ""
+  },
+  {
+   "zh": "開頭",
+   "en": "beginning first 10% keywordIn10Percent",
+   "note": ""
+  },
+  {
+   "zh": "前 10%",
+   "en": "keywordIn10Percent beginning",
+   "note": ""
+  },
+  {
+   "zh": "常見問題",
+   "en": "faq faq-block",
+   "note": ""
+  },
+  {
+   "zh": "問答",
+   "en": "faq",
+   "note": ""
+  },
+  {
+   "zh": "步驟",
+   "en": "howto step howto-block",
+   "note": ""
+  },
+  {
+   "zh": "教學步驟",
+   "en": "howto",
+   "note": ""
+  },
+  {
+   "zh": "區塊",
+   "en": "block markup",
+   "note": ""
+  },
+  {
+   "zh": "無效內容",
+   "en": "validity invalid save",
+   "note": ""
+  },
+  {
+   "zh": "區塊壞掉",
+   "en": "validity invalid",
+   "note": ""
+  },
+  {
+   "zh": "嘗試復原",
+   "en": "validity invalid",
+   "note": ""
+  },
+  {
+   "zh": "特色圖",
+   "en": "featured image",
+   "note": ""
+  },
+  {
+   "zh": "引言",
+   "en": "quote moksa",
+   "note": ""
+  },
+  {
+   "zh": "觀點",
+   "en": "quote moksa",
+   "note": ""
+  },
+  {
+   "zh": "發布",
+   "en": "wp-cli deploy publish",
+   "note": ""
+  },
+  {
+   "zh": "上稿",
+   "en": "wp-cli deploy",
+   "note": ""
+  },
+  {
+   "zh": "換行",
+   "en": "LF newline",
+   "note": ""
+  },
+  {
+   "zh": "安裝",
+   "en": "platform install",
+   "note": ""
+  },
+  {
+   "zh": "平台",
+   "en": "platform",
+   "note": ""
+  },
+  {
+   "zh": "待補",
+   "en": "pending",
+   "note": ""
+  },
+  {
+   "zh": "站內規則",
+   "en": "site style",
+   "note": ""
+  },
+  {
+   "zh": "站內風格",
+   "en": "site style",
+   "note": ""
+  },
+  {
+   "zh": "官方",
+   "en": "rank math source official",
+   "note": ""
+  }
+ ]
+}

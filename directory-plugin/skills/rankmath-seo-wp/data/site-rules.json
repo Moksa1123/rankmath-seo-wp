@@ -1,0 +1,185 @@
+{
+ "source_file": "data/site-rules.csv",
+ "rows": [
+  {
+   "rule_id": "h2_count",
+   "zh": "12 個 H2",
+   "rule": "article uses the 12-H2 skeleton (FAQ under H2 #12)",
+   "value": "12",
+   "rank_math_test": "none (keywordInSubheadings needs only 1 subheading with FK)",
+   "verifier": "verify-article: Heading balance (any balanced count passes)",
+   "source": "The author's site template; see data/h2-templates.csv",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "h2_with_fk",
+   "zh": "含關鍵字的 H2",
+   "rule": "5 of 12 H2s carry the FK (1/2/4/6/10); pronouns elsewhere to hold density",
+   "value": "5",
+   "rank_math_test": "keywordInSubheadings passes with 1",
+   "verifier": "verify-article: FK in H2 >= 1",
+   "source": "The author's site template",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "word_target",
+   "zh": "字數目標",
+   "rule": "aim for 1400+ wp.wordcount words (2000+ ideal); Rank Math itself passes from 600",
+   "value": "1400",
+   "rank_math_test": "lengthContent (600 pass; 2500 full 8/8)",
+   "verifier": "not gated (verifier gates on 600)",
+   "source": "The author's site habit; earlier versions called this a Rank Math minimum (it is not)",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "faq_count",
+   "zh": "FAQ 題數",
+   "rule": "FAQ block has 8 questions; 4 carry the FK",
+   "value": "8",
+   "rank_math_test": "none",
+   "verifier": "not gated",
+   "source": "The author's site FAQ habit; see data/faq-topics.csv",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "howto_steps",
+   "zh": "HowTo 步驟數",
+   "rule": "HowTo block has 4 steps under H2 #4",
+   "value": "4",
+   "rank_math_test": "none",
+   "verifier": "not gated",
+   "source": "The author's site template",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "youtube_embeds",
+   "zh": "YouTube 影片數",
+   "rule": "3 YouTube embeds in H2 #9; Rank Math media test counts at most 2 points for videos",
+   "value": "3",
+   "rank_math_test": "contentHasAssets (images 4+ for 6/6 or 3 images + 2 videos)",
+   "verifier": "not gated",
+   "source": "The author's site template",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "external_links",
+   "zh": "外部連結數",
+   "rule": "5 external links in H2 #11 (first link internal category page)",
+   "value": "5",
+   "rank_math_test": "linksHasExternals + linksNotAllExternals need 1 dofollow external",
+   "verifier": "not gated",
+   "source": "The author's site template",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "meta_desc_starts_fk",
+   "zh": "描述以關鍵字開頭",
+   "rule": "rank_math_description starts with the FK",
+   "value": "start",
+   "rank_math_test": "keywordInMetaDescription only needs FK anywhere (KB: first 120-160 chars)",
+   "verifier": "not gated",
+   "source": "The author's site habit (stricter than Rank Math)",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "seo_title_template",
+   "zh": "SEO 標題範本",
+   "rule": "rank_math_title = [FK] 完整教學：[digit] [量詞] [補充]",
+   "value": "template",
+   "rank_math_test": "titleStartWithKeyword + titleHasNumber + keywordInTitle",
+   "verifier": "not gated",
+   "source": "The author's site habit",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "post_title_english",
+   "zh": "post_title 只用英文",
+   "rule": "keep post_title English; Chinese goes in rank_math_title",
+   "value": "English",
+   "rank_math_test": "none",
+   "verifier": "not gated",
+   "source": "The author's site habit; reason (CJK font / breakage) never measured",
+   "trust": "推論"
+  },
+  {
+   "rule_id": "no_inline_ldjson",
+   "zh": "不用 inline ld+json",
+   "rule": "no <script type=application/ld+json> in content; the author's site theme printed it as text",
+   "value": "0",
+   "rank_math_test": "none",
+   "verifier": "verify-article: Forbidden",
+   "source": "The author's site incident; no saved reproduction",
+   "trust": "推論"
+  },
+  {
+   "rule_id": "no_schema_word_in_h2",
+   "zh": "H2 不寫 HowTo Schema",
+   "rule": "no \"HowTo Schema\"/\"FAQ Schema\" text in H2 headings",
+   "value": "0",
+   "rank_math_test": "none",
+   "verifier": "verify-article: Forbidden",
+   "source": "The author's site editorial rule",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "howto_sizeslug",
+   "zh": "HowTo sizeSlug",
+   "rule": "HowTo JSON sizeSlug \"large\" (plugin default \"full\"; save() ignores it)",
+   "value": "large",
+   "rank_math_test": "none",
+   "verifier": "verify-article: HowTo block (site-style issue)",
+   "source": "The author's site post 8594 canonical",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "howto_drop_fields",
+   "zh": "HowTo 不放時間欄位",
+   "rule": "omit hasDuration/days/hours/minutes/titleWrapper from HowTo JSON (they are valid plugin attributes; save() ignores them)",
+   "value": "omit",
+   "rank_math_test": "none",
+   "verifier": "verify-article: HowTo block (site-style issue)",
+   "source": "The author's site post 8594 canonical",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "moksa_quote",
+   "zh": "Moksa 觀點引言",
+   "rule": "opening blockquote in natural conversational Chinese",
+   "value": "1",
+   "rank_math_test": "none",
+   "verifier": "not gated",
+   "source": "references/moksa-style.md",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "featured_image",
+   "zh": "特色圖規格",
+   "rule": "2000x2000 webp; English text; Montserrat SemiBold",
+   "value": "2000x2000",
+   "rank_math_test": "contentHasAssets counts the featured image as 1 image",
+   "verifier": "not gated",
+   "source": "references/image-specs.md",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "lf_newlines",
+   "zh": "LF 換行",
+   "rule": "write article files with LF on Windows (newline='\\n')",
+   "value": "LF",
+   "rank_math_test": "none",
+   "verifier": "not gated",
+   "source": "references/wp-cli-pitfalls.md (the author's site deploys)",
+   "trust": "站內風格"
+  },
+  {
+   "rule_id": "wpcli_file_arg",
+   "zh": "WP-CLI 用檔案參數",
+   "rule": "wp post update ID file.html instead of --post_content=$(cat ...)",
+   "value": "file arg",
+   "rank_math_test": "none",
+   "verifier": "not gated",
+   "source": "references/wp-cli-pitfalls.md (the author's site deploys)",
+   "trust": "站內風格"
+  }
+ ]
+}
