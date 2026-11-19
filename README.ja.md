@@ -198,7 +198,7 @@ plugin としてインストールすると、Claude Code がこれらを `userC
 | Rank Math のルール | seo-by-rank-math 1.0.282（`analyzer.js`、HowTo／FAQ の `save()` と `block.json`）から読み取り、2026-11-15 に [Rank Math KB](https://rankmath.com/kb/score-100-in-tests/) と照合 | `data/rankmath-tests.csv`、`data/blocks.csv` |
 | サイト独自の慣例 | サイトのスタイルとして区別し、Rank Math のルールとは扱わない | `data/site-rules.csv` |
 | 単語カウント | 比較したすべてのファイルで `@wordpress/wordcount` パッケージと一致 | `scripts/test_verify.py` |
-| セルフテスト | オフラインの 30 項目：Python 版と Node 版の一致、壊れた記事は不合格、しきい値とデータの一致 | `python scripts/test_verify.py` |
+| セルフテスト | オフラインの 35 項目：Python 版と Node 版の一致、壊れた記事は不合格、しきい値とデータの一致 | `python scripts/test_verify.py` |
 | evals | 11 問。skill ありで 11/11、なしで 0/11 | [evals/RESULTS.md](evals/RESULTS.md) |
 | 文書の数値 | `SKILL.md` とこれらの README の数値はすべてデータと一致 | `python scripts/check_numbers.py` |
 

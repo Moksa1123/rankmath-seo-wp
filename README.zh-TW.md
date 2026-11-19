@@ -198,7 +198,7 @@ English: write a WordPress article, blog post or tutorial, Rank Math score, SEO 
 | Rank Math 規則 | 從 seo-by-rank-math 1.0.282 讀出（`analyzer.js`、HowTo／FAQ 的 `save()` 與 `block.json`），2026-11-15 對照 [Rank Math KB](https://rankmath.com/kb/score-100-in-tests/) | `data/rankmath-tests.csv`、`data/blocks.csv` |
 | 站內慣例 | 標為站內風格，不當成 Rank Math 規則 | `data/site-rules.csv` |
 | 字數計算 | 和 `@wordpress/wordcount` 套件比對過的每個檔案結果相同 | `scripts/test_verify.py` |
-| 自我測試 | 30 項離線測試：Python 與 Node 驗證器一致、壞掉的文章會被擋下、門檻和資料一致 | `python scripts/test_verify.py` |
+| 自我測試 | 35 項離線測試：Python 與 Node 驗證器一致、壞掉的文章會被擋下、門檻和資料一致 | `python scripts/test_verify.py` |
 | evals | 11 題；有 skill 11/11，沒有 skill 0/11 | [evals/RESULTS.md](evals/RESULTS.md) |
 | 文件數字 | `SKILL.md` 和這幾份 README 的每個數字都和資料一致 | `python scripts/check_numbers.py` |
 

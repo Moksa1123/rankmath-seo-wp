@@ -25,6 +25,8 @@ rankmath-seo-wp/
 ├── EXAMPLES.md             # Example index
 ├── .claude-plugin/         # plugin.json + marketplace.json (Claude plugin / directory)
 ├── docs/guide.md           # Long guide moved out of the README (CLI, platforms, skeleton)
+├── directory-plugin/       # GENERATED Claude-directory edition (md/json only) —
+│                           #   edit sources + run scripts/build_directory.py, never by hand
 ├── data/                   # CSV — every row has source + trust; pending.csv = open questions
 ├── examples/               # Sample article that passes verify-article
 ├── evals/                  # cases.json + grade.py + RESULTS.md (with/without skill)

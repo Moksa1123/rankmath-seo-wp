@@ -198,7 +198,7 @@ plugin으로 설치하면 Claude Code가 이 값들을 `userConfig`로 물어봅
 | Rank Math 규칙 | seo-by-rank-math 1.0.282(`analyzer.js`, HowTo/FAQ의 `save()`와 `block.json`)에서 읽고, 2026-11-15에 [Rank Math KB](https://rankmath.com/kb/score-100-in-tests/)와 대조 | `data/rankmath-tests.csv`, `data/blocks.csv` |
 | 사이트 관례 | 사이트 스타일로 구분하고 Rank Math 규칙으로 취급하지 않음 | `data/site-rules.csv` |
 | 단어 수 계산 | 비교한 모든 파일에서 `@wordpress/wordcount` 패키지와 같음 | `scripts/test_verify.py` |
-| 자체 테스트 | 오프라인 테스트 30개: Python·Node 검증기 일치, 망가진 글은 실패, 기준값과 데이터 일치 | `python scripts/test_verify.py` |
+| 자체 테스트 | 오프라인 테스트 35개: Python·Node 검증기 일치, 망가진 글은 실패, 기준값과 데이터 일치 | `python scripts/test_verify.py` |
 | evals | 11문항. skill 사용 시 11/11, 미사용 시 0/11 | [evals/RESULTS.md](evals/RESULTS.md) |
 | 문서의 숫자 | `SKILL.md`와 이 README들의 모든 숫자가 데이터와 일치 | `python scripts/check_numbers.py` |
 
