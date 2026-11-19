@@ -264,6 +264,53 @@ class Evals(unittest.TestCase):
             self.assertIn(c["trust"], TRUST, c["id"])
 
 
+class DirectoryEdition(unittest.TestCase):
+    """directory-plugin/ must be a fresh build of its sources and pass the
+    unverified-publisher file rules of the Claude plugin directory."""
+    OUT = ROOT / "directory-plugin"
+    ALLOWED = {".md", ".json", ".png"}
+
+    @classmethod
+    def setUpClass(cls):
+        import build_directory
+        cls.bd = build_directory
+        cls.files = [p for p in cls.OUT.rglob("*") if p.is_file()]
+
+    def test_in_sync_with_sources(self):
+        self.assertEqual(self.bd.differences(self.bd.build(), self.bd.existing()), [])
+
+    def test_only_allowed_files(self):
+        for p in self.files:
+            rel = p.relative_to(self.OUT).as_posix()
+            self.assertTrue(p.suffix in self.ALLOWED or rel == "LICENSE", rel)
+            self.assertNotIn(p.name, {"package.json", "package-lock.json", ".npmrc", "CONTRIBUTING.md"}, rel)
+            if p.suffix != ".png":
+                self.assertFalse(p.read_bytes().startswith(b"#!"), rel)
+                self.assertLess(p.stat().st_size, 256 * 1024, rel)
+
+    def test_no_private_data(self):
+        pattern = re.compile(r"moksaweb|services@|@em925|yun19|C:\\Users|/c/Users|AppData", re.I)
+        for p in self.files:
+            if p.suffix == ".png":
+                continue
+            m = pattern.search(p.read_text(encoding="utf-8"))
+            self.assertIsNone(m, (p.name, m and m.group(0)))
+
+    def test_manifest(self):
+        pj = json.loads((self.OUT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        pkg = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))
+        self.assertEqual(pj["version"], pkg["version"])
+        self.assertEqual(pj["skills"], ["./skills/rankmath-seo-wp"])
+        self.assertNotIn("userConfig", pj)
+        self.assertTrue((self.OUT / "skills" / "rankmath-seo-wp" / "SKILL.md").is_file())
+
+    def test_skill_md_runs_nothing(self):
+        text = (self.OUT / "skills" / "rankmath-seo-wp" / "SKILL.md").read_text(encoding="utf-8")
+        self.assertNotRegex(text, r"python |node |scripts/search\.py|tools/verify")
+        for ref in re.findall(r"`(data/[\w-]+\.json|references/[\w-]+\.md)`", text):
+            self.assertTrue((self.OUT / "skills" / "rankmath-seo-wp" / ref).is_file(), ref)
+
+
 class Numbers(unittest.TestCase):
     def test_skill_md_numbers(self):
         problems, _ = check_numbers.check()
