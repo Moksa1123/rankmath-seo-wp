@@ -1,0 +1,116 @@
+{{FRONTMATTER}}
+
+# Rank Math SEO WP Writing Skill (directory edition)
+
+This is the reference-only edition built for the Claude plugin directory: the
+rules, block markup and checklists, with no scripts. The full edition adds the
+verifier, the clipboard exporter, the FAQ / HowTo fixers and WP-CLI helpers:
+`npx -p rankmath-seo-wp@{{PKG_VERSION}} rankmath-install claude-code --global`
+or <https://github.com/Moksa1123/rankmath-seo-wp>.
+
+## Sources
+
+- **Rank Math rules** come from the plugin source, not memory:
+  seo-by-rank-math {{RM_VERSION}}, `assets/admin/js/analyzer.js` (every content
+  test, its points and thresholds) and `includes/modules/schema/blocks/*`
+  (HowTo/FAQ `save()` and `block.json`), cross-checked with the KB page
+  <https://rankmath.com/kb/score-100-in-tests/>. Checked {{CHECKED}}.
+- **Site conventions** (12 H2s, 8 FAQs, 3 YouTube, 5 links, opening quote,
+  image spec) come from the author's published articles and are labelled
+  站內風格 (site style). They are not Rank Math requirements.
+- Every row in `data/*.json` has `source` and `trust`: 官方原始碼 (plugin
+  source) > 官方文件 (KB) > 實測 (measured) > 站內風格 (site style) > 推論
+  (inferred, never state as fact).
+
+| Data file | Rows | What |
+|---|---|---|
+{{DATA_FILES}}
+
+## Usage
+
+Use when the user asks to write, fix or publish a WordPress article for a site
+running Rank Math SEO, or asks about Rank Math scoring, HowTo / FAQ block
+markup, or why a block shows "invalid content".
+
+Do NOT use for: other block-editor pages, Elementor or Mosaic pages, or sites
+using Yoast or another SEO plugin (different tests).
+
+**Entry point:** read the matching file in `data/` (JSON) or `references/`
+before answering. This edition runs nothing; it only reads files.
+
+## Routing
+
+**Iron rule: look it up first, never answer from memory.** Rank Math
+thresholds, block markup and point values are in `data/`. If nothing is found,
+say so, mark it 待補 (pending) and do not guess. Never present a 站內風格 or
+推論 row as a Rank Math rule. Open questions are in `data/pending.json`.
+
+| The user says | Read |
+|---|---|
+| 密度多少才及格 / keyword density | `data/rankmath-tests.json` (keywordDensity), `data/focus-keyword-density.json` |
+| 要寫幾個字 / word count | `data/rankmath-tests.json` (lengthContent) |
+| 怎樣才綠燈 / score, points | `data/rankmath-tests.json` (overallScore, scoreColor) |
+| 標題要放數字嗎 / title rules | `data/rankmath-tests.json` (title* rows) |
+| 強力字 / power words | `data/power-words.json` |
+| FAQ / HowTo 區塊怎麼寫, invalid content | `data/blocks.json`, `references/faq-block.md`, `references/howto-block.md` |
+| 圖片影片要幾個 / media | `data/rankmath-tests.json` (contentHasAssets) |
+| 文章架構 / 12 H2 | `data/h2-templates.json`, `data/site-rules.json`, `references/article-template.md` |
+| FAQ 題目怎麼出 | `data/faq-topics.json` |
+| 引言怎麼寫 | `references/moksa-style.md` |
+| 特色圖規格 | `references/image-specs.md` |
+| WP-CLI 發文出錯 | `references/wp-cli-pitfalls.md` |
+| 中文說法對不到英文術語 | `data/terms-zh.json` |
+
+## Tasks
+
+### Write a new article
+
+1. **Plan.** Pick the focus keyword (FK); outline from `data/h2-templates.json`.
+2. **Write.** Follow `references/article-template.md`; put the HowTo block under
+   H2 #4 and the FAQ block under H2 #12 using the markup in `data/blocks.json`.
+   Write mixed Chinese/English with spaces: Rank Math's word counter
+   (`wp.wordcount`) counts an unbroken run of Chinese as one word.
+3. **Check.** Go through the checklist in Verify, item by item, and say which
+   items you could not check.
+4. **Hand over.** Give the user the block HTML to paste into the block editor,
+   plus the SEO title, description and slug to set in the Rank Math sidebar.
+
+### Fix an existing article
+
+| Symptom | Read | Fix |
+|---|---|---|
+| Density too high / low | `data/focus-keyword-density.json` | pronouns (它 / 這個工具) in H2/FAQ titles, or restore FK |
+| HowTo or FAQ "invalid content" | `data/blocks.json` | rewrite the HTML so it equals what the block's `save()` writes from its JSON |
+| "SEO title doesn't contain a number" | `data/rankmath-tests.json` (titleHasNumber) | add a digit: 4 步驟 / 6 大功能 |
+| JSON-LD shows as text | `data/site-rules.json` (no_inline_ldjson) | remove the `wp:html` script; use the rank-math blocks |
+
+## Verify
+
+This edition has no verifier. Check by hand, and tell the user that the full
+edition's `rankmath-verify` counts words and density exactly as Rank Math does.
+
+Rank Math tests (plugin source, seo-by-rank-math {{RM_VERSION}}):
+
+| Test | Rule | Points |
+|---|---|---|
+{{TESTS_TABLE}}
+
+Block markup (from each block's `save()` and `block.json`):
+
+| Block | Item | Rule |
+|---|---|---|
+{{BLOCKS_TABLE}}
+
+Site style (the author's conventions, not Rank Math rules):
+
+| Rule | What | Trust |
+|---|---|---|
+{{SITE_TABLE}}
+
+## Maintenance
+
+This folder is generated in the main repository
+(<https://github.com/Moksa1123/rankmath-seo-wp>) from its `SKILL.md`,
+`data/*.csv`, `references/*.md` and the templates in `scripts/directory/`.
+Do not edit it by hand: change the sources there and rebuild; the main
+repository's self-test fails when this folder and its sources differ.
