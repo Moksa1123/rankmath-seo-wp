@@ -298,6 +298,26 @@ class DirectoryEdition(unittest.TestCase):
             m = pattern.search(p.read_text(encoding="utf-8"))
             self.assertIsNone(m, (p.name, m and m.group(0)))
 
+    def test_no_server_login_or_credentials(self):
+        # "Uses a credential from the user's machine" policy hold: no login steps, keys or secret files
+        pattern = re.compile(r"\bssh\b|\bscp\b|wp-config|\.env\b|id_rsa|id_ed25519|\.pem\b|password|passwd|"
+                             r"SSH_KEY|WP_SSH|YOUR_[A-Z_]{3,}", re.I)
+        for p in self.files:
+            if p.suffix == ".png":
+                continue
+            for i, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1):
+                self.assertIsNone(pattern.search(line), f"{p.relative_to(self.OUT)}:{i}: {line.strip()[:80]}")
+
+    def test_serverless_rewrite(self):
+        sample = ('## Pitfall 1: x\n```bash\nssh user@h "cd /p && wp cache flush"\n'
+                  'cat a.html | ssh user@h "cat > /tmp/a.html"\n```\n'
+                  '## Pitfall 2: SCP blocked\nscp a b\n## Pitfall 3: y\n')
+        out = self.bd.serverless(sample)
+        self.assertIn("wp cache flush", out)
+        self.assertNotRegex(out, r"ssh|scp|SCP")
+        self.assertIn("## Pitfall 2: y", out)  # renumbered after the SCP section is dropped
+        self.assertTrue(self.bd.FORBIDDEN.search('ssh user@host "wp"'))
+
     def test_manifest(self):
         pj = json.loads((self.OUT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
         pkg = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))

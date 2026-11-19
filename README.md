@@ -198,7 +198,7 @@ Installed as a plugin, Claude Code asks for these as `userConfig` values; export
 | Rank Math rules | Read from seo-by-rank-math 1.0.282 (`analyzer.js`, HowTo / FAQ `save()` and `block.json`), checked against the [Rank Math KB](https://rankmath.com/kb/score-100-in-tests/) on 2026-11-15 | `data/rankmath-tests.csv`, `data/blocks.csv` |
 | Site conventions | Marked as site style, never as Rank Math rules | `data/site-rules.csv` |
 | Word counter | Same result as the `@wordpress/wordcount` package on every file compared | `scripts/test_verify.py` |
-| Self-test | 35 offline tests: Python and Node verifiers agree, the checks fail on broken articles, thresholds match the data | `python scripts/test_verify.py` |
+| Self-test | 37 offline tests: Python and Node verifiers agree, the checks fail on broken articles, thresholds match the data | `python scripts/test_verify.py` |
 | Evals | 11 questions; with the skill 11/11, without it 0/11 | [evals/RESULTS.md](evals/RESULTS.md) |
 | Numbers in docs | Every number in `SKILL.md` and these READMEs matches the data | `python scripts/check_numbers.py` |
 
